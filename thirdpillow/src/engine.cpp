@@ -7,15 +7,28 @@
 
 #include "engine.h"
 
+void engine::create_camera() {
+	camera* c = new camera(this->render_width, this->render_height);
+	this->cameras.push_back(c);
+}
+
+void engine::create_camera(vector3 position, vector3 rotation) {
+	camera*c = new camera(this->render_width, this->render_height, position,
+			rotation);
+	this->cameras.push_back(c);
+}
+
+void engine::add_camera(camera* c) {
+	this->cameras.push_back(c);
+}
+
 void engine::cleanup() {
 	printf("cleaning up\n");
-	free(this->frame);
 }
 
 void engine::initialize() {
 	printf("engine initializing\n");
 	int size = this->render_width * this->render_height * 3;
-	this->frame = (float*)malloc(size * sizeof(float));
 }
 
 void engine::start() {
@@ -28,7 +41,12 @@ void engine::stop() {
 }
 
 void engine::render() {
-
+	for (int i = 0; i < this->cameras.size(); i++) {
+		if (this->cameras[i]->is_active()) {
+			this->cameras[i]->render(&this->scene);
+			this->frame = this->cameras[i]->get_frame();
+		}
+	}
 }
 
 float* engine::get_render_buffer() {

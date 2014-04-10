@@ -6,7 +6,6 @@
  */
 
 #include "world.h"
-#include <vector>
 
 world::world() {
 

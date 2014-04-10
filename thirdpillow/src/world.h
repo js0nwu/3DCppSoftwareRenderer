@@ -8,8 +8,15 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
+#include <vector>
+
+#include "thing.h"
+
+using namespace std;
+
 class world {
 public:
+	vector<thing*> things;
 	world();
 	virtual ~world();
 };

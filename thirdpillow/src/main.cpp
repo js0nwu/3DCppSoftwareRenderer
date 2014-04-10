@@ -9,12 +9,13 @@
 
 using namespace std;
 
-static const int width = 800;;
+static const int width = 800;
+;
 static const int height = 600;
 
 //time keeping
 static const int FRAME_CAP = 60;
-static const int frame_time = (int)(1000 / FRAME_CAP);
+static const int frame_time = (int) (1000 / FRAME_CAP);
 
 int timef = 0;
 int timebase = 0;
@@ -32,7 +33,8 @@ void render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glBegin(GL_2D);
-	glDrawPixels(width, height, GL_RGB, GL_FLOAT, thirdpillow->get_render_buffer());
+	glDrawPixels(width, height, GL_RGB, GL_FLOAT,
+			thirdpillow->get_render_buffer());
 	glEnd();
 	glutSwapBuffers();
 }
@@ -73,6 +75,7 @@ int main(int argc, char** argv) {
 	printf("Hello World!\n");
 	thirdpillow = new engine(width, height);
 	thirdpillow->start();
+	thirdpillow->create_camera();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(width, height);

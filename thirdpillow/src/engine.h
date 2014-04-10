@@ -10,9 +10,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <vector>
+
+#include "camera.h"
+#include "world.h"
+
+using namespace std;
 
 class engine {
 public:
+	void create_camera();
+	void create_camera(vector3 position, vector3 rotation);
+	void add_camera(camera* c);
 	void start();
 	void stop();
 	void render();
@@ -20,9 +29,11 @@ public:
 	engine(int render_width, int render_height);
 	virtual ~engine();
 private:
+	vector<camera*> cameras;
 	int render_width;
 	int render_height;
 	float* frame;
+	world scene;
 
 	void initialize();
 	void cleanup();
