@@ -7,6 +7,22 @@
 
 #include "vector3.h"
 
+void vector3::transform(matrix4* v) {
+	float x_prime = v->get_at(0, 0) * this->x + v->get_at(0, 1) * this->y
+			+ v->get_at(0, 2) * this->z + v->get_at(0, 3);
+	float y_prime = v->get_at(1, 0) * this->x + v->get_at(1, 1) * this->y
+			+ v->get_at(1, 2) * this->z + v->get_at(1, 3);
+	float z_prime = v->get_at(2, 0) * this->x + v->get_at(2, 1) * this->y
+			+ v->get_at(2, 2) * this->z + v->get_at(2, 3);
+	this->x = x_prime;
+	this->y = y_prime;
+	this->z = z_prime;
+}
+vector3* vector3::clone() {
+	vector3* clone = new vector3(this->x, this->y, this->z);
+	return clone;
+}
+
 float vector3::get_x() {
 	return this->x;
 }

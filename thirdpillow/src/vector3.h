@@ -10,6 +10,8 @@
 
 #include <math.h>
 
+#include "matrix4.h"
+
 class vector3 {
 public:
 	vector3();
@@ -40,8 +42,9 @@ public:
 	void divide(float s);
 	void divide(vector3* v);
 	void scale(vector3* f);
+	void transform(matrix4* v);
 
-	vector3 clone();
+	vector3* clone();
 private:
 	float x;
 	float y;

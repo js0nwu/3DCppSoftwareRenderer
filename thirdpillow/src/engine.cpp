@@ -26,9 +26,25 @@ void engine::cleanup() {
 	printf("cleaning up\n");
 }
 
+float engine::RandomFloat(float a, float b) {
+    float random = ((float) rand()) / (float) RAND_MAX;
+    float diff = b - a;
+    float r = random * diff;
+    return a + r;
+}
+
 void engine::initialize() {
 	printf("engine initializing\n");
 	int size = this->render_width * this->render_height * 3;
+	mesh* m = new mesh();
+	for (int i = 0; i < 10000; i++) {
+		vector3* vertex = new vector3(RandomFloat(-5, 5), RandomFloat(-5, 5),
+				RandomFloat(-1, 1));
+		m->vertices.push_back(vertex);
+	}
+	thing* t = new thing();
+	t->set_mesh(m);
+	this->scene.things.push_back(t);
 }
 
 void engine::start() {

@@ -37,7 +37,7 @@ public:
 	void divide(vector2* v);
 	void scale(vector2* f);
 
-	vector2 clone();
+	vector2* clone();
 private:
 	float x;
 	float y;

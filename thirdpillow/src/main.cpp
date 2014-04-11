@@ -6,6 +6,8 @@
 #include <GL/glut.h>
 
 #include "engine.h"
+#include "mesh.h"
+#include "thing.h"
 
 using namespace std;
 
@@ -26,6 +28,7 @@ int timeu = 0;
 
 //engine
 engine* thirdpillow;
+world* w;
 
 void render() {
 	frames++;
@@ -49,6 +52,8 @@ void update_time() {
 		frames = 0;
 	}
 }
+
+
 
 void display() {
 	update_time();
@@ -76,6 +81,7 @@ int main(int argc, char** argv) {
 	thirdpillow = new engine(width, height);
 	thirdpillow->start();
 	thirdpillow->create_camera();
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(width, height);

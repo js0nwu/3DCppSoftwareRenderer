@@ -34,7 +34,7 @@ private:
 	int render_height;
 	float* frame;
 	world scene;
-
+	float RandomFloat(float a, float b);
 	void initialize();
 	void cleanup();
 };

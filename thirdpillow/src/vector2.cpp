@@ -121,9 +121,9 @@ void vector2::scale(vector2* f) {
 	this->y = y_prime;
 }
 
-vector2 vector2::clone() {
+vector2* vector2::clone() {
 	vector2* clone = new vector2(this->get_x(), this->get_y());
-	return *clone;
+	return clone;
 }
 
 vector2::vector2() {
