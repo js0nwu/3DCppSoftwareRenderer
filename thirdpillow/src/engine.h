@@ -19,6 +19,7 @@ using namespace std;
 
 class engine {
 public:
+	camera* get_main_camera();
 	void create_camera();
 	void create_camera(vector3 position, vector3 rotation);
 	void add_camera(camera* c);
@@ -34,6 +35,8 @@ private:
 	int render_height;
 	float* frame;
 	world scene;
+	int main_camera;
+
 	float RandomFloat(float a, float b);
 	void initialize();
 	void cleanup();

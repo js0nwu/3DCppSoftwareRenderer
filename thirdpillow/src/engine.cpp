@@ -7,6 +7,10 @@
 
 #include "engine.h"
 
+camera* engine::get_main_camera() {
+	return this->cameras[this->main_camera];
+}
+
 void engine::create_camera() {
 	camera* c = new camera(this->render_width, this->render_height);
 	this->cameras.push_back(c);
@@ -36,9 +40,10 @@ float engine::RandomFloat(float a, float b) {
 void engine::initialize() {
 	printf("engine initializing\n");
 	int size = this->render_width * this->render_height * 3;
+	this->main_camera = 0;
 	mesh* m = new mesh();
-	for (int i = 0; i < 10000; i++) {
-		vector3* vertex = new vector3(RandomFloat(-5, 5), RandomFloat(-5, 5),
+	for (int i = 0; i < 1000000; i++) {
+		vector3* vertex = new vector3(RandomFloat(-500, 500), RandomFloat(-500, 500),
 				RandomFloat(-1, 1));
 		m->vertices.push_back(vertex);
 	}

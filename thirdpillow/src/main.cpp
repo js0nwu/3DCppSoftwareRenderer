@@ -8,6 +8,7 @@
 #include "engine.h"
 #include "mesh.h"
 #include "thing.h"
+#include "camera.h"
 
 using namespace std;
 
@@ -53,8 +54,6 @@ void update_time() {
 	}
 }
 
-
-
 void display() {
 	update_time();
 	timeu += time_delta;
@@ -65,7 +64,34 @@ void display() {
 }
 
 void keyboard(unsigned char key, int x, int y) {
-
+	int key_code = (int) key;
+	switch (key_code) {
+	case 27:
+		printf("Exiting...\n");
+		thirdpillow->stop();
+		exit(0);
+		break;
+	case 119:
+		thirdpillow->get_main_camera()->translate(new vector3(1, 0, 0));
+		break;
+	case 115:
+		thirdpillow->get_main_camera()->translate(new vector3(-1, 0, 0));
+		break;
+	case 97:
+		thirdpillow->get_main_camera()->translate(new vector3(0, 1, 0));
+		break;
+	case 100:
+		thirdpillow->get_main_camera()->translate(new vector3(0, -1, 0));
+		break;
+	case 113:
+		thirdpillow->get_main_camera()->translate(new vector3(0, 0, 1));
+		break;
+	case 101:
+		thirdpillow->get_main_camera()->translate(new vector3(0, 0, -1));
+		break;
+	default:
+		break;
+	}
 }
 
 void mouse(int button, int state, int x, int y) {
