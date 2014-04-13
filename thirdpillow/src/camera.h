@@ -50,6 +50,7 @@ private:
 	int min_z;
 	int max_z;
 
+	void clear();
 	void render_mesh(mesh* m);
 	void initialize();
 	void cleanup();

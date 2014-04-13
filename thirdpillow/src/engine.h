@@ -14,6 +14,7 @@
 
 #include "camera.h"
 #include "world.h"
+#include "vertex.h"
 
 using namespace std;
 

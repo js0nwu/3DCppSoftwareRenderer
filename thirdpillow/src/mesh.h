@@ -10,13 +10,13 @@
 
 #include <vector>
 
-#include "vector3.h"
+#include "vertex.h"
 
 using namespace std;
 
 class mesh {
 public:
-	vector<vector3*> vertices; //how do you spell this
+	vector<vertex*> vertices; //how do you spell this
 	mesh();
 	virtual ~mesh();
 };

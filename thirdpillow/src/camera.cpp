@@ -7,6 +7,12 @@
 
 #include "camera.h"
 
+void camera::clear() {
+	for (int i = 0; i < this->render_width * this->render_height; i++) {
+		this->frame[i] = 0;
+	}
+}
+
 void camera::rotate_degree_xy(float degrees) {
 	this->rotation.rotate_degree_xy(degrees);
 }
@@ -46,8 +52,9 @@ void camera::render_mesh(mesh* m) {
 }
 
 void camera::render(world* scene) {
-	for (int i = 0; i < render_width * render_height * 3; i++) {
-		this->frame[i] = 0.5;
+	this->clear();
+	for (int i = 0; i < scene->things.size(); i++) {
+		this->render_mesh(scene->things[i]->get_mesh());
 	}
 }
 
