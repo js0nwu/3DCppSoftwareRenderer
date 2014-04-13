@@ -7,6 +7,10 @@
 
 #include "vector2.h"
 
+int vector2::get_index_2d(int x, int y, int wide) {
+	return y * wide + x;
+}
+
 void vector2::set_x(float x) {
 	this->x = x;
 }

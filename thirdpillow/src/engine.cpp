@@ -39,12 +39,11 @@ float engine::RandomFloat(float a, float b) {
 
 void engine::initialize() {
 	printf("engine initializing\n");
-	int size = this->render_width * this->render_height * 3;
 	this->main_camera = 0;
 	mesh* m = new mesh();
-	for (int i = 0; i < 1000000; i++) {
-		vector3* vertex = new vector3(RandomFloat(-500, 500), RandomFloat(-500, 500),
-				RandomFloat(-1, 1));
+	for (int i = 0; i < 1; i++) {
+		vector3* vertex = new vector3(RandomFloat(0, 1), RandomFloat(0, 1),
+				RandomFloat(0, 1));
 		m->vertices.push_back(vertex);
 	}
 	thing* t = new thing();

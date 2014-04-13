@@ -36,6 +36,7 @@ public:
 	void divide(float s);
 	void divide(vector2* v);
 	void scale(vector2* f);
+	static int get_index_2d(int x, int y, int wide);
 
 	vector2* clone();
 private:
