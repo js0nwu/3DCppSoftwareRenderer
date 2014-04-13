@@ -7,6 +7,14 @@
 
 #include "vector3.h"
 
+void vector3::lookat(vector3* v) {
+	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y, v->get_z() - this->z);
+	r->normalize();
+	this->x = r->get_x();
+	this->y = r->get_y();
+	this->z = r->get_z();
+}
+
 void vector3::transform(matrix4* v) {
 	float x_prime = v->get_at(0, 0) * this->x + v->get_at(0, 1) * this->y
 			+ v->get_at(0, 2) * this->z + v->get_at(0, 3);

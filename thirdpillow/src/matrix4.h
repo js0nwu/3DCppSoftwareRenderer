@@ -14,6 +14,7 @@
 
 class matrix4 {
 public:
+	void print();
 	float* get_data();
 	float get_at(int x, int y);
 	void set_at(int x, int y, float value);
