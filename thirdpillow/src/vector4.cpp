@@ -42,7 +42,8 @@ float vector4::get_w() {
 void vector4::multiply_by(matrix4* m) {
 	//rewrite this with a loop ... later
 	float x_prime = m->get_at(0, 0) * this->x + m->get_at(1, 0) * this->y + m->get_at(2, 0) * this->z + m->get_at(3, 0) * this->w;
-	printf("x_prime: %f %f %f %f %f %f %f %f\n", this->x, this->y, this->z, this->w, m->get_at(0, 0), m->get_at(1, 0), m->get_at(2, 0), m->get_at(3, 0));
+	//printf("x_prime: %f %f %f %f %f %f %f %f\n", this->x, this->y, this->z, this->w, m->get_at(0, 0), m->get_at(1, 0), m->get_at(2, 0), m->get_at(3, 0));
+	m->print();
 	float y_prime = m->get_at(0, 1) * this->x + m->get_at(1, 1) * this->y + m->get_at(2, 1) * this->z + m->get_at(3, 1) * this->w;
 	float z_prime = m->get_at(0, 2) * this->x + m->get_at(1, 2) * this->y + m->get_at(2, 2) * this->z + m->get_at(3, 2) * this->w;
 	float w_prime = m->get_at(0, 3) * this->x + m->get_at(1, 3) * this->y + m->get_at(2, 3) * this->z + m->get_at(3, 3) * this->w;

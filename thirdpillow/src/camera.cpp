@@ -45,13 +45,17 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 
 void camera::render_mesh(mesh* m) {
 	for (int i = 0; i < m->vertices.size(); i++) {
-		transform* t = new transform(*this->get_position());
+		vector3 pos = *this->get_position();
+		printf("pos x %f y %f z %f\n", pos.get_x(), pos.get_y(), pos.get_z());
+		transform* t = new transform(pos);
+
 		vector4* p = new vector4(m->vertices[i]->get_position());
 		if (i == 0) {
 			printf("p %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
 		}
-
-		p->multiply_by(t->get_transformation());
+		//rows and columns are inconsistent
+		p->multiply_by(t->get_transformation()->clone());
+		//t->get_transformation()->print();
 		if (i == 0) {
 			printf("np %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
 			exit(0);
