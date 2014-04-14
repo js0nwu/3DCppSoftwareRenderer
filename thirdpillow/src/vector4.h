@@ -9,6 +9,7 @@
 #define VECTOR4_H_
 
 #include "vector3.h"
+#include "matrix4.h"
 
 class vector4 {
 public:
@@ -20,6 +21,8 @@ public:
 	float get_y();
 	float get_z();
 	float get_w();
+	void multiply_by(matrix4* m);
+
 	vector4();
 	vector4(float x, float y, float z, float w);
 	vector4(vector3* v);
