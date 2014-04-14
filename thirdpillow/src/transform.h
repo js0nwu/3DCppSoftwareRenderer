@@ -13,6 +13,7 @@
 
 class transform {
 public:
+	matrix4* get_transformation();
 	void set_translation(vector3* t);
 	void set_translation(float x, float y, float z);
 	vector3* get_translation();

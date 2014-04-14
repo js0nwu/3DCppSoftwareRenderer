@@ -7,6 +7,12 @@
 
 #include "transform.h"
 
+matrix4* transform::get_transformation() {
+	matrix4* m_translation = new matrix4();
+	m_translation->initialize_translation(translation.get_x(), translation.get_y(), translation.get_z());
+	return m_translation;
+}
+
 void transform::set_translation(vector3* t) {
 	this->translation = *t->clone();
 }
