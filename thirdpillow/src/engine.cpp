@@ -42,8 +42,7 @@ void engine::initialize() {
 	this->main_camera = 0;
 	mesh* m = new mesh();
 	for (int i = 0; i < 1; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 1), RandomFloat(0, 1),
-				RandomFloat(0, 1));
+		vector3* vertexp = new vector3(3,1,4);
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();

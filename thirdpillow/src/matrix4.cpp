@@ -81,7 +81,7 @@ void matrix4::multiply(matrix4* m) {
 							+ this->matrix[i][3] * m->get_at(3, j));
 		}
 	}
-	static float* data = product->get_data();
+	float* data = product->get_data();
 
 	for (int i_2 = 0; i_2 < 4; i_2++) {
 		for (int j_2 = 0; j_2 < 4; j_2++) {

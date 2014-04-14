@@ -8,7 +8,7 @@
 #include "camera.h"
 
 void camera::clear() {
-	for (int i = 0; i < this->render_width * this->render_height; i++) {
+	for (int i = 0; i < this->render_width * this->render_height * 3; i++) {
 		this->frame[i] = 0;
 	}
 }
@@ -34,13 +34,9 @@ vector3* camera::get_position() {
 }
 
 void camera::translate(vector3* delta) {
-	printf("old position: %f %f %f\n", this->position.get_x(),
-			this->position.get_y(), this->position.get_z());
 	this->position.set_x(this->position.get_x() + delta->get_x());
 	this->position.set_y(this->position.get_y() + delta->get_y());
 	this->position.set_z(this->position.get_z() + delta->get_z());
-	printf("new position: %f %f %f\n", this->position.get_x(),
-			this->position.get_y(), this->position.get_z());
 }
 
 int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
@@ -48,7 +44,28 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 }
 
 void camera::render_mesh(mesh* m) {
+	for (int i = 0; i < m->vertices.size(); i++) {
+		transform* t = new transform(*this->get_position());
+		vector4* p = new vector4(m->vertices[i]->get_position());
+		if (i == 0) {
+			printf("p %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
+		}
 
+		p->multiply_by(t->get_transformation());
+		if (i == 0) {
+			printf("np %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
+			exit(0);
+		}
+		if ((int) p->get_x() >= this->min_x && (int) p->get_x() < this->max_x
+				&& (int) p->get_y() >= this->min_y
+				&& (int) p->get_y() < this->max_y) {
+			int pixel_index = camera::get_index_3d((int) p->get_x(),
+					(int) p->get_y(), 0, render_width, 3);
+			this->frame[pixel_index] = 1;
+			this->frame[pixel_index + 1] = 1;
+			this->frame[pixel_index + 2] = 1;
+		}
+	}
 }
 
 void camera::render(world* scene) {
