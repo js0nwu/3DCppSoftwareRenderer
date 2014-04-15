@@ -91,7 +91,8 @@ void keyboard(unsigned char key, int x, int y) {
 		thirdpillow->get_main_camera()->translate(new vector3(0, 0, -1));
 		break;
 	case 32:
-		thirdpillow->get_main_camera()->rotate_degree_xz(10);
+		thirdpillow->get_main_camera()->rotate_degree_xy(30);
+		break;
 	default:
 		break;
 	}

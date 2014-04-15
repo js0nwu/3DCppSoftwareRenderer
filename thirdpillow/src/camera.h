@@ -26,6 +26,8 @@ public:
 	void rotate_degree_xz(float degrees);
 	void set_position(vector3* p);
 	vector3* get_position();
+	void set_rotation(vector3* r);
+	vector3* get_rotation();
 	void translate(vector3* delta);
 	static int get_index_3d(int x, int y, int z, int wide, int thick);
 	void activate();

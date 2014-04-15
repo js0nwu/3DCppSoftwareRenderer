@@ -13,6 +13,14 @@ void camera::clear() {
 	}
 }
 
+void camera::set_rotation(vector3* r) {
+	this->rotation = *r;
+}
+
+vector3* camera::get_rotation() {
+	return &this->rotation;
+}
+
 void camera::rotate_degree_xy(float degrees) {
 	this->rotation.rotate_degree_xy(degrees);
 }
@@ -47,7 +55,8 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 void camera::render_mesh(mesh* m) {
 	for (int i = 0; i < m->vertices.size(); i++) {
 		vector3 pos = *this->get_position();
-		transform* t = new transform(pos);
+		vector3 rot = *this->get_rotation();
+		transform* t = new transform(pos, rot);
 		vector4* p = new vector4(m->vertices[i]->get_position());
 		matrix4* m_transformation = t->get_transformation();
 		p->multiply_first(m_transformation);
@@ -60,7 +69,7 @@ void camera::render_mesh(mesh* m) {
 			this->frame[pixel_index + 1] = 1;
 			this->frame[pixel_index + 2] = 1;
 		}
-		free(m_transformation); //for some reason delete doesn't work
+		delete m_transformation;
 		delete p;
 		delete t;
 	}

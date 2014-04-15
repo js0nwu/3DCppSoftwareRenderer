@@ -15,6 +15,46 @@ void matrix4::set_at(int x, int y, float value) {
 	this->matrix[x][y] = value;
 }
 
+void matrix4::initialize_rotation(float x, float y, float z) {
+	matrix4* rx = new matrix4();
+	matrix4* ry = new matrix4();
+	matrix4* rz = new matrix4();
+
+	float x_radians = (x * (float) 3.14) / (float) 180;
+	float y_radians = (y * (float) 3.14) / (float) 180;
+	float z_radians = (z * (float) 3.14) / (float) 180;
+
+	rz->initialize_identity();
+	rx->initialize_identity();
+	ry->initialize_identity();
+
+	rz->set_at(0, 0, cos(z_radians));
+	rz->set_at(1, 0, -sin(z_radians));
+	rz->set_at(0, 1, sin(z_radians));
+	rz->set_at(1, 1, cos(z_radians));
+
+	rx->set_at(1, 1, cos(x_radians));
+	rx->set_at(1, 2, sin(x_radians));
+	rx->set_at(2, 1, -sin(x_radians));
+	rx->set_at(2, 2, cos(x_radians));
+
+	ry->set_at(0, 0, cos(y_radians));
+	ry->set_at(0, 2, sin(y_radians));
+	ry->set_at(2, 0, -sin(y_radians));
+	ry->set_at(2, 2, cos(y_radians));
+
+	ry->multiply(rx);
+	rz->multiply(ry);
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			matrix[i][j] = rz->get_at(i, j);
+		}
+	}
+	delete rx;
+	delete ry;
+	delete rz;
+}
+
 void matrix4::initialize_translation(float x, float y, float z) {
 	matrix[0][0] = 1;
 	matrix[1][0] = 0;
@@ -36,21 +76,21 @@ void matrix4::initialize_translation(float x, float y, float z) {
 
 void matrix4::initialize_identity() {
 	matrix[0][0] = 1;
-		matrix[1][0] = 0;
-		matrix[2][0] = 0;
-		matrix[3][0] = 0;
-		matrix[0][1] = 0;
-		matrix[1][1] = 1;
-		matrix[2][1] = 0;
-		matrix[3][1] = 0;
-		matrix[0][2] = 0;
-		matrix[1][2] = 0;
-		matrix[2][2] = 1;
-		matrix[3][2] = 0;
-		matrix[0][3] = 0;
-		matrix[1][3] = 0;
-		matrix[2][3] = 0;
-		matrix[3][3] = 1;
+	matrix[1][0] = 0;
+	matrix[2][0] = 0;
+	matrix[3][0] = 0;
+	matrix[0][1] = 0;
+	matrix[1][1] = 1;
+	matrix[2][1] = 0;
+	matrix[3][1] = 0;
+	matrix[0][2] = 0;
+	matrix[1][2] = 0;
+	matrix[2][2] = 1;
+	matrix[3][2] = 0;
+	matrix[0][3] = 0;
+	matrix[1][3] = 0;
+	matrix[2][3] = 0;
+	matrix[3][3] = 1;
 }
 
 float* matrix4::get_data() {
@@ -107,7 +147,6 @@ matrix4::matrix4(float* data) {
 }
 
 matrix4::~matrix4() {
-	delete this->matrix;
 }
 void matrix4::print() {
 	printf("matrix4:\n");

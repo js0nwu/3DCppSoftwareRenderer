@@ -19,6 +19,7 @@ public:
 	float get_at(int x, int y);
 	void set_at(int x, int y, float value);
 	void initialize_identity();
+	void initialize_rotation(float x, float y, float z);
 	void initialize_translation(float x, float y, float z);
 	void multiply(matrix4* m);
 	matrix4();
