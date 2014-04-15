@@ -20,13 +20,10 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 	matrix4* ry = new matrix4();
 	matrix4* rz = new matrix4();
 
+
 	float x_radians = (x * (float) 3.14) / (float) 180;
 	float y_radians = (y * (float) 3.14) / (float) 180;
 	float z_radians = (z * (float) 3.14) / (float) 180;
-
-	rz->initialize_identity();
-	rx->initialize_identity();
-	ry->initialize_identity();
 
 	rz->set_at(0, 0, cos(z_radians));
 	rz->set_at(1, 0, -sin(z_radians));
@@ -47,7 +44,7 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 	rz->multiply(ry);
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			matrix[i][j] = rz->get_at(i, j);
+			this->matrix[i][j] = rz->get_at(i, j);
 		}
 	}
 	delete rx;
@@ -131,6 +128,7 @@ void matrix4::multiply(matrix4* m) {
 	}
 
 	delete data;
+	delete product;
 }
 
 matrix4::matrix4() {

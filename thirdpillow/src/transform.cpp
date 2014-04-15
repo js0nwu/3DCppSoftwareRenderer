@@ -14,11 +14,8 @@ matrix4* transform::get_transformation() {
 	matrix4* m_rotation = new matrix4();
 	m_rotation->initialize_rotation(rotation.get_x(), rotation.get_y(),
 			rotation.get_z());
-
 	m_translation->multiply(m_rotation);
-
-	matrix4* product = m_translation->clone();
-	delete m_translation;
+	matrix4* product = m_translation;
 	delete m_rotation;
 	return product;
 }
