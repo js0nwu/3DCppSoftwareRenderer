@@ -89,6 +89,8 @@ void matrix4::multiply(matrix4* m) {
 			this->matrix[i_2][j_2] = data[index];
 		}
 	}
+
+	delete data;
 }
 
 matrix4::matrix4() {
@@ -105,7 +107,7 @@ matrix4::matrix4(float* data) {
 }
 
 matrix4::~matrix4() {
-
+	delete this->matrix;
 }
 void matrix4::print() {
 	printf("matrix4:\n");

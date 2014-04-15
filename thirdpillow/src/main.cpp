@@ -72,16 +72,16 @@ void keyboard(unsigned char key, int x, int y) {
 		thirdpillow->stop();
 		exit(0);
 		break;
-	case 119:
+	case 97:
 		thirdpillow->get_main_camera()->translate(new vector3(1, 0, 0));
 		break;
-	case 115:
+	case 100:
 		thirdpillow->get_main_camera()->translate(new vector3(-1, 0, 0));
 		break;
-	case 97:
+	case 115:
 		thirdpillow->get_main_camera()->translate(new vector3(0, 1, 0));
 		break;
-	case 100:
+	case 119:
 		thirdpillow->get_main_camera()->translate(new vector3(0, -1, 0));
 		break;
 	case 113:

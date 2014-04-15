@@ -27,7 +27,7 @@ vector3* transform::get_translation() {
 }
 
 transform::transform(vector3 translation) {
-	this->translation = *translation.clone();
+	this->translation = translation;
 }
 
 transform::transform() {

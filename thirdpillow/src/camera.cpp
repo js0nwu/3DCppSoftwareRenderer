@@ -47,10 +47,10 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 void camera::render_mesh(mesh* m) {
 	for (int i = 0; i < m->vertices.size(); i++) {
 		vector3 pos = *this->get_position();
-		//printf("pos x %f y %f z %f\n", pos.get_x(), pos.get_y(), pos.get_z());
 		transform* t = new transform(pos);
 		vector4* p = new vector4(m->vertices[i]->get_position());
-		p->multiply_by(t->get_transformation());
+		matrix4* m_transformation = t->get_transformation();
+		p->multiply_first(m_transformation);
 		if ((int) p->get_x() >= this->min_x && (int) p->get_x() < this->max_x
 				&& (int) p->get_y() >= this->min_y
 				&& (int) p->get_y() < this->max_y) {
@@ -60,6 +60,9 @@ void camera::render_mesh(mesh* m) {
 			this->frame[pixel_index + 1] = 1;
 			this->frame[pixel_index + 2] = 1;
 		}
+		free(m_transformation); //for some reason delete doesn't work
+		delete p;
+		delete t;
 	}
 }
 

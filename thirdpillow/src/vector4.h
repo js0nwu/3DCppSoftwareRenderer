@@ -21,7 +21,7 @@ public:
 	float get_y();
 	float get_z();
 	float get_w();
-	void multiply_by(matrix4* m);
+	void multiply_first(matrix4* m);
 
 	vector4();
 	vector4(float x, float y, float z, float w);

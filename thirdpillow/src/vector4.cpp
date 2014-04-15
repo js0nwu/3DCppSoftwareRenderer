@@ -39,7 +39,7 @@ float vector4::get_w() {
 	return this->w;
 }
 
-void vector4::multiply_by(matrix4* m) {
+void vector4::multiply_first(matrix4* m) {
 	//rewrite this with a loop ... later
 	float x_prime = m->get_at(0, 0) * this->x + m->get_at(1, 0) * this->y + m->get_at(2, 0) * this->z + m->get_at(3, 0) * this->w;
 	float y_prime = m->get_at(0, 1) * this->x + m->get_at(1, 1) * this->y + m->get_at(2, 1) * this->z + m->get_at(3, 1) * this->w;
@@ -49,7 +49,7 @@ void vector4::multiply_by(matrix4* m) {
 	this->x = x_prime;
 	this->y = y_prime;
 	this->z = z_prime;
-	this->w = w_prime;
+	this->w = w_prime; //this should always be 1?
 }
 
 vector4::vector4() {
