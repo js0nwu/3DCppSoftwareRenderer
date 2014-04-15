@@ -17,40 +17,40 @@ void matrix4::set_at(int x, int y, float value) {
 
 void matrix4::initialize_translation(float x, float y, float z) {
 	matrix[0][0] = 1;
-	matrix[0][1] = 0;
-	matrix[0][2] = 0;
-	matrix[0][3] = x;
 	matrix[1][0] = 0;
-	matrix[1][1] = 1;
-	matrix[1][2] = 0;
-	matrix[1][3] = y;
 	matrix[2][0] = 0;
+	matrix[3][0] = -x;
+	matrix[0][1] = 0;
+	matrix[1][1] = 1;
 	matrix[2][1] = 0;
+	matrix[3][1] = -y;
+	matrix[0][2] = 0;
+	matrix[1][2] = 0;
 	matrix[2][2] = 1;
-	matrix[2][3] = z;
-	matrix[3][0] = 0;
-	matrix[3][1] = 0;
-	matrix[3][2] = 0;
+	matrix[3][2] = -z;
+	matrix[0][3] = 0;
+	matrix[1][3] = 0;
+	matrix[2][3] = 0;
 	matrix[3][3] = 1;
 }
 
 void matrix4::initialize_identity() {
 	matrix[0][0] = 1;
-	matrix[0][1] = 0;
-	matrix[0][2] = 0;
-	matrix[0][3] = 0;
-	matrix[1][0] = 0;
-	matrix[1][1] = 1;
-	matrix[1][2] = 0;
-	matrix[1][3] = 0;
-	matrix[2][0] = 0;
-	matrix[2][1] = 0;
-	matrix[2][2] = 1;
-	matrix[2][3] = 0;
-	matrix[3][0] = 0;
-	matrix[3][1] = 0;
-	matrix[3][2] = 0;
-	matrix[3][3] = 1;
+		matrix[1][0] = 0;
+		matrix[2][0] = 0;
+		matrix[3][0] = 0;
+		matrix[0][1] = 0;
+		matrix[1][1] = 1;
+		matrix[2][1] = 0;
+		matrix[3][1] = 0;
+		matrix[0][2] = 0;
+		matrix[1][2] = 0;
+		matrix[2][2] = 1;
+		matrix[3][2] = 0;
+		matrix[0][3] = 0;
+		matrix[1][3] = 0;
+		matrix[2][3] = 0;
+		matrix[3][3] = 1;
 }
 
 float* matrix4::get_data() {
@@ -107,12 +107,11 @@ matrix4::matrix4(float* data) {
 matrix4::~matrix4() {
 
 }
-
 void matrix4::print() {
+	printf("matrix4:\n");
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			printf("(%d, %d) = %f\n", i, j, this->get_at(i, j));
 		}
 	}
 }
-

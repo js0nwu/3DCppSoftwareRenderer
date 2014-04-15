@@ -65,6 +65,7 @@ void display() {
 
 void keyboard(unsigned char key, int x, int y) {
 	int key_code = (int) key;
+	printf("keycode: %d\n", key_code);
 	switch (key_code) {
 	case 27:
 		printf("Exiting...\n");

@@ -7,6 +7,10 @@
 
 #include "vector3.h"
 
+void vector3::print() {
+	printf("vector3: %f %f %f\n", this->x, this->y, this->z);
+}
+
 void vector3::lookat(vector3* v) {
 	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y, v->get_z() - this->z);
 	r->normalize();

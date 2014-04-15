@@ -37,6 +37,7 @@ void camera::translate(vector3* delta) {
 	this->position.set_x(this->position.get_x() + delta->get_x());
 	this->position.set_y(this->position.get_y() + delta->get_y());
 	this->position.set_z(this->position.get_z() + delta->get_z());
+	this->position.print();
 }
 
 int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
@@ -46,20 +47,10 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 void camera::render_mesh(mesh* m) {
 	for (int i = 0; i < m->vertices.size(); i++) {
 		vector3 pos = *this->get_position();
-		printf("pos x %f y %f z %f\n", pos.get_x(), pos.get_y(), pos.get_z());
+		//printf("pos x %f y %f z %f\n", pos.get_x(), pos.get_y(), pos.get_z());
 		transform* t = new transform(pos);
-
 		vector4* p = new vector4(m->vertices[i]->get_position());
-		if (i == 0) {
-			printf("p %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
-		}
-		//rows and columns are inconsistent
-		p->multiply_by(t->get_transformation()->clone());
-		//t->get_transformation()->print();
-		if (i == 0) {
-			printf("np %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z(), p->get_w());
-			exit(0);
-		}
+		p->multiply_by(t->get_transformation());
 		if ((int) p->get_x() >= this->min_x && (int) p->get_x() < this->max_x
 				&& (int) p->get_y() >= this->min_y
 				&& (int) p->get_y() < this->max_y) {

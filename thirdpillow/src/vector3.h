@@ -43,6 +43,7 @@ public:
 	void divide(vector3* v);
 	void scale(vector3* f);
 	void lookat(vector3* v);
+	void print();
 
 	vector3* clone();
 private:
