@@ -20,6 +20,7 @@ using namespace std;
 
 class engine {
 public:
+	world* get_scene();
 	camera* get_main_camera();
 	void create_camera();
 	void create_camera(vector3 position, vector3 rotation, vector3 scale);

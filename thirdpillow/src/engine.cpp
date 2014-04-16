@@ -7,6 +7,10 @@
 
 #include "engine.h"
 
+world* engine::get_scene() {
+	return &this->scene;
+}
+
 camera* engine::get_main_camera() {
 	return this->cameras[this->main_camera];
 }
@@ -42,8 +46,8 @@ void engine::initialize() {
 	this->main_camera = 0;
 	mesh* m = new mesh();
 	for (int i = 0; i < 5000; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 500), RandomFloat(0, 500),
-				RandomFloat(0, 500));
+		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
+				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();

@@ -73,16 +73,16 @@ void keyboard(unsigned char key, int x, int y) {
 		exit(0);
 		break;
 	case 97:
-		thirdpillow->get_main_camera()->translate(new vector3(1, 0, 0));
-		break;
-	case 100:
 		thirdpillow->get_main_camera()->translate(new vector3(-1, 0, 0));
 		break;
+	case 100:
+		thirdpillow->get_main_camera()->translate(new vector3(1, 0, 0));
+		break;
 	case 115:
-		thirdpillow->get_main_camera()->translate(new vector3(0, 1, 0));
+		thirdpillow->get_main_camera()->translate(new vector3(0, 0, -1));
 		break;
 	case 119:
-		thirdpillow->get_main_camera()->translate(new vector3(0, -1, 0));
+		thirdpillow->get_main_camera()->translate(new vector3(0, 0, 1));
 		break;
 	case 113:
 		thirdpillow->get_main_camera()->translate(new vector3(0, 0, 1));
@@ -92,6 +92,18 @@ void keyboard(unsigned char key, int x, int y) {
 		break;
 	case 32:
 		thirdpillow->get_main_camera()->rotate_degree_xz(30);
+		break;
+	case 105:
+		thirdpillow->get_scene()->things[0]->get_mesh()->get_transform()->rotate_degree_xz(30);
+		break;
+	case 106:
+
+		break;
+	case 107:
+
+		break;
+	case 108:
+
 		break;
 	default:
 		break;
