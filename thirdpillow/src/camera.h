@@ -21,6 +21,7 @@
 
 class camera {
 public:
+	//these get forwarded to transform
 	void rotate_degree_xy(float degrees);
 	void rotate_degree_yz(float degrees);
 	void rotate_degree_xz(float degrees);
@@ -38,13 +39,12 @@ public:
 	void render(world* scene);
 	camera(int render_width, int render_height);
 	camera(int render_width, int render_height, vector3 position,
-			vector3 rotation);
+			vector3 rotation, vector3 scale);
 	virtual ~camera();
 private:
 	int render_width;
 	int render_height;
-	vector3 position;
-	vector3 rotation;
+	transform m_transform;
 	bool active;
 	float* frame;
 	int min_x;
@@ -53,6 +53,9 @@ private:
 	int max_y;
 	int min_z;
 	int max_z;
+	float z_near;
+	float z_far;
+	float fov;
 
 	void clear();
 	void render_mesh(mesh* m);

@@ -14,38 +14,35 @@ void camera::clear() {
 }
 
 void camera::set_rotation(vector3* r) {
-	this->rotation = *r;
+	this->m_transform.set_rotation(r);
 }
 
 vector3* camera::get_rotation() {
-	return &this->rotation;
+	return this->m_transform.get_rotation();
 }
 
 void camera::rotate_degree_xy(float degrees) {
-	this->rotation.rotate_degree_xy(degrees);
+	this->m_transform.rotate_degree_xy(degrees);
 }
 
 void camera::rotate_degree_yz(float degrees) {
-	this->rotation.rotate_degree_yz(degrees);
+	this->m_transform.rotate_degree_yz(degrees);
 }
 
 void camera::rotate_degree_xz(float degrees) {
-	this->rotation.rotate_degree_xz(degrees);
+	this->m_transform.rotate_degree_xz(degrees);
 }
 
 void camera::set_position(vector3* p) {
-	this->position = *p;
+	this->m_transform.set_translation(p);
 }
 
 vector3* camera::get_position() {
-	return &this->position;
+	return this->m_transform.get_translation();
 }
 
 void camera::translate(vector3* delta) {
-	this->position.set_x(this->position.get_x() + delta->get_x());
-	this->position.set_y(this->position.get_y() + delta->get_y());
-	this->position.set_z(this->position.get_z() + delta->get_z());
-	this->position.print();
+	this->m_transform.translate(delta);
 }
 
 int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
@@ -56,9 +53,12 @@ void camera::render_mesh(mesh* m) {
 	for (int i = 0; i < m->vertices.size(); i++) {
 		vector3 pos = *this->get_position();
 		vector3 rot = *this->get_rotation();
-		transform* t = new transform(pos, rot);
+		vector3 scale = *this->m_transform.get_scale();
+		transform* t = new transform(pos, rot, scale);
 		vector4* p = new vector4(m->vertices[i]->get_position());
-		matrix4* m_transformation = t->get_transformation();
+		matrix4* m_transformation = t->get_projected_transformation(this->fov,
+				(float) this->render_width, (float) this->render_height,
+				this->z_near, this->z_far);
 		p->multiply_first(m_transformation);
 		if ((int) p->get_x() >= this->min_x && (int) p->get_x() < this->max_x
 				&& (int) p->get_y() >= this->min_y
@@ -126,19 +126,30 @@ camera::camera(int render_width, int render_height) {
 	this->initialize();
 	vector3* position = new vector3(5, -5, 8);
 	vector3* rotation = new vector3(0, 0, 0);
+	vector3* scale = new vector3(1, 1, 1);
 	rotation->lookat(new vector3(3, 4, 0));
 	rotation->normalize();
-	this->position = *position;
-	this->rotation = *rotation;
+	transform* t = new transform(*position, *rotation, *scale);
+	this->m_transform = *t;
+
+	//test projection settings
+	this->fov = 88;
+	this->z_near = (float) 0.1;
+	this->z_far = (float) 1000;
 }
 
 camera::camera(int render_width, int render_height, vector3 position,
-		vector3 rotation) {
+		vector3 rotation, vector3 scale) {
 	this->render_width = render_width;
 	this->render_height = render_height;
 	this->initialize();
-	this->position = position;
-	this->rotation = rotation;
+	transform* t = new transform(position, rotation, scale);
+	this->m_transform = *t;
+
+	//test projection settings
+	this->fov = 88;
+	this->z_near = (float) 0.1;
+	this->z_far = (float) 1000;
 }
 
 camera::~camera() {

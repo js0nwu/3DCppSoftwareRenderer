@@ -22,7 +22,7 @@ class engine {
 public:
 	camera* get_main_camera();
 	void create_camera();
-	void create_camera(vector3 position, vector3 rotation);
+	void create_camera(vector3 position, vector3 rotation, vector3 scale);
 	void add_camera(camera* c);
 	void start();
 	void stop();

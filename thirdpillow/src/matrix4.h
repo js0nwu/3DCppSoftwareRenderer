@@ -21,6 +21,8 @@ public:
 	void initialize_identity();
 	void initialize_rotation(float x, float y, float z);
 	void initialize_translation(float x, float y, float z);
+	void initialize_scale(float x, float y, float z);
+	void initialize_projection(float fov, float width, float height, float z_near, float z_far);
 	void multiply(matrix4* m);
 	matrix4();
 	matrix4(float* data);

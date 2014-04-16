@@ -7,9 +7,14 @@
 
 #include "mesh.h"
 
+transform* mesh::get_transform() {
+	return &this->m_transform;
+}
+
 mesh::mesh() {
 	// TODO Auto-generated constructor stub
-
+	transform* t= new transform();
+	this->m_transform = *t;
 }
 
 mesh::~mesh() {

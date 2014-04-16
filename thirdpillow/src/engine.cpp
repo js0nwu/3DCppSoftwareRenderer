@@ -16,9 +16,9 @@ void engine::create_camera() {
 	this->cameras.push_back(c);
 }
 
-void engine::create_camera(vector3 position, vector3 rotation) {
+void engine::create_camera(vector3 position, vector3 rotation, vector3 scale) {
 	camera*c = new camera(this->render_width, this->render_height, position,
-			rotation);
+			rotation, scale);
 	this->cameras.push_back(c);
 }
 
@@ -31,18 +31,19 @@ void engine::cleanup() {
 }
 
 float engine::RandomFloat(float a, float b) {
-    float random = ((float) rand()) / (float) RAND_MAX;
-    float diff = b - a;
-    float r = random * diff;
-    return a + r;
+	float random = ((float) rand()) / (float) RAND_MAX;
+	float diff = b - a;
+	float r = random * diff;
+	return a + r;
 }
 
 void engine::initialize() {
 	printf("engine initializing\n");
 	this->main_camera = 0;
 	mesh* m = new mesh();
-	for (int i = 0; i < 10000; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 500),RandomFloat(0, 500),RandomFloat(0, 500));
+	for (int i = 0; i < 5000; i++) {
+		vector3* vertexp = new vector3(RandomFloat(0, 500), RandomFloat(0, 500),
+				RandomFloat(0, 500));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();
