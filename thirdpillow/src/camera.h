@@ -21,15 +21,15 @@
 
 class camera {
 public:
-	//these get forwarded to transform
-	void rotate_degree_xy(float degrees);
-	void rotate_degree_yz(float degrees);
-	void rotate_degree_xz(float degrees);
+	vector3 y_axis;
 	void set_position(vector3* p);
 	vector3* get_position();
-	void set_rotation(vector3* r);
-	vector3* get_rotation();
-	void translate(vector3* delta);
+	vector3* get_left();
+	vector3* get_right();
+	void rotate_x(float degree);
+	void rotate_y(float degree);
+	void rotate_z(float degree);
+	void move(vector3* direction, float amount);
 	static int get_index_3d(int x, int y, int z, int wide, int thick);
 	void activate();
 	void deactivate();
@@ -38,13 +38,15 @@ public:
 	void set_active(bool state);
 	void render(world* scene);
 	camera(int render_width, int render_height);
-	camera(int render_width, int render_height, vector3 position,
-			vector3 rotation, vector3 scale);
+	camera(int render_width, int render_height, vector3 pos, vector3 forward, vector3 up);
+
 	virtual ~camera();
 private:
 	int render_width;
 	int render_height;
-	transform m_transform;
+	vector3 position;
+	vector3 forward;
+	vector3 up;
 	bool active;
 	float* frame;
 	int min_x;

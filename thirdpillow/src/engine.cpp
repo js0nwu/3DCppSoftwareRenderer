@@ -21,8 +21,8 @@ void engine::create_camera() {
 }
 
 void engine::create_camera(vector3 position, vector3 rotation, vector3 scale) {
-	camera*c = new camera(this->render_width, this->render_height, position,
-			rotation, scale);
+	//create a camera here;
+	camera* c = new camera(this->render_width, this->render_height);
 	this->cameras.push_back(c);
 }
 
@@ -46,8 +46,8 @@ void engine::initialize() {
 	this->main_camera = 0;
 	mesh* m = new mesh();
 	for (int i = 0; i < 5000; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
-				RandomFloat(0, 50));
+		vector3* vertexp = new vector3(RandomFloat(0, 10), RandomFloat(0, 10),
+				RandomFloat(0, 10));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();

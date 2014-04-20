@@ -16,10 +16,13 @@ void matrix4::set_at(int x, int y, float value) {
 }
 
 void matrix4::initialize_rotation(float x, float y, float z) {
+	this->initialize_identity();
 	matrix4* rx = new matrix4();
 	matrix4* ry = new matrix4();
 	matrix4* rz = new matrix4();
-
+	rx->initialize_identity();
+	ry->initialize_identity();
+	rz->initialize_identity();
 	float x_radians = (x * (float) 3.14) / (float) 180;
 	float y_radians = (y * (float) 3.14) / (float) 180;
 	float z_radians = (z * (float) 3.14) / (float) 180;
@@ -130,7 +133,7 @@ void matrix4::initialize_projection(float fov, float width, float height,
 	matrix[0][3] = 0;
 	matrix[1][3] = 0;
 	matrix[2][3] = 1;
-	matrix[3][3] = 1;
+	matrix[3][3] = 0;
 }
 
 float* matrix4::get_data() {

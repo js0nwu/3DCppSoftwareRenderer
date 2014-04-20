@@ -10,6 +10,7 @@
 
 #include <math.h>
 
+#include "quaternion.h"
 #include "matrix4.h"
 
 class vector3 {
@@ -30,9 +31,6 @@ public:
 	float dot_product(vector3* v);
 	void cross_product(vector3* v);
 	float angle_between(vector3* v);
-	void rotate_degree_xy(float degrees);
-	void rotate_degree_yz(float degrees);
-	void rotate_degree_xz(float degrees);
 	void add(float s);
 	void add(vector3* v);
 	void subtract(float s);
@@ -43,6 +41,7 @@ public:
 	void divide(vector3* v);
 	void scale(vector3* f);
 	void lookat(vector3* v);
+	void rotate(float degree, vector3* axis);
 	void print();
 
 	vector3* clone();

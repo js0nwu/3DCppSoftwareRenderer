@@ -8,7 +8,7 @@
 #ifndef QUATERNION_H_
 #define QUATERNION_H_
 
-#include "vector3.h"
+#include <math.h>
 
 class quaternion {
 public:
@@ -27,7 +27,7 @@ public:
 	virtual ~quaternion();
 	void conjugate();
 	void multiply(quaternion* q);
-	void multiply(vector3* v);
+	void multiply(float v_x, float v_y, float v_z);
 
 	quaternion* clone();
 private:

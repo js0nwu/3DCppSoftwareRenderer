@@ -14,9 +14,6 @@
 class transform {
 public:
 	void translate(vector3* delta);
-	void rotate_degree_xy(float degrees);
-	void rotate_degree_yz(float degrees);
-	void rotate_degree_xz(float degrees);
 	matrix4* get_projected_transformation(float fov, float width, float height, float z_near, float z_far);
 	matrix4* get_transformation();
 	void set_translation(vector3* t);

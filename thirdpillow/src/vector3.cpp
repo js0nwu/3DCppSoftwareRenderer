@@ -11,6 +11,26 @@ void vector3::print() {
 	printf("vector3: %f %f %f\n", this->x, this->y, this->z);
 }
 
+void vector3::rotate(float degree, vector3* axis) {
+	float radians = (degree*(float)3.14)/(float)180;
+	float sin_half = sin(radians/2);
+	float cos_half = cos(radians/2);
+	float r_x = axis->get_x() * sin_half;
+	float r_y = axis->get_y() * sin_half;
+	float r_z = axis->get_z() * sin_half;
+	float r_w = 1 * cos_half;
+
+	quaternion* rotation = new quaternion(r_x, r_y, r_z, r_w);
+	quaternion* conjugate = rotation->clone();
+	conjugate->conjugate();
+	quaternion* w = rotation->clone();
+	w->multiply(this->x, this->y, this->z);
+	w->multiply(conjugate);
+	this->x = w->get_x();
+	this->y = w->get_y();
+	this->z = w->get_z();
+}
+
 void vector3::lookat(vector3* v) {
 	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y, v->get_z() - this->z);
 	r->normalize();
@@ -97,41 +117,6 @@ float vector3::angle_between(vector3* v) {
 	float angle_radian = acos(dot_product / total_magnitude);
 	float angle = ((float) 180 * angle_radian) / (float) 3.14;
 	return angle;
-}
-
-void vector3::rotate_degree_xy(float degrees) {
-	float radians = (degrees * (float) 3.14) / (float) 180;
-	float x_prime = (this->x * cos(radians)) + (this->y * -sin(radians))
-			+ (this->z * 0);
-	float y_prime = (this->x * sin(radians)) + (this->y * cos(radians))
-			+ (this->z * 0);
-	float z_prime = (this->x * 0) + (this->y * 0) + (this->z * 1);
-	this->x = x_prime;
-	this->y = y_prime;
-	this->z = z_prime;
-}
-
-void vector3::rotate_degree_yz(float degrees) {
-	float radians = (degrees * (float) 3.14) / (float) 180;
-	float x_prime = (this->x * 1) + (this->y * 0) + (this->z * 0);
-	float y_prime = (this->x * 0) + (this->y * 1) + (this->z * 0);
-	float z_prime = (this->x * -sin(radians)) + (this->y * 0)
-			+ (this->z * cos(radians));
-	this->x = x_prime;
-	this->y = y_prime;
-	this->z = z_prime;
-}
-
-void vector3::rotate_degree_xz(float degrees) {
-	float radians = (degrees * (float) 3.14) / (float) 180;
-	float x_prime = (this->x * cos(radians)) + (this->y * 0)
-			+ (this->z * sin(radians));
-	float y_prime = (this->x * 0) + (this->y * 1) + (this->z * 0);
-	float z_prime = (this->x * -sin(radians)) + (this->y * 0)
-			+ (this->z * cos(radians));
-	this->x = x_prime;
-	this->y = y_prime;
-	this->z = z_prime;
 }
 
 void vector3::add(float s) {

@@ -73,18 +73,6 @@ vector3* transform::get_rotation() {
 	return &this->rotation;
 }
 
-void transform::rotate_degree_xy(float degrees) {
-	this->rotation.rotate_degree_xy(degrees);
-}
-
-void transform::rotate_degree_yz(float degrees) {
-	this->rotation.rotate_degree_yz(degrees);
-}
-
-void transform::rotate_degree_xz(float degrees) {
-	this->rotation.rotate_degree_xz(degrees);
-}
-
 void transform::translate(vector3* delta) {
 	this->translation.set_x(this->translation.get_x() + delta->get_x());
 	this->translation.set_y(this->translation.get_y() + delta->get_y());
