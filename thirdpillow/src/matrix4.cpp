@@ -58,15 +58,15 @@ void matrix4::initialize_translation(float x, float y, float z) {
 	matrix[0][0] = 1;
 	matrix[1][0] = 0;
 	matrix[2][0] = 0;
-	matrix[3][0] = -x;
+	matrix[3][0] = x;
 	matrix[0][1] = 0;
 	matrix[1][1] = 1;
 	matrix[2][1] = 0;
-	matrix[3][1] = -y;
+	matrix[3][1] = y;
 	matrix[0][2] = 0;
 	matrix[1][2] = 0;
 	matrix[2][2] = 1;
-	matrix[3][2] = -z;
+	matrix[3][2] = z;
 	matrix[0][3] = 0;
 	matrix[1][3] = 0;
 	matrix[2][3] = 0;
@@ -134,6 +134,26 @@ void matrix4::initialize_projection(float fov, float width, float height,
 	matrix[1][3] = 0;
 	matrix[2][3] = 1;
 	matrix[3][3] = 0;
+}
+
+void matrix4::initialize_camera(vector3* forward, vector3* up) {
+	vector3* f = forward;
+	f->normalize();
+	vector3* r = up;
+	r->normalize();
+	r->cross_product(f);
+	vector3* u = f->clone();
+	u->cross_product(r);
+	this->initialize_identity();
+	this->set_at(0, 0, r->get_x());
+	this->set_at(1, 0, r->get_y());
+	this->set_at(2, 0, r->get_z());
+	this->set_at(0, 1, u->get_x());
+	this->set_at(1, 1, u->get_y());
+	this->set_at(2, 1, u->get_z());
+	this->set_at(0, 2, f->get_x());
+	this->set_at(1, 2, f->get_y());
+	this->set_at(2, 2, f->get_z());
 }
 
 float* matrix4::get_data() {

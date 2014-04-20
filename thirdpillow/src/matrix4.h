@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "vector2.h"
+#include "vector3.h"
 
 class matrix4 {
 public:
@@ -23,6 +24,7 @@ public:
 	void initialize_translation(float x, float y, float z);
 	void initialize_scale(float x, float y, float z);
 	void initialize_projection(float fov, float width, float height, float z_near, float z_far);
+	void initialize_camera(vector3* forward, vector3* up);
 	void multiply(matrix4* m);
 	matrix4();
 	matrix4(float* data);

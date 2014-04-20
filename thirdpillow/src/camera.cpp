@@ -7,6 +7,29 @@
 
 #include "camera.h"
 
+matrix4* camera::get_view_projection() {
+	vector3* r = new vector3(1, 0, 0);
+	vector3* s = new vector3(1, 1, 1);
+	transform* t = new transform(this->position, *r, *s);
+	matrix4* transformation = t->get_transformation();
+	matrix4* projection = new matrix4();
+	projection->initialize_projection(this->fov, (float) this->render_width,
+			(float) this->render_height, this->z_near, this->z_far);
+	matrix4* m_camera = new matrix4();
+	m_camera->initialize_camera(&this->forward, &this->up);
+	matrix4* m_camera_translation = new matrix4();
+	m_camera_translation->initialize_translation(-this->position.get_x(), -this->position.get_y(), -this->position.get_z());
+	m_camera_translation->multiply(transformation);
+	m_camera->multiply(m_camera_translation);
+	projection->multiply(m_camera);
+	delete transformation;
+	delete m_camera;
+	delete r;
+	delete s;
+	delete m_camera_translation;
+	return projection;
+}
+
 void camera::clear() {
 	for (int i = 0; i < this->render_width * this->render_height * 3; i++) {
 		this->frame[i] = 0;
@@ -84,7 +107,8 @@ camera::camera(int render_width, int render_height) {
 	this->position = *pos;
 }
 
-camera::camera(int render_width, int render_height, vector3 pos, vector3 forward, vector3 up) {
+camera::camera(int render_width, int render_height, vector3 pos,
+		vector3 forward, vector3 up) {
 	this->render_width = render_width;
 	this->render_height = render_height;
 	this->initialize();
@@ -111,14 +135,26 @@ vector3* camera::get_right() {
 }
 
 void camera::rotate_x(float degree) {
-	/*
-	vector3* h_axis = y_axis.clone()->cross_product(&this->forward);
+	vector3* h_axis = y_axis.clone();
+	h_axis->cross_product(&this->forward);
 	h_axis->normalize();
-
+	forward.rotate(degree, h_axis);
 	forward.normalize();
-	up = forward.clone()->cross_product(h_axis);
+	up = *forward.clone();
+	up.cross_product(h_axis);
 	up.normalize();
-	*/
+	delete h_axis;
+}
+void camera::rotate_y(float degree) {
+	vector3* h_axis = y_axis.clone();
+	h_axis->cross_product(&this->forward);
+	h_axis->normalize();
+	forward.rotate(degree, h_axis);
+	forward.normalize();
+	up = *forward.clone();
+	up.cross_product(h_axis);
+	up.normalize();
+	delete h_axis;
 }
 
 void camera::move(vector3* direction, float amount) {

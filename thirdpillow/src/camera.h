@@ -22,13 +22,13 @@
 class camera {
 public:
 	vector3 y_axis;
+	matrix4* get_view_projection();
 	void set_position(vector3* p);
 	vector3* get_position();
 	vector3* get_left();
 	vector3* get_right();
 	void rotate_x(float degree);
 	void rotate_y(float degree);
-	void rotate_z(float degree);
 	void move(vector3* direction, float amount);
 	static int get_index_3d(int x, int y, int z, int wide, int thick);
 	void activate();
