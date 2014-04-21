@@ -53,6 +53,8 @@ void engine::stop() {
 }
 
 void engine::render() {
+	vector3* test_r = player->get_rotation();
+	player->set_rotation(test_r->get_x() + 10, test_r->get_y() + 10, test_r->get_z() + 10);
 	vector3* delta = new vector3(1, 1, 1);
 	player->translate(delta);
 	delete delta;
