@@ -10,11 +10,12 @@
 
 #include "vector3.h"
 #include "matrix4.h"
+#include "camera.h"
 
 class transform {
 public:
 	void translate(vector3* delta);
-	matrix4* get_projected_transformation(float fov, float width, float height, float z_near, float z_far);
+	matrix4* get_projected_transformation();
 	matrix4* get_transformation();
 	void set_translation(vector3* t);
 	void set_translation(float x, float y, float z);
@@ -29,6 +30,7 @@ public:
 	transform(vector3 translation, vector3 rotation, vector3 scale);
 	virtual ~transform();
 private:
+	camera* cam;
 	vector3 translation;
 	vector3 rotation;
 	vector3 scale;

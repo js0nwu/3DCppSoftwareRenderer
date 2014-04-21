@@ -114,7 +114,6 @@ int main(int argc, char** argv) {
 	printf("Hello World!\n");
 	thirdpillow = new engine(width, height);
 	thirdpillow->start();
-	thirdpillow->create_camera();
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);

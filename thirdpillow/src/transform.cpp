@@ -7,11 +7,19 @@
 
 #include "transform.h"
 
-matrix4* transform::get_projected_transformation(float fov, float width, float height, float z_near, float z_far) {
+matrix4* transform::get_projected_transformation() {
 	matrix4* m_transformation = this->get_transformation();
 	matrix4* m_projection = new matrix4();
-	m_projection->initialize_projection(fov, width, height, z_near, z_far);
-	m_projection->multiply(m_transformation);
+	matrix4* camera_rotation = new matrix4();
+	camera_rotation->initialize_camera(cam->get_forward(), cam->get_up());
+	matrix4* camera_translation = new matrix4();
+	camera_translation->initialize_translation(-cam->get_position()->get_x(), -cam->get_position()->get_y(), -cam->get_position()->get_z());
+	camera_translation->multiply(m_transformation);
+	camera_rotation->multiply(camera_translation);
+	m_projection->initialize_projection((float)88, (float)800, (float)600, (float) 0.1, (float) 1000);
+	m_projection->multiply(camera_rotation);
+	delete camera_rotation;
+	delete camera_translation;
 	delete m_transformation;
 	return m_projection;
 }
@@ -84,6 +92,7 @@ transform::transform(vector3 translation, vector3 rotation, vector3 scale) {
 	this->translation = translation;
 	this->rotation = rotation;
 	this->scale = scale;
+
 }
 
 transform::transform() {
@@ -94,6 +103,9 @@ transform::transform() {
 	this->translation = *translation;
 	this->rotation = *rotation;
 	this->scale = *scale;
+	this->cam = new camera(800, 600);
+	vector3* test = new vector3(-30, -300, -100);
+	this->cam->set_position(test);
 }
 
 transform::~transform() {

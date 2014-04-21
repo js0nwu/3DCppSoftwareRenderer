@@ -13,7 +13,8 @@
 #include <vector>
 
 #include "vector3.h"
-#include "camera.h"
+#include "vector4.h"
+#include "transform.h"
 #include "world.h"
 #include "vertex.h"
 
@@ -22,10 +23,6 @@ using namespace std;
 class engine {
 public:
 	world* get_scene();
-	camera* get_main_camera();
-	void create_camera();
-	void create_camera(vector3 position, vector3 rotation, vector3 scale);
-	void add_camera(camera* c);
 	void start();
 	void stop();
 	void render();
@@ -33,16 +30,16 @@ public:
 	engine(int render_width, int render_height);
 	virtual ~engine();
 private:
-	vector<camera*> cameras;
 	int render_width;
 	int render_height;
 	float* frame;
 	world scene;
-	int main_camera;
+	transform* player;
 
 	float RandomFloat(float a, float b);
 	void initialize();
 	void cleanup();
+	void cls();
 };
 
 #endif /* ENGINE_H_ */
