@@ -28,18 +28,18 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 	float z_radians = (z * (float) 3.14) / (float) 180;
 
 	rz->set_at(0, 0, cos(z_radians));
-	rz->set_at(1, 0, -sin(z_radians));
-	rz->set_at(0, 1, sin(z_radians));
+	rz->set_at(0, 1, -sin(z_radians));
+	rz->set_at(1, 0, sin(z_radians));
 	rz->set_at(1, 1, cos(z_radians));
 
 	rx->set_at(1, 1, cos(x_radians));
-	rx->set_at(1, 2, sin(x_radians));
-	rx->set_at(2, 1, -sin(x_radians));
+	rx->set_at(2, 1, sin(x_radians));
+	rx->set_at(1, 2, -sin(x_radians));
 	rx->set_at(2, 2, cos(x_radians));
 
 	ry->set_at(0, 0, cos(y_radians));
-	ry->set_at(0, 2, sin(y_radians));
-	ry->set_at(2, 0, -sin(y_radians));
+	ry->set_at(2, 0, sin(y_radians));
+	ry->set_at(0, 2, -sin(y_radians));
 	ry->set_at(2, 2, cos(y_radians));
 
 	ry->multiply(rx);
@@ -56,58 +56,58 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 
 void matrix4::initialize_translation(float x, float y, float z) {
 	matrix[0][0] = 1;
-	matrix[1][0] = 0;
-	matrix[2][0] = 0;
-	matrix[3][0] = x;
+	matrix[0][1] = 0;
+	matrix[0][2] = 0;
+	matrix[0][3] = x;
 	matrix[0][1] = 0;
 	matrix[1][1] = 1;
-	matrix[2][1] = 0;
-	matrix[3][1] = y;
-	matrix[0][2] = 0;
 	matrix[1][2] = 0;
+	matrix[1][3] = y;
+	matrix[2][0] = 0;
+	matrix[2][1] = 0;
 	matrix[2][2] = 1;
-	matrix[3][2] = z;
-	matrix[0][3] = 0;
-	matrix[1][3] = 0;
-	matrix[2][3] = 0;
+	matrix[2][3] = z;
+	matrix[3][0] = 0;
+	matrix[3][1] = 0;
+	matrix[3][2] = 0;
 	matrix[3][3] = 1;
 }
 
 void matrix4::initialize_scale(float x, float y, float z) {
 	matrix[0][0] = x;
-	matrix[1][0] = 0;
-	matrix[2][0] = 0;
-	matrix[3][0] = 0;
 	matrix[0][1] = 0;
-	matrix[1][1] = y;
-	matrix[2][1] = 0;
-	matrix[3][1] = 0;
 	matrix[0][2] = 0;
-	matrix[1][2] = 0;
-	matrix[2][2] = z;
-	matrix[3][2] = 0;
 	matrix[0][3] = 0;
+	matrix[1][0] = 0;
+	matrix[1][1] = y;
+	matrix[1][2] = 0;
 	matrix[1][3] = 0;
+	matrix[2][0] = 0;
+	matrix[2][1] = 0;
+	matrix[2][2] = z;
 	matrix[2][3] = 0;
+	matrix[3][0] = 0;
+	matrix[3][1] = 0;
+	matrix[3][2] = 0;
 	matrix[3][3] = 1;
 }
 
 void matrix4::initialize_identity() {
 	matrix[0][0] = 1;
-	matrix[1][0] = 0;
-	matrix[2][0] = 0;
-	matrix[3][0] = 0;
 	matrix[0][1] = 0;
-	matrix[1][1] = 1;
-	matrix[2][1] = 0;
-	matrix[3][1] = 0;
 	matrix[0][2] = 0;
-	matrix[1][2] = 0;
-	matrix[2][2] = 1;
-	matrix[3][2] = 0;
 	matrix[0][3] = 0;
+	matrix[1][0] = 0;
+	matrix[1][1] = 1;
+	matrix[1][2] = 0;
 	matrix[1][3] = 0;
+	matrix[2][0] = 0;
+	matrix[2][1] = 0;
+	matrix[2][2] = 1;
 	matrix[2][3] = 0;
+	matrix[3][0] = 0;
+	matrix[3][1] = 0;
+	matrix[3][2] = 0;
 	matrix[3][3] = 1;
 }
 
@@ -119,20 +119,20 @@ void matrix4::initialize_projection(float fov, float width, float height,
 	float z_range = z_near - z_far;
 
 	matrix[0][0] = (float) 1 / (tan_fov * ar);
-	matrix[1][0] = 0;
-	matrix[2][0] = 0;
-	matrix[3][0] = 0;
 	matrix[0][1] = 0;
-	matrix[1][1] = (float) 1 / tan_fov;
-	matrix[2][1] = 0;
-	matrix[3][1] = 0;
 	matrix[0][2] = 0;
-	matrix[1][2] = 0;
-	matrix[2][2] = (-z_near - z_far) / z_range;
-	matrix[3][2] = (float) 2 * z_far * z_near / z_range;
 	matrix[0][3] = 0;
+	matrix[1][0] = 0;
+	matrix[1][1] = (float) 1 / tan_fov;
+	matrix[1][2] = 0;
 	matrix[1][3] = 0;
-	matrix[2][3] = 1;
+	matrix[2][0] = 0;
+	matrix[2][1] = 0;
+	matrix[2][2] = (-z_near - z_far) / z_range;
+	matrix[2][3] = (float) 2 * z_far * z_near / z_range;
+	matrix[3][0] = 0;
+	matrix[3][1] = 0;
+	matrix[3][2] = 1;
 	matrix[3][3] = 0;
 }
 
@@ -146,13 +146,13 @@ void matrix4::initialize_camera(vector3* forward, vector3* up) {
 	u->cross_product(r);
 	this->initialize_identity();
 	this->set_at(0, 0, r->get_x());
-	this->set_at(1, 0, r->get_y());
-	this->set_at(2, 0, r->get_z());
-	this->set_at(0, 1, u->get_x());
+	this->set_at(0, 1, r->get_y());
+	this->set_at(0, 2, r->get_z());
+	this->set_at(1, 0, u->get_x());
 	this->set_at(1, 1, u->get_y());
-	this->set_at(2, 1, u->get_z());
-	this->set_at(0, 2, f->get_x());
-	this->set_at(1, 2, f->get_y());
+	this->set_at(1, 2, u->get_z());
+	this->set_at(2, 0, f->get_x());
+	this->set_at(2, 1, f->get_y());
 	this->set_at(2, 2, f->get_z());
 }
 

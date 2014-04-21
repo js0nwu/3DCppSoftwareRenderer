@@ -85,7 +85,7 @@ void transform::translate(vector3* delta) {
 	this->translation.set_x(this->translation.get_x() + delta->get_x());
 	this->translation.set_y(this->translation.get_y() + delta->get_y());
 	this->translation.set_z(this->translation.get_z() + delta->get_z());
-	this->translation.print();
+	//this->translation.print
 }
 
 transform::transform(vector3 translation, vector3 rotation, vector3 scale) {

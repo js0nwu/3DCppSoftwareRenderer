@@ -53,7 +53,7 @@ void engine::stop() {
 }
 
 void engine::render() {
-	vector3* delta = new vector3(-0.5, -2, 0);
+	vector3* delta = new vector3(1, 1, 1);
 	player->translate(delta);
 	delete delta;
 	this->cls(); //clear screen;
