@@ -17,6 +17,8 @@ camera* engine::get_main_camera() {
 
 void engine::create_camera() {
 	camera* c = new camera(this->render_width, this->render_height);
+	vector3* test = new vector3((float)555, (float)-5555, (float) 555);
+	c->set_position(test);
 	this->cameras.push_back(c);
 }
 

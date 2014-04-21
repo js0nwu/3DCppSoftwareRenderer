@@ -7,11 +7,16 @@
 
 #include "camera.h"
 
+void camera::set_position(vector3* p) {
+	this->position = *p;
+}
+
 matrix4* camera::get_view_projection() {
 	vector3* r = new vector3(1, 0, 0);
 	vector3* s = new vector3(1, 1, 1);
 	transform* t = new transform(this->position, *r, *s);
 	matrix4* transformation = t->get_transformation();
+	transformation->print();
 	matrix4* projection = new matrix4();
 	projection->initialize_projection(this->fov, (float) this->render_width,
 			(float) this->render_height, this->z_near, this->z_far);
@@ -40,7 +45,22 @@ int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
 }
 
 void camera::render_mesh(mesh* m) {
-
+	for (int i = 0; i < m->vertices.size(); i++) {
+		matrix4* m_transformation = this->get_view_projection();
+		vector4* p = new vector4(m->vertices[i]->get_position());
+		printf("p %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z());
+		p->multiply_first(m_transformation);
+		printf("p %f %f %f %f\n", p->get_x(), p->get_y(), p->get_z());
+		exit(-1);
+		if ((int) p->get_x() >= this->min_x && (int) p->get_x() < this->max_x && (int) p->get_y() >= this->min_y && p->get_y() < this->max_y) {
+			int pixel_index = camera::get_index_3d((int) p->get_x(), (int) p->get_y(), 0, render_width, 3);
+			this->frame[pixel_index] = 1;
+			this->frame[pixel_index + 1] = 1;
+			this->frame[pixel_index + 2] = 1;
+		}
+		delete m_transformation;
+		delete p;
+	}
 }
 
 void camera::render(world* scene) {

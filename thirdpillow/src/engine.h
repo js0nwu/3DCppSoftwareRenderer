@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <vector>
 
+#include "vector3.h"
 #include "camera.h"
 #include "world.h"
 #include "vertex.h"
