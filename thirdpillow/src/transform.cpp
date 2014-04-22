@@ -104,7 +104,7 @@ transform::transform() {
 	this->rotation = *rotation;
 	this->scale = *scale;
 	this->cam = new camera(800, 600);
-	vector3* test = new vector3(-200, -50, -300);
+	vector3* test = new vector3(-10, -10, -10);
 	this->cam->set_position(test);
 }
 
