@@ -59,7 +59,7 @@ void matrix4::initialize_translation(float x, float y, float z) {
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
 	matrix[0][3] = x;
-	matrix[0][1] = 0;
+	matrix[1][0] = 0;
 	matrix[1][1] = 1;
 	matrix[1][2] = 0;
 	matrix[1][3] = y;

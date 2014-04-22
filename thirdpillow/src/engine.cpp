@@ -27,9 +27,9 @@ void engine::initialize() {
 	this->frame = new float[render_width*render_height*3];
 	player = new transform();
 	mesh* m = new mesh();
-	for (int i = 0; i < 5000; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 10), RandomFloat(0, 10),
-				RandomFloat(0, 10));
+	for (int i = 0; i < 500; i++) {
+		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
+				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();
@@ -54,8 +54,10 @@ void engine::stop() {
 
 void engine::render() {
 	vector3* test_r = player->get_rotation();
-	player->set_rotation(test_r->get_x() + 10, test_r->get_y() + 10, test_r->get_z() + 10);
-	vector3* delta = new vector3(1, 1, 1);
+	player->set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5, test_r->get_z() + 0.5);
+	vector3* test_s = player->get_scale();
+	player->set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01, test_s->get_z() + 0.01);
+	vector3* delta = new vector3(0.1, 0.1, 0.1);
 	player->translate(delta);
 	delete delta;
 	this->cls(); //clear screen;
