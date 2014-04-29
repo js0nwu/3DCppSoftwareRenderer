@@ -27,7 +27,7 @@ void engine::initialize() {
 	this->frame = new float[render_width * render_height * 3];
 	player = new transform();
 	mesh* m = new mesh();
-	for (int i = 0; i < 5000; i++) {
+	for (int i = 0; i < 3; i++) {
 		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
 				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
@@ -80,7 +80,7 @@ void engine::render() {
 											- player->get_translation()->get_z())
 											* (m->vertices[i]->get_position()->get_z()
 													- player->get_translation()->get_z()));
-			player->set_scale(50/distance, 50/distance, 50/distance);
+			player->set_scale(50 / distance, 50 / distance, 50 / distance);
 			matrix4* move = this->player->get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
