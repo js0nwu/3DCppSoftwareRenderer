@@ -15,10 +15,6 @@ vector3* camera::get_position() {
 	return &this->position;
 }
 
-int camera::get_index_3d(int x, int y, int z, int wide, int thick) {
-	return ((y * wide + x) * thick) + z;
-}
-
 vector3* camera::get_forward() {
 	return &this->forward;
 }

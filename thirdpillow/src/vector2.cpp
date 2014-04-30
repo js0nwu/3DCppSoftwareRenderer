@@ -133,7 +133,6 @@ vector2* vector2::clone() {
 vector2::vector2() {
 	this->x = 0;
 	this->y = 0;
-
 }
 
 vector2::vector2(float x, float y) {

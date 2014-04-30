@@ -24,7 +24,7 @@ float engine::RandomFloat(float a, float b) {
 
 void engine::initialize() {
 	printf("engine initializing\n");
-	this->frame = new float[render_width * render_height * 3];
+	rast = new rasterizer();
 	player = new transform();
 	mesh* m = new mesh();
 	for (int i = 0; i < 3; i++) {
@@ -35,12 +35,6 @@ void engine::initialize() {
 	thing* t = new thing();
 	t->set_mesh(m);
 	this->scene.things.push_back(t);
-}
-
-void engine::cls() {
-	for (int i = 0; i < render_width * render_height * 3; i++) {
-		this->frame[i] = (float) 0;
-	}
 }
 
 void engine::start() {
@@ -56,12 +50,12 @@ void engine::render() {
 	vector3* test_r = player->get_rotation();
 	player->set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
 			test_r->get_z() + 0.5);
-	//vector3* test_s = player->get_scale();
-	//player->set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01, test_s->get_z() + 0.01);
+	vector3* test_s = player->get_scale();
+	player->set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01, test_s->get_z() + 0.01);
 	vector3* delta = new vector3(0.1, 0.1, 0.1);
 	player->translate(delta);
 	delete delta;
-	this->cls(); //clear screen;
+	this->frame->cls();
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
@@ -86,11 +80,15 @@ void engine::render() {
 			point->multiply_first(move);
 			if (point->get_x() >= 0 && point->get_x() < 800
 					&& point->get_y() >= 0 && point->get_y() < 600) {
-				int index = camera::get_index_3d(point->get_x(), point->get_y(),
-						0, 800, 3);
-				this->frame[index] = 1;
-				this->frame[index + 1] = 1;
-				this->frame[index + 2] = 1;
+				vector2* origin = new vector2((float) 0, (float) 0);
+				float p_x = point->get_x();
+				float p_y = point->get_y();
+				vector2* point = new vector2(p_x, p_y);
+				color* white = new color(1, 1, 1, 1);
+				rast->draw_line(this->frame, origin, point, white);
+				delete origin;
+				delete point;
+				delete white;
 			}
 			delete move;
 			delete point;
@@ -99,13 +97,12 @@ void engine::render() {
 }
 
 float* engine::get_render_buffer() {
-	return this->frame;
+	return this->frame->get_buffer();
 }
 
 engine::engine(int render_width, int render_height) {
 	printf("engine created (%d, %d)\n", render_width, render_height);
-	this->render_width = render_width;
-	this->render_height = render_height;
+	this->frame = new screen(render_width, render_height);
 }
 
 engine::~engine() {

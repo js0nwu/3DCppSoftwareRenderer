@@ -17,6 +17,10 @@
 #include "transform.h"
 #include "world.h"
 #include "vertex.h"
+#include "rasterizer.h"
+#include "putils.h"
+#include "screen.h"
+#include "rasterizer.h"
 
 using namespace std;
 
@@ -30,16 +34,13 @@ public:
 	engine(int render_width, int render_height);
 	virtual ~engine();
 private:
-	int render_width;
-	int render_height;
-	float* frame;
 	world scene;
 	transform* player;
-
+	screen* frame;
+	rasterizer* rast;
 	float RandomFloat(float a, float b);
 	void initialize();
 	void cleanup();
-	void cls();
 };
 
 #endif /* ENGINE_H_ */
