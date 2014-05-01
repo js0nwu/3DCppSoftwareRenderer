@@ -17,6 +17,7 @@ public:
 	rasterizer();
 	void draw_line(screen* s, vector2* a, vector2* b, color* c);
 	void draw_line(screen* s, vector2* a, color* a_color, vector2* b, color* b_color);
+	void set_pixel(screen* s, vector2* p, color* c);
 	virtual ~rasterizer();
 };
 

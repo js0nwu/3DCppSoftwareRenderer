@@ -51,10 +51,13 @@ color* screen::get_pixel(int x, int y) {
 }
 
 void screen::set_pixel(int x, int y, color* c) {
-	int index = putils::get_index_3d(x, y, 0, this->render_width, 3);
-	this->buffer[index] = c->get_r();
-	this->buffer[index + 1] = c->get_g();
-	this->buffer[index + 2] = c->get_b();
+	if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
+		int index = putils::get_index_3d(x, y, 0, this->render_width, 3);
+		this->buffer[index] = c->get_r();
+		this->buffer[index + 1] = c->get_g();
+		this->buffer[index + 2] = c->get_b();
+	}
+
 }
 
 screen::~screen() {
