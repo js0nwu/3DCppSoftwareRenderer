@@ -27,7 +27,7 @@ void engine::initialize() {
 	rast = new rasterizer();
 	player = new transform();
 	mesh* m = new mesh();
-	for (int i = 0; i < 300; i++) {
+	for (int i = 0; i < 3000; i++) {
 		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
 				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
@@ -48,18 +48,20 @@ void engine::stop() {
 
 void engine::render() {
 	this->frame->cls();
-	vector3* test_r = player->get_rotation();
-	player->set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
-			test_r->get_z() + 0.5);
-	vector3* test_s = player->get_scale();
-	player->set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01,
-			test_s->get_z() + 0.01);
-	vector3* delta = new vector3(1, 1, 1);
-	player->translate(delta);
-	delete delta;
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
+		vector3* test_r = player->get_rotation();
+		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
+				test_r->get_z() + 0.5);
+		vector3* test_s = player->get_scale();
+		t->t.set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01,
+				test_s->get_z() + 0.01);
+		vector3* delta = new vector3(1, 1, 1);
+		t->t.translate(delta);
+		delete delta;
+		//delete test_r;
+		//delete test_s;
 		vector<vector2*> points;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
@@ -79,7 +81,7 @@ void engine::render() {
 											* (m->vertices[i]->get_position()->get_z()
 													- player->get_translation()->get_z()));
 			//player->set_scale(50 / distance, 50 / distance, 50 / distance);
-			matrix4* move = this->player->get_projected_transformation();
+			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
 			float p_x = point->get_x();

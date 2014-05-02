@@ -9,11 +9,13 @@
 #define THING_H_
 
 #include "mesh.h"
+#include "transform.h"
 
 class thing {
 public:
 	void set_mesh(mesh* m);
 	mesh* get_mesh();
+	transform t;
 	thing();
 	virtual ~thing();
 private:

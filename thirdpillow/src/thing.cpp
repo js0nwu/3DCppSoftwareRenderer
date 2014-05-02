@@ -16,8 +16,8 @@ mesh* thing::get_mesh() {
 }
 
 thing::thing() {
-	// TODO Auto-generated constructor stub
-
+	transform* t = new transform();
+	this->t = *t;
 }
 
 thing::~thing() {
