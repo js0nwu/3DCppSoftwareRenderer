@@ -61,8 +61,8 @@ void engine::render() {
 		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
 				test_r->get_z() + 0.5);
 		vector3* test_s = t->t.get_scale();
-		t->t.set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01,
-				test_s->get_z() + 0.01);
+		t->t.set_scale(test_s->get_x() - 0.01, test_s->get_y() - 0.01,
+				test_s->get_z() - 0.01);
 		vector3* delta = new vector3(0.1, 0.1, 0.1);
 		t->t.translate(delta);
 		delete delta;
@@ -83,7 +83,6 @@ void engine::render() {
 											- player->get_translation()->get_z())
 											* (m->vertices[i]->get_position()->get_z()
 													- player->get_translation()->get_z()));
-			//player->set_scale(50 / distance, 50 / distance, 50 / distance);
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
