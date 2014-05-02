@@ -7,6 +7,8 @@
 
 #include "engine.h"
 
+camera* cam;
+
 world* engine::get_scene() {
 	return &this->scene;
 }
@@ -27,9 +29,9 @@ void engine::initialize() {
 	rast = new rasterizer();
 	player = new transform();
 	mesh* m = new mesh();
-	camera* cam = new camera(this->frame->get_width(), this->frame->get_height());
+	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
-	for (int i = 0; i < 3000; i++) {
+	for (int i = 0; i < 300; i++) {
 		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
 				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
@@ -50,6 +52,8 @@ void engine::stop() {
 
 void engine::render() {
 	this->frame->cls();
+
+	vector<vector2*> points;
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
@@ -59,12 +63,9 @@ void engine::render() {
 		vector3* test_s = t->t.get_scale();
 		t->t.set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01,
 				test_s->get_z() + 0.01);
-		vector3* delta = new vector3(1, 1, 1);
+		vector3* delta = new vector3(0.1, 0.1, 0.1);
 		t->t.translate(delta);
 		delete delta;
-		//delete test_r;
-		//delete test_s;
-		vector<vector2*> points;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
 		for (int j = 0; j < m->vertices.size(); j++) {
@@ -124,7 +125,6 @@ float* engine::get_render_buffer() {
 engine::engine(int render_width, int render_height) {
 	printf("engine created (%d, %d)\n", render_width, render_height);
 	this->frame = new screen(render_width, render_height);
-	initialize();
 }
 
 engine::~engine() {

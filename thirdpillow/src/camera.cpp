@@ -45,7 +45,7 @@ camera::camera(int render_width, int render_height) {
 	this->render_height = render_height;
 	this->initialize();
 	//test projection settings
-	this->fov = 88;
+	this->fov = 70;
 	this->z_near = (float) 0.1;
 	this->z_far = (float) 1000;
 	vector3* forward = new vector3(1, 0, 0);
@@ -61,7 +61,7 @@ camera::camera(int render_width, int render_height, vector3 pos,
 	this->render_width = render_width;
 	this->render_height = render_height;
 	this->initialize();
-	this->fov = 88;
+	this->fov = 70;
 	this->z_near = (float) 0.1;
 	this->z_far = (float) 1000;
 	this->position = pos;
