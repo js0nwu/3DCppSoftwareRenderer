@@ -53,10 +53,10 @@ void engine::render() {
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
-		vector3* test_r = player->get_rotation();
+		vector3* test_r = t->t.get_rotation();
 		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
 				test_r->get_z() + 0.5);
-		vector3* test_s = player->get_scale();
+		vector3* test_s = t->t.get_scale();
 		t->t.set_scale(test_s->get_x() + 0.01, test_s->get_y() + 0.01,
 				test_s->get_z() + 0.01);
 		vector3* delta = new vector3(1, 1, 1);
