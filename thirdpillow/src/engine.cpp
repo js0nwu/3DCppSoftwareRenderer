@@ -27,6 +27,8 @@ void engine::initialize() {
 	rast = new rasterizer();
 	player = new transform();
 	mesh* m = new mesh();
+	camera* cam = new camera(this->frame->get_width(), this->frame->get_height());
+	transform::set_camera(cam);
 	for (int i = 0; i < 3000; i++) {
 		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
 				RandomFloat(0, 50));
@@ -122,6 +124,7 @@ float* engine::get_render_buffer() {
 engine::engine(int render_width, int render_height) {
 	printf("engine created (%d, %d)\n", render_width, render_height);
 	this->frame = new screen(render_width, render_height);
+	initialize();
 }
 
 engine::~engine() {

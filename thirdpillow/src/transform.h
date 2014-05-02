@@ -26,11 +26,14 @@ public:
 	void set_scale(vector3* s);
 	void set_scale(float x, float y, float z);
 	vector3* get_scale();
+	static void set_projection(float fov, float width, float height, float z_near, float z_far);
+	static void set_camera(camera* c);
+	static camera* get_camera();
 	transform();
 	transform(vector3 translation, vector3 rotation, vector3 scale);
 	virtual ~transform();
 private:
-	camera* cam;
+	static camera* cam;
 	vector3 translation;
 	vector3 rotation;
 	vector3 scale;

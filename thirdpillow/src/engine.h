@@ -21,6 +21,7 @@
 #include "putils.h"
 #include "screen.h"
 #include "rasterizer.h"
+#include "camera.h"
 
 using namespace std;
 

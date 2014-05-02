@@ -7,13 +7,27 @@
 
 #include "transform.h"
 
+camera* transform::cam;
+
+void transform::set_projection(float fov, float width, float height, float z_near, float z_far) {
+	//figure this out later
+}
+
+void transform::set_camera(camera* c) {
+	transform::cam = c;
+}
+
+camera* transform::get_camera() {
+	return transform::cam;
+}
+
 matrix4* transform::get_projected_transformation() {
 	matrix4* m_transformation = this->get_transformation();
 	matrix4* m_projection = new matrix4();
 	matrix4* camera_rotation = new matrix4();
-	camera_rotation->initialize_camera(cam->get_forward(), cam->get_up());
+	camera_rotation->initialize_camera(transform::get_camera()->get_forward(), transform::get_camera()->get_up());
 	matrix4* camera_translation = new matrix4();
-	camera_translation->initialize_translation(-cam->get_position()->get_x(), -cam->get_position()->get_y(), -cam->get_position()->get_z());
+	camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
 	camera_translation->multiply(m_transformation);
 	camera_rotation->multiply(camera_translation);
 	m_projection->initialize_projection((float)88, (float)800, (float)600, (float) 0.1, (float) 1000);
@@ -103,9 +117,6 @@ transform::transform() {
 	this->translation = *translation;
 	this->rotation = *rotation;
 	this->scale = *scale;
-	this->cam = new camera(800, 600);
-	vector3* test = new vector3(-10, -10, -10);
-	this->cam->set_position(test);
 }
 
 transform::~transform() {
