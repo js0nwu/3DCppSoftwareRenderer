@@ -31,7 +31,7 @@ void engine::initialize() {
 	mesh* m = new mesh();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
-	for (int i = 0; i < 300; i++) {
+	for (int i = 0; i < 3; i++) {
 		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
 				RandomFloat(0, 50));
 		m->vertices.push_back(new vertex(*vertexp));
@@ -68,6 +68,7 @@ void engine::render() {
 		delete delta;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
+		color* blue = new color(0, 0, 1, 1);
 		for (int j = 0; j < m->vertices.size(); j++) {
 			float distance =
 					sqrt(
@@ -109,11 +110,12 @@ void engine::render() {
 			delete point;
 		}
 		rast->draw_line(this->frame, points[0], red, points[1], green);
-		rast->draw_line(this->frame, points[1], red, points[2], green);
-		rast->draw_line(this->frame, points[2], red, points[0], green);
+		rast->draw_line(this->frame, points[1], green, points[2], blue);
+		rast->draw_line(this->frame, points[2], blue, points[0], red);
 		points.clear();
 		delete red;
 		delete green;
+		delete blue;
 	}
 }
 
