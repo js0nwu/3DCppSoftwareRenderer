@@ -85,9 +85,9 @@ void quaternion::multiply(quaternion* q) {
 			- z * q->get_z();
 	float x_prime = x * q->get_w() + w * q->get_x() + y * q->get_z()
 			- z * q->get_y();
-	float y_prime = z * q->get_w() + w * q->get_y() + z * q->get_x()
+	float y_prime = y * q->get_w() + w * q->get_y() + z * q->get_x()
 			- x * q->get_z();
-	float z_prime = y * q->get_w() + w * q->get_z() + x * q->get_y()
+	float z_prime = z * q->get_w() + w * q->get_z() + x * q->get_y()
 			- y * q->get_x();
 	this->x = x_prime;
 	this->y = y_prime;
