@@ -21,7 +21,6 @@ void vector3::rotate(float degree, vector3* axis) {
 	float r_w = 1 * cos_half;
 
 	quaternion* rotation = new quaternion(r_x, r_y, r_z, r_w);
-	rotation->print();
 	quaternion* c = rotation->clone();
 	c->conjugate();
 	quaternion* w = rotation->clone();

@@ -89,7 +89,7 @@ void camera::rotate_x(float degree) {
 	h_axis->normalize();
 	forward.rotate(degree, h_axis);
 	forward.normalize();
-	up = *forward.clone();
+	up = forward;
 	up.cross_product(h_axis);
 	up.normalize();
 	delete h_axis;
@@ -98,9 +98,9 @@ void camera::rotate_y(float degree) {
 	vector3* h_axis = y_axis.clone();
 	h_axis->cross_product(&this->forward);
 	h_axis->normalize();
-	forward.rotate(degree, h_axis);
+	forward.rotate(degree, &y_axis);
 	forward.normalize();
-	up = *forward.clone();
+	up = forward;
 	up.cross_product(h_axis);
 	up.normalize();
 	delete h_axis;

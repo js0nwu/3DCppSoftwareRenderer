@@ -54,6 +54,16 @@ void update_time() {
 	}
 }
 
+void camera_stat() {
+	printf("camera: %f %f %f %f %f %f\n",
+			transform::get_camera()->get_position()->get_x(),
+			transform::get_camera()->get_position()->get_y(),
+			transform::get_camera()->get_position()->get_z(),
+			transform::get_camera()->get_forward()->get_x(),
+			transform::get_camera()->get_forward()->get_y(),
+			transform::get_camera()->get_forward()->get_z());
+}
+
 void display() {
 	update_time();
 	timeu += time_delta;
@@ -73,16 +83,18 @@ void keyboard(unsigned char key, int x, int y) {
 		exit(0);
 		break;
 	case 97: //a
-		transform::get_camera()->rotate_y((float) -0.1);
+		transform::get_camera()->rotate_y((float) -10);
 		break;
 	case 100: //d
-		transform::get_camera()->rotate_y((float) 0.1);
+		transform::get_camera()->rotate_y((float) 10);
 		break;
 	case 115: //s
-		transform::get_camera()->move(transform::get_camera()->get_forward(), (float) -0.01);
+		transform::get_camera()->move(transform::get_camera()->get_forward(),
+				(float) -0.01);
 		break;
 	case 119: //w
-		transform::get_camera()->move(transform::get_camera()->get_forward(), (float) 0.01);
+		transform::get_camera()->move(transform::get_camera()->get_forward(),
+				(float) 0.01);
 		break;
 	case 113:
 		break;
@@ -104,6 +116,7 @@ void keyboard(unsigned char key, int x, int y) {
 	default:
 		break;
 	}
+	camera_stat();
 }
 
 void mouse(int button, int state, int x, int y) {
