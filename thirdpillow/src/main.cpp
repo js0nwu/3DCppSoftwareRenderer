@@ -9,6 +9,7 @@
 #include "mesh.h"
 #include "thing.h"
 #include "camera.h"
+#include "transform.h"
 
 using namespace std;
 
@@ -72,13 +73,17 @@ void keyboard(unsigned char key, int x, int y) {
 		thirdpillow->stop();
 		exit(0);
 		break;
-	case 97:
+	case 97: //a
+		transform::get_camera()->rotate_x(-0.1);
 		break;
-	case 100:
+	case 100: //d
+		transform::get_camera()->rotate_x(0.1);
 		break;
-	case 115:
+	case 115: //s
+		transform::get_camera()->move(transform::get_camera()->get_forward(), (float) -0.01);
 		break;
-	case 119:
+	case 119: //w
+		transform::get_camera()->move(transform::get_camera()->get_forward(), (float) 0.01);
 		break;
 	case 113:
 		break;

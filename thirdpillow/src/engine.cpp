@@ -32,8 +32,8 @@ void engine::initialize() {
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
 	for (int i = 0; i < 3; i++) {
-		vector3* vertexp = new vector3(RandomFloat(0, 50), RandomFloat(0, 50),
-				RandomFloat(0, 50));
+		vector3* vertexp = new vector3(RandomFloat(-25, 25), RandomFloat(-25, 25),
+				RandomFloat(-25, 25));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();
