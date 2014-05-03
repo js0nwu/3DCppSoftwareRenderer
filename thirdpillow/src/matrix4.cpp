@@ -137,9 +137,10 @@ void matrix4::initialize_projection(float fov, float width, float height,
 }
 
 void matrix4::initialize_camera(vector3* forward, vector3* up) {
-	vector3* f = forward;
-	f->normalize();
-	vector3* r = up;
+	forward->normalize();
+	vector3* f = forward->clone();
+	up->normalize();
+	vector3* r = up->clone();
 	r->normalize();
 	r->cross_product(f);
 	vector3* u = f->clone();
@@ -154,6 +155,9 @@ void matrix4::initialize_camera(vector3* forward, vector3* up) {
 	this->set_at(2, 0, f->get_x());
 	this->set_at(2, 1, f->get_y());
 	this->set_at(2, 2, f->get_z());
+	delete u;
+	delete r;
+	delete f;
 }
 
 float* matrix4::get_data() {
