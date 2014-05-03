@@ -8,6 +8,7 @@
 #ifndef QUATERNION_H_
 #define QUATERNION_H_
 
+#include <stdio.h>
 #include <math.h>
 
 class quaternion {
@@ -29,6 +30,7 @@ public:
 	void multiply(quaternion* q);
 	void multiply(float v_x, float v_y, float v_z);
 
+	void print();
 	quaternion* clone();
 private:
 	float x;

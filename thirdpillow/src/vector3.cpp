@@ -21,11 +21,12 @@ void vector3::rotate(float degree, vector3* axis) {
 	float r_w = 1 * cos_half;
 
 	quaternion* rotation = new quaternion(r_x, r_y, r_z, r_w);
-	quaternion* conjugate = rotation->clone();
-	conjugate->conjugate();
+	rotation->print();
+	quaternion* c = rotation->clone();
+	c->conjugate();
 	quaternion* w = rotation->clone();
 	w->multiply(this->x, this->y, this->z);
-	w->multiply(conjugate);
+	w->multiply(c);
 	this->x = w->get_x();
 	this->y = w->get_y();
 	this->z = w->get_z();

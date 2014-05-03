@@ -107,7 +107,11 @@ void quaternion::multiply(float v_x, float v_y, float v_z) {
 	this->w = w_prime;
 }
 
+void quaternion::print() {
+	printf("quaternion: %f %f %f %f\n", this->x, this->y, this->z, this->w);
+}
+
 quaternion* quaternion::clone() {
 	quaternion* clone = new quaternion(this->x, this->y, this->z, this->w);
-
+	return clone; //wow fail
 }

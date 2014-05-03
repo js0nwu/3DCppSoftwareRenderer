@@ -14,7 +14,6 @@
 using namespace std;
 
 static const int width = 800;
-;
 static const int height = 600;
 
 //time keeping
@@ -74,10 +73,10 @@ void keyboard(unsigned char key, int x, int y) {
 		exit(0);
 		break;
 	case 97: //a
-		transform::get_camera()->rotate_x(-0.1);
+		transform::get_camera()->rotate_y((float) -0.1);
 		break;
 	case 100: //d
-		transform::get_camera()->rotate_x(0.1);
+		transform::get_camera()->rotate_y((float) 0.1);
 		break;
 	case 115: //s
 		transform::get_camera()->move(transform::get_camera()->get_forward(), (float) -0.01);
