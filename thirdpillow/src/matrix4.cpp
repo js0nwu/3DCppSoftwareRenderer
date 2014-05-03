@@ -161,7 +161,7 @@ float* matrix4::get_data() {
 	//printf("pointer %p\n", data);
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			int index = vector2::get_index_2d(i, j, 4);
+			int index = putils::get_index_2d(i, j, 4);
 			data[index] = this->matrix[i][j];
 		}
 	}
@@ -188,7 +188,7 @@ void matrix4::multiply(matrix4* m) {
 
 	for (int i_2 = 0; i_2 < 4; i_2++) {
 		for (int j_2 = 0; j_2 < 4; j_2++) {
-			int index = vector2::get_index_2d(i_2, j_2, 4);
+			int index = putils::get_index_2d(i_2, j_2, 4);
 			this->matrix[i_2][j_2] = data[index];
 		}
 	}
@@ -204,7 +204,7 @@ matrix4::matrix4() {
 matrix4::matrix4(float* data) {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			int index = vector2::get_index_2d(i, j, 4);
+			int index = putils::get_index_2d(i, j, 4);
 			this->matrix[i][j] = data[index];
 		}
 	}
