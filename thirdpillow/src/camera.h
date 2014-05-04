@@ -28,6 +28,8 @@ public:
 	void rotate_x(float degree);
 	void rotate_y(float degree);
 	void move(vector3* direction, float amount);
+	void input(int keycode);
+
 	camera(int render_width, int render_height);
 	camera(int render_width, int render_height, vector3 pos, vector3 forward, vector3 up);
 

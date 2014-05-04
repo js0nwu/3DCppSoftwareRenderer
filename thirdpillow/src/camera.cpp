@@ -111,6 +111,37 @@ void camera::move(vector3* direction, float amount) {
 	delete delta;
 }
 
+void camera::input(int keycode) {
+	switch (keycode) {
+	case 106: //j
+		rotate_y((float) 10);
+		break;
+	case 108: //l
+		rotate_y((float) -10);
+		break;
+	case 107: //k
+		rotate_x((float) 10);
+		break;
+	case 105: //i
+		rotate_x((float) -10);
+		break;
+	case 97: //a
+		move(get_left(), (float) 10);
+		break;
+	case 100: //d
+		move(get_right(), (float) 10);
+		break;
+	case 115: //s
+		move(get_forward(), (float) -10);
+		break;
+	case 119: //w
+		move(get_forward(), (float) 10);
+		break;
+	default:
+		break;
+	}
+}
+
 camera::~camera() {
 	this->cleanup();
 }

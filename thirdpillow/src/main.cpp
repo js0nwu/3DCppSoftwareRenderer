@@ -82,40 +82,10 @@ void keyboard(unsigned char key, int x, int y) {
 		thirdpillow->stop();
 		exit(0);
 		break;
-	case 97: //a
-		transform::get_camera()->rotate_x((float) -10);
-		break;
-	case 100: //d
-		transform::get_camera()->rotate_x((float) 10);
-		break;
-	case 115: //s
-		transform::get_camera()->move(transform::get_camera()->get_forward(),
-				(float) -0.01);
-		break;
-	case 119: //w
-		transform::get_camera()->move(transform::get_camera()->get_forward(),
-				(float) 0.01);
-		break;
-	case 113:
-		break;
-	case 101:
-		break;
-	case 32:
-		break;
-	case 105:
-		break;
-	case 106:
-
-		break;
-	case 107:
-
-		break;
-	case 108:
-
-		break;
 	default:
 		break;
 	}
+	transform::get_camera()->input(key_code);
 	camera_stat();
 }
 

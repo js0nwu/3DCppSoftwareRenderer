@@ -12,14 +12,14 @@ void vector3::print() {
 }
 
 void vector3::rotate(float degree, vector3* axis) {
-	float radians = (degree*(float)3.14)/(float)180;
-	float sin_half = sin(radians/2);
-	float cos_half = cos(radians/2);
+
+	float radians = (degree * (float) 3.14) / (float) 180;
+	float sin_half = sin(radians / 2);
+	float cos_half = cos(radians / 2);
 	float r_x = axis->get_x() * sin_half;
 	float r_y = axis->get_y() * sin_half;
 	float r_z = axis->get_z() * sin_half;
-	float r_w = 1 * cos_half;
-
+	float r_w = cos_half;
 	quaternion* rotation = new quaternion(r_x, r_y, r_z, r_w);
 	quaternion* c = rotation->clone();
 	c->conjugate();
@@ -32,7 +32,8 @@ void vector3::rotate(float degree, vector3* axis) {
 }
 
 void vector3::lookat(vector3* v) {
-	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y, v->get_z() - this->z);
+	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y,
+			v->get_z() - this->z);
 	r->normalize();
 	this->x = r->get_x();
 	this->y = r->get_y();

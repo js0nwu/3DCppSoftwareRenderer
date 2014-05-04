@@ -32,7 +32,6 @@ matrix4* transform::get_projected_transformation() {
 	camera_rotation->multiply(camera_translation);
 	m_projection->initialize_projection((float)88, (float)800, (float)600, (float) 0.1, (float) 1000);
 	m_projection->multiply(camera_rotation); //clearly flicker and weird artifacts has something to do with camera_rotation
-	//m_projection->multiply(camera_translation); testing
 	delete camera_rotation;
 	delete camera_translation;
 	delete m_transformation;

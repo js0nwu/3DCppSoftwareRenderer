@@ -38,6 +38,7 @@ void engine::initialize() {
 	}
 	thing* t = new thing();
 	t->set_mesh(m);
+	t->t.set_scale(10, 10, 10);
 	this->scene.things.push_back(t);
 }
 
@@ -58,32 +59,15 @@ void engine::render() {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
 		vector3* test_r = t->t.get_rotation();
-		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
-				test_r->get_z() + 0.5);
-		vector3* test_s = t->t.get_scale();
-		t->t.set_scale(test_s->get_x() - 0.01, test_s->get_y() - 0.01,
-				test_s->get_z() - 0.01);
+		//t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
+		//		test_r->get_z() + 0.5);
 		vector3* delta = new vector3(0.1, 0.1, 0.1);
-		t->t.translate(delta);
+		//t->t.translate(delta);
 		delete delta;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
 		color* blue = new color(0, 0, 1, 1);
 		for (int j = 0; j < m->vertices.size(); j++) {
-			float distance =
-					sqrt(
-							(m->vertices[i]->get_position()->get_x()
-									- player->get_translation()->get_x())
-									* (m->vertices[i]->get_position()->get_x()
-											- player->get_translation()->get_x())
-									+ (m->vertices[i]->get_position()->get_y()
-											- player->get_translation()->get_y())
-											* (m->vertices[i]->get_position()->get_y()
-													- player->get_translation()->get_y())
-									+ (m->vertices[i]->get_position()->get_z()
-											- player->get_translation()->get_z())
-											* (m->vertices[i]->get_position()->get_z()
-													- player->get_translation()->get_z()));
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
@@ -91,21 +75,6 @@ void engine::render() {
 			float p_y = point->get_y();
 			vector2* n_point = new vector2(p_x, p_y);
 			points.push_back(n_point);
-			this->frame->set_pixel(p_x, p_y, red);
-			/*
-			 if (point->get_x() >= 0 && point->get_x() < 800
-			 && point->get_y() >= 0 && point->get_y() < 600) {
-			 vector2* origin = new vector2((float) -10, (float) -10);
-			 float p_x = point->get_x();
-			 float p_y = point->get_y();
-			 vector2* point = new vector2(p_x, p_y);
-			 color* white = new color(1, 1, 1, 1);
-			 rast->draw_line(this->frame, origin, point, white);
-			 delete origin;
-			 delete point;
-			 delete white;
-			 }
-			 */
 			delete move;
 			delete point;
 		}
