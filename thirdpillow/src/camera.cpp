@@ -84,32 +84,31 @@ vector3* camera::get_right() {
 }
 
 void camera::rotate_x(float degree) {
-	vector3* h_axis = y_axis.clone();
-	h_axis->cross_product(&this->forward);
-	h_axis->normalize();
-	forward.rotate(degree, h_axis);
+	vector3 h_axis = y_axis;
+	h_axis.cross_product(&this->forward);
+	h_axis.normalize();
+	forward.rotate(degree, &h_axis);
 	forward.normalize();
 	up = forward;
-	up.cross_product(h_axis);
+	up.cross_product(&h_axis);
 	up.normalize();
-	delete h_axis;
 }
 void camera::rotate_y(float degree) {
-	vector3* h_axis = y_axis.clone();
-	h_axis->cross_product(&this->forward);
-	h_axis->normalize();
+	vector3 h_axis = y_axis;
+	h_axis.cross_product(&this->forward);
+	h_axis.normalize();
 	forward.rotate(degree, &y_axis);
 	forward.normalize();
 	up = forward;
-	up.cross_product(h_axis);
+	up.cross_product(&h_axis);
 	up.normalize();
-	delete h_axis;
 }
 
 void camera::move(vector3* direction, float amount) {
-	vector3* delta = direction;
-	direction->multiply(amount);
+	vector3* delta = direction->clone();
+	delta->multiply(amount);
 	this->position.add(delta);
+	delete delta;
 }
 
 camera::~camera() {

@@ -83,10 +83,10 @@ void keyboard(unsigned char key, int x, int y) {
 		exit(0);
 		break;
 	case 97: //a
-		transform::get_camera()->rotate_y((float) -10);
+		transform::get_camera()->rotate_x((float) -10);
 		break;
 	case 100: //d
-		transform::get_camera()->rotate_y((float) 10);
+		transform::get_camera()->rotate_x((float) 10);
 		break;
 	case 115: //s
 		transform::get_camera()->move(transform::get_camera()->get_forward(),
