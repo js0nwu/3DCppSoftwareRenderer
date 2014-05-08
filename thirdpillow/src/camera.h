@@ -29,6 +29,24 @@ public:
 	void rotate_y(float degree);
 	void move(vector3* direction, float amount);
 	void input(int keycode);
+	float get_fov();
+	void set_fov(float f);
+	int get_min_x();
+	void set_min_x(int i);
+	int get_max_x();
+	void set_max_x(int i);
+	int get_min_y();
+	void set_min_y(int i);
+	int get_max_y();
+	void set_max_y(int i);
+	float get_z_near();
+	void set_z_near(float f);
+	float get_z_far();
+	void set_z_far(float f);
+	int get_render_width();
+	void set_render_width(int i);
+	int get_render_height();
+	void set_render_height(int i);
 
 	camera(int render_width, int render_height);
 	camera(int render_width, int render_height, vector3 pos, vector3 forward, vector3 up);
@@ -45,8 +63,6 @@ private:
 	int max_x;
 	int min_y;
 	int max_y;
-	int min_z;
-	int max_z;
 	float z_near;
 	float z_far;
 	float fov;

@@ -10,7 +10,11 @@
 camera* transform::cam;
 
 void transform::set_projection(float fov, float width, float height, float z_near, float z_far) {
-	//figure this out later
+	transform::get_camera()->set_fov(fov);
+	transform::get_camera()->set_render_width(width);
+	transform::get_camera()->set_render_height(height);
+	transform::get_camera()->set_z_near(z_near);
+	transform::get_camera()->set_z_far(z_far);
 }
 
 void transform::set_camera(camera* c) {
@@ -30,7 +34,7 @@ matrix4* transform::get_projected_transformation() {
 	camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
 	camera_translation->multiply(m_transformation);
 	camera_rotation->multiply(camera_translation);
-	m_projection->initialize_projection((float)88, (float)800, (float)600, (float) 0.1, (float) 1000);
+	m_projection->initialize_projection(transform::get_camera()->get_fov(), transform::get_camera()->get_render_width(), transform::get_camera()->get_render_height(), transform::get_camera()->get_z_near(), transform::get_camera()->get_z_far());
 	m_projection->multiply(camera_rotation); //clearly flicker and weird artifacts has something to do with camera_rotation
 	delete camera_rotation;
 	delete camera_translation;
@@ -41,10 +45,10 @@ matrix4* transform::get_projected_transformation() {
 matrix4* transform::get_transformation() {
 	matrix4* m_translation = new matrix4();
 	m_translation->initialize_translation(translation.get_x(),
-			translation.get_y(), translation.get_z());
+		translation.get_y(), translation.get_z());
 	matrix4* m_rotation = new matrix4();
 	m_rotation->initialize_rotation(rotation.get_x(), rotation.get_y(),
-			rotation.get_z());
+		rotation.get_z());
 	matrix4* m_scale = new matrix4();
 	m_scale->initialize_scale(scale.get_x(), scale.get_y(), scale.get_z());
 	m_rotation->multiply(m_scale);

@@ -27,10 +27,8 @@ void camera::initialize() {
 	printf("initializing camera\n");
 	this->min_x = 0;
 	this->min_y = 0;
-	this->min_z = 0;
 	this->max_x = this->render_width;
 	this->max_y = this->render_height;
-	this->max_z = 100;
 	vector3* up = new vector3(0, 1, 0);
 	up->normalize();
 	this->y_axis = *up;
@@ -140,6 +138,78 @@ void camera::input(int keycode) {
 	default:
 		break;
 	}
+}
+
+float camera::get_fov() {
+	return this->fov;
+}
+
+void camera::set_fov(float f) {
+	this->fov = f;
+}
+
+int camera::get_min_x() {
+	return this->min_x;
+}
+
+void camera::set_min_x(int i) {
+	this->min_x = i;
+}
+
+int camera::get_max_x() {
+	return this->max_x;
+}
+
+void camera::set_max_x(int i) {
+	this->max_x = i;
+}
+
+int camera::get_min_y() {
+	return this->min_y;
+}
+
+void camera::set_min_y(int i) {
+	this->min_y = i;
+}
+
+int camera::get_max_y() {
+	return this->max_y;
+}
+
+void camera::set_max_y(int i) {
+	this->max_y = i;
+}
+
+float camera::get_z_near() {
+	return this->z_near;
+}
+
+void camera::set_z_near(float f) {
+	this->z_near = f;
+}
+
+float camera::get_z_far() {
+	return this->z_far;
+}
+
+void camera::set_z_far(float f) {
+	this->z_far = f;
+}
+
+int camera::get_render_width() {
+	return this->render_width;
+}
+
+void camera::set_render_width(int i) {
+	this->render_width = i;
+}
+
+int camera::get_render_height() {
+	return this->render_height;
+}
+
+void camera::set_render_height(int i) {
+	this->render_height = i;
 }
 
 camera::~camera() {

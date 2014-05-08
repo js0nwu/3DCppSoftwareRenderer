@@ -18,7 +18,7 @@ void engine::cleanup() {
 }
 
 float engine::RandomFloat(float a, float b) {
-	float random = ((float) rand()) / (float) RAND_MAX;
+	float random = ((float)rand()) / (float)RAND_MAX;
 	float diff = b - a;
 	float r = random * diff;
 	return a + r;
@@ -31,14 +31,15 @@ void engine::initialize() {
 	mesh* m = new mesh();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
+	transform::set_projection((float) 70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float) 1000);
 	for (int i = 0; i < 3; i++) {
 		vector3* vertexp = new vector3(RandomFloat(-25, 25), RandomFloat(-25, 25),
-				RandomFloat(-25, 25));
+			RandomFloat(-25, 25));
 		m->vertices.push_back(new vertex(*vertexp));
 	}
 	thing* t = new thing();
 	t->set_mesh(m);
-	t->t.set_scale(10, 10, 10);
+	t->t.set_scale(1, 1, 1);
 	this->scene.things.push_back(t);
 }
 
@@ -59,10 +60,10 @@ void engine::render() {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
 		vector3* test_r = t->t.get_rotation();
-		//t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
-		//		test_r->get_z() + 0.5);
+		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
+			test_r->get_z() + 0.5);
 		vector3* delta = new vector3(0.1, 0.1, 0.1);
-		//t->t.translate(delta);
+		t->t.translate(delta);
 		delete delta;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
@@ -71,6 +72,9 @@ void engine::render() {
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
+			float zoom = 10;
+			//float p_x = point->get_x() / point->get_z() * zoom + (this->frame->get_width() / 2);
+			//float p_y = point->get_y() / point->get_z() * zoom + (this->frame->get_height() / 2);
 			float p_x = point->get_x();
 			float p_y = point->get_y();
 			vector2* n_point = new vector2(p_x, p_y);

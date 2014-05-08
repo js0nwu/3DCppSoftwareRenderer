@@ -23,9 +23,9 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 	rx->initialize_identity();
 	ry->initialize_identity();
 	rz->initialize_identity();
-	float x_radians = (x * (float) 3.14) / (float) 180;
-	float y_radians = (y * (float) 3.14) / (float) 180;
-	float z_radians = (z * (float) 3.14) / (float) 180;
+	float x_radians = (x * (float) 3.14) / (float)180;
+	float y_radians = (y * (float) 3.14) / (float)180;
+	float z_radians = (z * (float) 3.14) / (float)180;
 
 	rz->set_at(0, 0, cos(z_radians));
 	rz->set_at(0, 1, -sin(z_radians));
@@ -112,24 +112,24 @@ void matrix4::initialize_identity() {
 }
 
 void matrix4::initialize_projection(float fov, float width, float height,
-		float z_near, float z_far) {
+	float z_near, float z_far) {
 	float ar = width / height;
-	float fov_radians = (fov * (float) 3.14) / (float) 180;
-	float tan_fov = tan(fov_radians / (float) 2);
+	float fov_radians = (fov * (float) 3.14) / (float)180;
+	float tan_fov = tan(fov_radians / (float)2);
 	float z_range = z_near - z_far;
 
-	matrix[0][0] = (float) 1 / (tan_fov * ar);
+	matrix[0][0] = (float)1 / (tan_fov * ar);
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
 	matrix[0][3] = 0;
 	matrix[1][0] = 0;
-	matrix[1][1] = (float) 1 / tan_fov;
+	matrix[1][1] = (float)1 / tan_fov;
 	matrix[1][2] = 0;
 	matrix[1][3] = 0;
 	matrix[2][0] = 0;
 	matrix[2][1] = 0;
 	matrix[2][2] = (-z_near - z_far) / z_range;
-	matrix[2][3] = (float) 2 * z_far * z_near / z_range;
+	matrix[2][3] = (float)2 * z_far * z_near / z_range;
 	matrix[3][0] = 0;
 	matrix[3][1] = 0;
 	matrix[3][2] = 1;
@@ -182,10 +182,10 @@ void matrix4::multiply(matrix4* m) {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			product->set_at(i, j,
-					this->matrix[i][0] * m->get_at(0, j)
-							+ this->matrix[i][1] * m->get_at(1, j)
-							+ this->matrix[i][2] * m->get_at(2, j)
-							+ this->matrix[i][3] * m->get_at(3, j));
+				this->matrix[i][0] * m->get_at(0, j)
+				+ this->matrix[i][1] * m->get_at(1, j)
+				+ this->matrix[i][2] * m->get_at(2, j)
+				+ this->matrix[i][3] * m->get_at(3, j));
 		}
 	}
 	float* data = product->get_data();
