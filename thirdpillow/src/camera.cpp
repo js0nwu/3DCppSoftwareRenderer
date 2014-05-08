@@ -45,7 +45,7 @@ camera::camera(int render_width, int render_height) {
 	//test projection settings
 	this->fov = 70;
 	this->z_near = (float) 0.1;
-	this->z_far = (float) 1000;
+	this->z_far = (float)1000;
 	vector3* forward = new vector3(1, 0, 0);
 	this->forward = *forward;
 	vector3* up = new vector3(0, 1, 0);
@@ -55,13 +55,13 @@ camera::camera(int render_width, int render_height) {
 }
 
 camera::camera(int render_width, int render_height, vector3 pos,
-		vector3 forward, vector3 up) {
+	vector3 forward, vector3 up) {
 	this->render_width = render_width;
 	this->render_height = render_height;
 	this->initialize();
 	this->fov = 70;
 	this->z_near = (float) 0.1;
-	this->z_far = (float) 1000;
+	this->z_far = (float)1000;
 	this->position = pos;
 	this->forward = forward;
 	this->up = up;
@@ -112,28 +112,34 @@ void camera::move(vector3* direction, float amount) {
 void camera::input(int keycode) {
 	switch (keycode) {
 	case 106: //j
-		rotate_y((float) 10);
+		rotate_y((float)10);
 		break;
 	case 108: //l
-		rotate_y((float) -10);
+		rotate_y((float)-10);
 		break;
 	case 107: //k
-		rotate_x((float) 10);
+		rotate_x((float)10);
 		break;
 	case 105: //i
-		rotate_x((float) -10);
+		rotate_x((float)-10);
 		break;
 	case 97: //a
-		move(get_left(), (float) 10);
+		move(get_left(), (float)-10);
 		break;
 	case 100: //d
-		move(get_right(), (float) 10);
+		move(get_right(), (float)-10);
 		break;
 	case 115: //s
-		move(get_forward(), (float) -10);
+		move(get_forward(), (float)-10);
 		break;
 	case 119: //w
-		move(get_forward(), (float) 10);
+		move(get_forward(), (float)10);
+		break;
+	case 113: //q
+		move(get_up(), (float)10);
+		break;
+	case 101: //e
+		move(get_up(), (float)-10);
 		break;
 	default:
 		break;
