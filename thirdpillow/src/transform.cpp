@@ -32,7 +32,7 @@ matrix4* transform::get_projected_transformation() {
 	camera_rotation->initialize_camera(transform::get_camera()->get_forward(), transform::get_camera()->get_up());
 	matrix4* camera_translation = new matrix4();
 	//camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
-	camera_translation->initialize_translation(0, -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
+	camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
 	camera_translation->multiply(m_transformation);
 	camera_rotation->multiply(camera_translation);
 	m_projection->initialize_projection(transform::get_camera()->get_fov(), transform::get_camera()->get_render_width(), transform::get_camera()->get_render_height(), transform::get_camera()->get_z_near(), transform::get_camera()->get_z_far());

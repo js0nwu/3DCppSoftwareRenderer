@@ -72,11 +72,8 @@ void engine::render() {
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
-			float zoom = 10;
-			//float p_x = point->get_x() / point->get_z() * zoom + (this->frame->get_width() / 2);
-			//float p_y = point->get_y() / point->get_z() * zoom + (this->frame->get_height() / 2);
-			float p_x = point->get_x();
-			float p_y = point->get_y();
+			float p_x = point->get_x() / -point->get_z();
+			float p_y = point->get_y() / -point->get_z();
 			vector2* n_point = new vector2(p_x, p_y);
 			points.push_back(n_point);
 			delete move;

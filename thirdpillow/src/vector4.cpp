@@ -7,6 +7,10 @@
 
 #include "vector4.h"
 
+void vector4::print() {
+	printf("vector4: %f %f %f %f\n", this->x, this->y, this->z, this->w);
+}
+
 void vector4::set_x(float x) {
 	this->x = x;
 }

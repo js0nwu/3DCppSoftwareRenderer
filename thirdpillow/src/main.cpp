@@ -84,7 +84,7 @@ void keyboard(unsigned char key, int x, int y) {
 	default:
 		break;
 	}
-	transform::get_camera()->input(key_code);
+	transform::get_camera()->input(key_code);          
 	camera_stat();
 }
 
