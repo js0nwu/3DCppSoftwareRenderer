@@ -62,7 +62,7 @@ void engine::render() {
 		vector3* test_r = t->t.get_rotation();
 		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
 			test_r->get_z() + 0.5);
-		vector3* delta = new vector3(0.1, 0.1, 0.1);
+		vector3* delta = new vector3(0.01, 0.01, 0.01);
 		t->t.translate(delta);
 		delete delta;
 		color* red = new color(1, 0, 0, 1);
@@ -72,16 +72,25 @@ void engine::render() {
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
-			float p_x = point->get_x();
-			float p_y = point->get_y();
+			point->set_w((float)1);
+			float x_offset = (float) this->frame->get_width() / (float)2;
+			float y_offset = (float) this->frame->get_height() / (float)2;
+			float scale = 300;
+			float distance = transform::get_camera()->get_z_near();
+			float p_x = x_offset + scale * point->get_x() / (point->get_z() + distance);
+			float p_y = y_offset + scale * point->get_y() / (point->get_z() + distance);
 			vector2* n_point = new vector2(p_x, p_y);
-			points.push_back(n_point);
+			if (point->get_z() > 0) {
+				points.push_back(n_point);
+			}
 			delete move;
 			delete point;
 		}
-		rast->draw_line(this->frame, points[0], red, points[1], green);
-		rast->draw_line(this->frame, points[1], green, points[2], blue);
-		rast->draw_line(this->frame, points[2], blue, points[0], red);
+		if (points.size() == 3) {
+			rast->draw_line(this->frame, points[0], red, points[1], green);
+			rast->draw_line(this->frame, points[1], green, points[2], blue);
+			rast->draw_line(this->frame, points[2], blue, points[0], red);
+		}
 		points.clear();
 		delete red;
 		delete green;

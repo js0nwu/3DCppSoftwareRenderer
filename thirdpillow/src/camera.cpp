@@ -112,34 +112,34 @@ void camera::move(vector3* direction, float amount) {
 void camera::input(int keycode) {
 	switch (keycode) {
 	case 106: //j
-		rotate_y((float)10);
+		rotate_y((float)1);
 		break;
 	case 108: //l
-		rotate_y((float)-10);
+		rotate_y((float)-1);
 		break;
 	case 107: //k
-		rotate_x((float)10);
+		rotate_x((float)1);
 		break;
 	case 105: //i
-		rotate_x((float)-10);
+		rotate_x((float)-1);
 		break;
 	case 97: //a
-		move(get_left(), (float)-10);
+		move(get_left(), (float)-1);
 		break;
 	case 100: //d
-		move(get_right(), (float)-10);
+		move(get_right(), (float)-1);
 		break;
 	case 115: //s
-		move(get_forward(), (float)-10);
+		move(get_forward(), (float)-1);
 		break;
 	case 119: //w
-		move(get_forward(), (float)10);
+		move(get_forward(), (float)1);
 		break;
 	case 113: //q
-		move(get_up(), (float)10);
+		move(get_up(), (float)1);
 		break;
 	case 101: //e
-		move(get_up(), (float)-10);
+		move(get_up(), (float)-1);
 		break;
 	default:
 		break;
