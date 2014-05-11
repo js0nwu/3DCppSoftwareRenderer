@@ -114,47 +114,23 @@ void matrix4::initialize_identity() {
 void matrix4::initialize_projection(float fov, float width, float height,
 	float z_near, float z_far) {
 	float ar = width / height;
-	float fov_radians = (fov * (float) 3.14) / (float)180;
-	float tan_fov = tan(fov_radians / (float)2);
+	float tan_half_fov = tanf((fov / (float)2) * ((float) 3.14 / (float)180));
 	float z_range = z_near - z_far;
-	float e = 1 / tan_fov;
-	float a = height / width;
-	z_near = -z_near;
-	z_far = -z_far;
-	/*
-
-	matrix[0][0] = (float)1 / (tan_fov * ar);
+	matrix[0][0] = (float)1 / (tan_half_fov * ar);
 	matrix[0][1] = 0;
 	matrix[0][2] = 0;
 	matrix[0][3] = 0;
 	matrix[1][0] = 0;
-	matrix[1][1] = (float)1 / tan_fov;
+	matrix[1][1] = (float)1 / (tan_half_fov);
 	matrix[1][2] = 0;
 	matrix[1][3] = 0;
 	matrix[2][0] = 0;
 	matrix[2][1] = 0;
 	matrix[2][2] = (-z_near - z_far) / z_range;
-	matrix[2][3] = (float)2 * z_far * z_near / z_range;
+	matrix[2][3] = 2 * z_far * z_near / z_range;
 	matrix[3][0] = 0;
 	matrix[3][1] = 0;
 	matrix[3][2] = 1;
-	matrix[3][3] = 0;
-	*/
-	matrix[0][0] = e;
-	matrix[0][1] = 0;
-	matrix[0][2] = 0;
-	matrix[0][3] = 0;
-	matrix[1][0] = 0;
-	matrix[1][1] = e / a;
-	matrix[1][2] = 0;
-	matrix[1][3] = 0;
-	matrix[2][0] = 0;
-	matrix[2][1] = 0;
-	matrix[2][2] = -(z_far + z_near) / (z_far - z_near);
-	matrix[2][3] = -(z_far * z_near) / (z_far - z_near);
-	matrix[3][0] = 0;
-	matrix[3][1] = 0;
-	matrix[3][2] = -1;
 	matrix[3][3] = 0;
 }
 
