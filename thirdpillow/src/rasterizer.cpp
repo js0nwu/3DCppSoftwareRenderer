@@ -71,6 +71,7 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 		delete c_1;
 		delete d;
 		delete d_1;
+		delete sp;
 		factor_1 += factor_step_1;
 		factor_2 += factor_step_2;
 	}
