@@ -41,7 +41,7 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 		return;
 	}
 	float y_diff_2 = (float)(b->get_b()->get_y() - b->get_a()->get_y());
-	if (y_diff_2) {
+	if (y_diff_2 == (float)0) {
 		return;
 	}
 	float x_diff_1 = (float)(a->get_b()->get_x() - a->get_a()->get_x());

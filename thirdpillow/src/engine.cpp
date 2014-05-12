@@ -91,7 +91,7 @@ void engine::render() {
 			delete point;
 		}
 		if (points.size() == 3) {
-			rast->draw_triangle_wire(this->frame, points[0], red, points[1], green, points[2], blue);
+			rast->draw_triangle_fill(this->frame, points[0], red, points[1], green, points[2], blue);
 		}
 		points.clear();
 		delete red;

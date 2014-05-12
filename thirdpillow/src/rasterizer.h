@@ -8,6 +8,8 @@
 #ifndef RASTERIZER_H_
 #define RASTERIZER_H_
 
+#include <stdio.h>
+
 #include "color.h"
 #include "vector2.h"
 #include "screen.h"
