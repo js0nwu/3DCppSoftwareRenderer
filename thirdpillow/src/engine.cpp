@@ -72,11 +72,12 @@ void engine::render() {
 			matrix4* move = t->t.get_projected_transformation();
 			vector4* point = new vector4(m->vertices[j]->get_position());
 			point->multiply_first(move);
+			float d = point->get_z();
 			//vector4 normalization
 			point->set_x(point->get_x() / point->get_w());
 			point->set_y(point->get_y() / point->get_w());
 			point->set_z(point->get_z() / point->get_w());
-			if (point->get_z() > 0) {
+			if (d > 0) {
 				point->set_x(point->get_x() / point->get_z());
 				point->set_y(point->get_y() / point->get_z());
 				float x_offset = (float) this->frame->get_width() / (float)2;
