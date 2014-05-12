@@ -77,15 +77,14 @@ void engine::render() {
 			point->set_x(point->get_x() / point->get_w());
 			point->set_y(point->get_y() / point->get_w());
 			point->set_z(point->get_z() / point->get_w());
-			if (d > 0) {
+			if (d > transform::get_camera()->get_z_near()) {
 				point->set_x(point->get_x() / point->get_z());
 				point->set_y(point->get_y() / point->get_z());
 				float x_offset = (float) this->frame->get_width() / (float)2;
 				float y_offset = (float) this->frame->get_height() / (float)2;
 				float scale = 300;
-				float distance = transform::get_camera()->get_z_near();
-				float p_x = x_offset + scale * point->get_x() / (point->get_z() + distance);
-				float p_y = y_offset + scale * point->get_y() / (point->get_z() + distance);
+				float p_x = x_offset + scale * point->get_x() / (point->get_z());
+				float p_y = y_offset + scale * point->get_y() / (point->get_z());
 				vector2* n_point = new vector2(p_x, p_y);
 				points.push_back(n_point);
 			}
