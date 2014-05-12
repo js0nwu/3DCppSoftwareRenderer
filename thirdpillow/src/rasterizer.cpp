@@ -84,10 +84,10 @@ void rasterizer::draw_triangle_fill(screen* s, vector2* a, color* a_color, vecto
 	edges[0] = new edge(*a, *a_color, *b, *b_color);
 	edges[1] = new edge(*b, *b_color, *c, *c_color);
 	edges[2] = new edge(*c, *c_color, *a, *a_color);
-	int max_length = 0;
+	float max_length = (float)0;
 	int long_edge = 0;
 	for (int i = 0; i < 3; i++) {
-		int length = edges[i]->get_b()->get_y() - edges[i]->get_a()->get_y();
+		float length = edges[i]->get_b()->get_y() - edges[i]->get_a()->get_y();
 		if (length > max_length) {
 			max_length = length;
 			long_edge = i;

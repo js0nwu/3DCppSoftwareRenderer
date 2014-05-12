@@ -31,6 +31,8 @@ void engine::initialize() {
 	mesh* m = new mesh();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
+	vector3* start = new vector3(-37, 10, -2);
+	cam->set_position(start);
 	transform::set_projection((float) 70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float) 1000);
 	for (int i = 0; i < 3; i++) {
 		vector3* vertexp = new vector3(RandomFloat(-25, 25), RandomFloat(-25, 25),
@@ -60,9 +62,9 @@ void engine::render() {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
 		vector3* test_r = t->t.get_rotation();
-		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5, test_r->get_z() + 0.5);
+		//t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5, test_r->get_z() + 0.5);
 		vector3* delta = new vector3(0.01, 0.01, 0.01);
-		t->t.translate(delta);
+		//t->t.translate(delta);
 		delete delta;
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
@@ -91,6 +93,7 @@ void engine::render() {
 			delete point;
 		}
 		if (points.size() == 3) {
+			rast->draw_triangle_wire(this->frame, points[0], red, points[1], green, points[2], blue);
 			rast->draw_triangle_fill(this->frame, points[0], red, points[1], green, points[2], blue);
 		}
 		points.clear();
