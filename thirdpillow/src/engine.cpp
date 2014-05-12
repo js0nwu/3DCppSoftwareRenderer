@@ -60,8 +60,7 @@ void engine::render() {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
 		vector3* test_r = t->t.get_rotation();
-		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5,
-			test_r->get_z() + 0.5);
+		t->t.set_rotation(test_r->get_x() + 0.5, test_r->get_y() + 0.5, test_r->get_z() + 0.5);
 		vector3* delta = new vector3(0.01, 0.01, 0.01);
 		t->t.translate(delta);
 		delete delta;
@@ -92,9 +91,7 @@ void engine::render() {
 			delete point;
 		}
 		if (points.size() == 3) {
-			rast->draw_line(this->frame, points[0], red, points[1], green);
-			rast->draw_line(this->frame, points[1], green, points[2], blue);
-			rast->draw_line(this->frame, points[2], blue, points[0], red);
+			rast->draw_triangle_wire(this->frame, points[0], red, points[1], green, points[2], blue);
 		}
 		points.clear();
 		delete red;

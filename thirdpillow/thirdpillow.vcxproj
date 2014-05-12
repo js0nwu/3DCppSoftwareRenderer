@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\span.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\edge.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\span.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\color.h" />
     <ClInclude Include="src\edge.h" />
