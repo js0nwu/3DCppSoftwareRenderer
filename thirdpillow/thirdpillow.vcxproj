@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cube.cpp" />
     <ClCompile Include="src\span.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
@@ -85,6 +86,7 @@
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\thing.cpp" />
     <ClCompile Include="src\transform.cpp" />
+    <ClCompile Include="src\triangle.cpp" />
     <ClCompile Include="src\vector2.cpp" />
     <ClCompile Include="src\vector3.cpp" />
     <ClCompile Include="src\vector4.cpp" />
@@ -92,6 +94,7 @@
     <ClCompile Include="src\world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\cube.h" />
     <ClInclude Include="src\span.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\color.h" />
@@ -105,6 +108,7 @@
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\thing.h" />
     <ClInclude Include="src\transform.h" />
+    <ClInclude Include="src\triangle.h" />
     <ClInclude Include="src\vector2.h" />
     <ClInclude Include="src\vector3.h" />
     <ClInclude Include="src\vector4.h" />
