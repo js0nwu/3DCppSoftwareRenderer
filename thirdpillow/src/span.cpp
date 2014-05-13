@@ -1,10 +1,18 @@
 #include "span.h"
 
 span::span(color a, int x_1, color b, int x_2) {
-	this->a_color = a;
-	this->b_color = b;
-	this->x_1 = x_1;
-	this->x_2 = x_2;
+	if (x_1 > x_2) {
+		this->x_2 = x_1;
+		this->a_color = b;
+		this->x_1 = x_2;
+		this->b_color = a;
+	}
+	else {
+		this->a_color = a;
+		this->b_color = b;
+		this->x_1 = x_1;
+		this->x_2 = x_2;
+	}
 }
 
 int span::get_x_1() {

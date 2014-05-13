@@ -8,6 +8,7 @@
 #ifndef EDGE_H_
 #define EDGE_H_
 
+#include <stdio.h>
 #include "vector2.h"
 #include "color.h"
 
@@ -22,6 +23,8 @@ public:
 	void set_b(vector2* v);
 	void set_a_color(color* c);
 	void set_b_color(color* c);
+
+	void print();
 
 	edge* clone();
 	virtual ~edge();

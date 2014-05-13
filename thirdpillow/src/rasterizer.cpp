@@ -34,6 +34,7 @@ void rasterizer::draw_span(screen* s, span* a, int y) {
 }
 
 void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
+	//printf("%f %f %f %f %f %f %f %f\n", a->get_a()->get_x(), a->get_a()->get_y(), a->get_b()->get_x(), a->get_b()->get_y(), b->get_a()->get_x(), b->get_a()->get_y(), b->get_b()->get_x(), b->get_b()->get_y());
 	float y_diff_1 = (float)(a->get_b()->get_y() - a->get_a()->get_y());
 	if (y_diff_1 == (float)0) {
 		return;
@@ -57,12 +58,12 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 		color* c_1 = e_1->clone();
 		c_1->multiply(factor_1);
 		c->add(c_1);
-		int c_x_1 = a->get_a()->get_x() + (int)(x_diff_1 * factor_1);
+		int c_x_1 = (int)a->get_a()->get_x() + (int)(x_diff_1 * factor_1);
 		color* d = b->get_a_color()->clone();
 		color* d_1 = e_2->clone();
 		d_1->multiply(factor_2);
 		d->add(d_1);
-		int c_x_2 = b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
+		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
 		span* sp = new span(*c, c_x_1, *d, c_x_2);
 		draw_span(s, sp, y);
 		delete c;
@@ -93,7 +94,6 @@ void rasterizer::draw_triangle_fill(screen* s, vector2* a, color* a_color, vecto
 	}
 	int short_1 = (long_edge + 1) % 3;
 	int short_2 = (long_edge + 2) % 3;
-	printf("long %d short %d %d\n", long_edge, short_1, short_2);
 	draw_edge_span(s, edges[long_edge], edges[short_1]);
 	draw_edge_span(s, edges[long_edge], edges[short_2]);
 }
