@@ -21,14 +21,12 @@ void rasterizer::draw_span(screen* s, span* a, int y) {
 	float factor = (float)0;
 	float factor_step = (float)1 / (float)x_diff;
 	for (int x = (int)a->get_x_1(); x < (int)a->get_x_2(); x++) {
-		vector2* pixel = new vector2((float)x, (float)y);
 		color* c = a->get_a_color()->clone();
 		color* c_1 = c_diff->clone();
 		c_1->multiply(factor);
 		c->add(c_1);
-		this->set_pixel(s, pixel, c);
+		s->set_pixel(x, y, c);
 		factor += factor_step;
-		delete pixel;
 		delete c;
 		delete c_1;
 	}
