@@ -12,6 +12,7 @@
 
 #include "vertex.h"
 #include "transform.h"
+#include "putils.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ class mesh {
 public:
 	vector<vertex*> vertices; //how do you spell this
 	transform* get_transform();
+	static mesh* from_obj(char* filename);
 	mesh();
 	virtual ~mesh();
 private:

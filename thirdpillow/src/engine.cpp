@@ -31,7 +31,7 @@ void engine::initialize() {
 	mesh* m = new mesh();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
-	vector3* start = new vector3(-37, 10, -2);
+	vector3* start = new vector3(-100, 10, -1);
 	cam->set_position(start);
 	transform::set_projection((float) 70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float) 1000);
 	for (int i = 0; i < 3; i++) {
