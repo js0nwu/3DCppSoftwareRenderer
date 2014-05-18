@@ -24,7 +24,6 @@ public:
 	void draw_edge_span(screen* s, edge* a, edge* b);
 	void draw_triangle_wire(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color);
 	void draw_triangle_fill(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color);
-	
 	void draw_line(screen* s, vector2* a, vector2* b, color* c);
 	void draw_line(screen* s, vector2* a, color* a_color, vector2* b, color* b_color);
 	void set_pixel(screen* s, vector2* p, color* c);

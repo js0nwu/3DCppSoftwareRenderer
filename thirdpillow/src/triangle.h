@@ -8,6 +8,7 @@ public:
 	triangle(vertex* a, vertex* b, vertex* c);
 	triangle(vector3* vertices);
 	triangle(vertex* vertices);
+	vector3* get_center();
 	vertex* get_vertices();
 	void set_vertices(vertex* v);
 	virtual ~triangle();

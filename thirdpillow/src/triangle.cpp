@@ -28,6 +28,14 @@ vertex* triangle::get_vertices() {
 	return &this->vertices[0];
 }
 
+vector3* triangle::get_center() {
+	float x = (vertices[0].get_position()->get_x() + vertices[1].get_position()->get_x() + vertices[2].get_position()->get_x()) / 3;
+	float y = (vertices[0].get_position()->get_y() + vertices[1].get_position()->get_y() + vertices[2].get_position()->get_y()) / 3;
+	float z = (vertices[0].get_position()->get_z() + vertices[1].get_position()->get_z() + vertices[2].get_position()->get_z()) / 3;
+	vector3* center = new vector3(x, y, z);
+	return center;
+}
+
 triangle::~triangle() {
 
 }
