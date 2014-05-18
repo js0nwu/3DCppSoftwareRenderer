@@ -75,7 +75,7 @@
     <ClCompile Include="src\cube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\triangle.cpp">
+    <ClCompile Include="src\triangle3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,7 +137,7 @@
     <ClInclude Include="src\cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\triangle.h">
+    <ClInclude Include="src\triangle3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

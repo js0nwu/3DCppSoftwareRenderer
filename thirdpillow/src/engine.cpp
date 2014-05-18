@@ -41,7 +41,7 @@ void engine::initialize() {
 			RandomFloat(-25, 25));
 		tri_v[i] = *vertexp;
 	}
-	triangle* tri = new triangle(&tri_v[0]);
+	triangle3* tri = new triangle3(&tri_v[0]);
 	m->faces.push_back(tri);
 	thing* t = new thing();
 	t->set_mesh(m);

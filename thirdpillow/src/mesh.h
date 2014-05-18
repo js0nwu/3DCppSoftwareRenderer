@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "vertex.h"
-#include "triangle.h"
+#include "triangle3.h"
 #include "transform.h"
 #include "putils.h"
 
@@ -19,7 +19,7 @@ using namespace std;
 
 class mesh {
 public:
-	vector<triangle*> faces;
+	vector<triangle3*> faces;
 	transform* get_transform();
 	static mesh* from_obj(char* filename);
 	mesh();
