@@ -7,8 +7,16 @@
 
 #include "rasterizer.h"
 
-rasterizer::rasterizer() {
+rasterizer::rasterizer(color* c) {
+	this->default_color = *c;
+}
 
+color* rasterizer::get_default_color() {
+	return &this->default_color;
+}
+
+void rasterizer::set_default_color(color* c) {
+	this->default_color = *c;
 }
 
 void rasterizer::draw_span(screen* s, span* a, int y) {
@@ -78,7 +86,7 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 	delete e_2;
 }
 
-void rasterizer::draw_triangle_fill(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
+void rasterizer::draw_triangle_fill_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
 	edge* edges[3];
 	edges[0] = new edge(*a, *a_color, *b, *b_color);
 	edges[1] = new edge(*b, *b_color, *c, *c_color);
@@ -98,13 +106,13 @@ void rasterizer::draw_triangle_fill(screen* s, vector2* a, color* a_color, vecto
 	draw_edge_span(s, edges[long_edge], edges[short_2]);
 }
 
-void rasterizer::draw_triangle_wire(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
-	draw_line(s, a, a_color, b, b_color);
-	draw_line(s, b, b_color, c, c_color);
-	draw_line(s, c, c_color, a, a_color);
+void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
+	draw_line_color(s, a, a_color, b, b_color);
+	draw_line_color(s, b, b_color, c, c_color);
+	draw_line_color(s, c, c_color, a, a_color);
 }
 
-void rasterizer::draw_line(screen* s, vector2* a, vector2* b, color* c) {
+void rasterizer::draw_line_color(screen* s, vector2* a, vector2* b, color* c) {
 	int w = (int) (b->get_x() - a->get_x());
 	int h = (int) (b->get_y() - a->get_y());
 	float m = h / (float) w;
@@ -115,7 +123,7 @@ void rasterizer::draw_line(screen* s, vector2* a, vector2* b, color* c) {
 	}
 }
 
-void rasterizer::draw_line(screen* s, vector2* a, color* a_color, vector2* b, color* b_color) {
+void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color) {
 	float x_diff = b->get_x() - a->get_x();
 	float y_diff = b->get_y() - a->get_y();
 	if (x_diff == 0 && y_diff == 0) {
