@@ -112,6 +112,22 @@ void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color,
 	draw_line_color(s, c, c_color, a, a_color);
 }
 
+void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* c) {
+	draw_triangle_wire_color(s, a, &this->default_color, b, &this->default_color, c, &this->default_color);
+}
+
+void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
+	draw_triangle_wire_color(s, &t->get_vertices()[0], &this->default_color, &t->get_vertices()[1], &this->default_color, &t->get_vertices()[2], &this->default_color);
+}
+
+void rasterizer::draw_triangle_fill(screen* s, vector2* a, vector2* b, vector2* c) {
+	draw_triangle_fill_color(s, a, &this->default_color, b, &this->default_color, c, &this->default_color);
+}
+
+void rasterizer::draw_triangle_fill(screen* s, triangle2* t) {
+	draw_triangle_fill_color(s, &t->get_vertices()[0], &this->default_color, &t->get_vertices()[1], &this->default_color, &t->get_vertices()[2], &this->default_color);
+}
+
 void rasterizer::draw_line_color(screen* s, vector2* a, vector2* b, color* c) {
 	int w = (int) (b->get_x() - a->get_x());
 	int h = (int) (b->get_y() - a->get_y());

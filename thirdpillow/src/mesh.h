@@ -21,7 +21,7 @@ class mesh {
 public:
 	vector<triangle3*> faces;
 	transform* get_transform();
-	static mesh* from_obj(char* filename);
+	void from_obj(char* filename);
 	mesh();
 	virtual ~mesh();
 private:

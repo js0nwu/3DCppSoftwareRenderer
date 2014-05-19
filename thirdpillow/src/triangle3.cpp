@@ -36,6 +36,10 @@ vector3* triangle3::get_center() {
 	return center;
 }
 
+triangle2* triangle3::flatten() {
+
+}
+
 triangle3::~triangle3() {
 
 }

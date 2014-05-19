@@ -11,7 +11,7 @@ transform* mesh::get_transform() {
 	return &this->m_transform;
 }
 
-mesh* mesh::from_obj(char* filename) {
+void mesh::from_obj(char* filename) {
 	int n_len;
 	char** split_filename = putils::split_string(filename, (char*)".", &n_len);
 	char* ext = split_filename[n_len - 1];
@@ -20,7 +20,6 @@ mesh* mesh::from_obj(char* filename) {
 		exit(1);
 	}
 	vector<vertex*> vertices;
-	mesh* m = new mesh();
 	int f_len;
 	char* model_c = putils::read_file(filename, &f_len);
 	int l_len;
@@ -50,11 +49,10 @@ mesh* mesh::from_obj(char* filename) {
 				int b = atoi((const char*)line[2]);
 				int c = atoi((const char*)line[3]);
 				triangle3* face = new triangle3(vertices[a], vertices[b], vertices[c]);
-				m->faces.push_back(face);
+				this->faces.push_back(face);
 			}
 		}
 	}
-	return m;
 }
 
 mesh::mesh() {
