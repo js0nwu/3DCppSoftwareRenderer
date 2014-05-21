@@ -14,7 +14,7 @@ public:
 	vector3* get_center();
 	vertex* get_vertices();
 	void set_vertices(vertex* v);
-	triangle2* flatten();
+	triangle2* flatten(matrix4* m);
 	virtual ~triangle3();
 private:
 	vertex vertices[3];

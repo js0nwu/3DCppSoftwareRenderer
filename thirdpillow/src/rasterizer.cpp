@@ -193,6 +193,10 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 	}
 }
 
+void rasterizer::draw_mesh_painter(screen* s, mesh* m, matrix4* mt) {
+
+}
+
 void rasterizer::set_pixel(screen* s, vector2* p, color* c) {
 	s->set_pixel((int) p->get_x(), (int) p->get_y(), c);
 }

@@ -16,6 +16,8 @@
 #include "edge.h"
 #include "span.h"
 #include "triangle2.h"
+#include "mesh.h"
+#include "matrix4.h"
 
 class rasterizer {
 public:
@@ -32,6 +34,7 @@ public:
 	void draw_triangle_fill_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color);
 	void draw_line_color(screen* s, vector2* a, vector2* b, color* c);
 	void draw_line_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color);
+	void draw_mesh_painter(screen* s, mesh* m, matrix4* mt);
 	void set_pixel(screen* s, vector2* p, color* c);
 	virtual ~rasterizer();
 private:

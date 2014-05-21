@@ -36,8 +36,29 @@ vector3* triangle3::get_center() {
 	return center;
 }
 
-triangle2* triangle3::flatten() {
-
+triangle2* triangle3::flatten(matrix4* m) {
+	float x_offset = (float)transform::get_camera()->get_render_width() / (float)2;
+	float y_offset = (float)transform::get_camera()->get_render_height() / (float)2;
+	float scale = 300;
+	float z_offset = (float)0.5;
+	vector2* tri2[3];
+	for (int i = 0; i < 3; i++) {
+		vector4* point = new vector4(this->vertices[i].get_position());
+		point->multiply_first(m);
+		point->set_x(point->get_x() / point->get_w());
+		point->set_y(point->get_y() / point->get_w());
+		point->set_z(point->get_z() / point->get_w());
+		if (point->get_z() > transform::get_camera()->get_z_near()) {
+			point->set_x(point->get_x() / point->get_z());
+			point->set_y(point->get_y() / point->get_z());
+			float p_x = x_offset + scale * point->get_x() / (point->get_z() + z_offset);
+			float p_y = y_offset + scale * point->get_y() / (point->get_z() + z_offset);
+			vector2* v2 = new vector2(p_x, p_y);
+			tri2[i] = v2;
+		}
+	}
+	triangle2* result = new triangle2(tri2[0], tri2[1], tri2[2]);
+	return result;
 }
 
 triangle3::~triangle3() {

@@ -78,19 +78,19 @@ void engine::render() {
 				vector4* point = new vector4(m->faces[j]->get_vertices()[k].get_position());
 				matrix4* move = t->t.get_projected_transformation();
 				point->multiply_first(move);
-				float d = point->get_z();
 				//vector4 normalization
 				point->set_x(point->get_x() / point->get_w());
 				point->set_y(point->get_y() / point->get_w());
 				point->set_z(point->get_z() / point->get_w());
-				if (d > transform::get_camera()->get_z_near()) {
+				if (point->get_z() > transform::get_camera()->get_z_near()) {
 					point->set_x(point->get_x() / point->get_z());
 					point->set_y(point->get_y() / point->get_z());
 					float x_offset = (float) this->frame->get_width() / (float)2;
 					float y_offset = (float) this->frame->get_height() / (float)2;
-					float scale = 400;
-					float p_x = x_offset + scale * point->get_x() / (point->get_z());
-					float p_y = y_offset + scale * point->get_y() / (point->get_z());
+					float scale = 300;
+					float z_offset = (float)0.5;
+					float p_x = x_offset + scale * point->get_x() / (point->get_z() + z_offset);
+					float p_y = y_offset + scale * point->get_y() / (point->get_z() + z_offset);
 					vector2* n_point = new vector2(p_x, p_y);
 					points.push_back(n_point);
 				}
