@@ -25,7 +25,6 @@ float engine::RandomFloat(float a, float b) {
 }
 
 void engine::initialize() {
-	system("dir");
 	printf("engine initializing\n");
 	color* default_color = new color(1, 0, 0, 1);
 	rast = new rasterizer(default_color);
