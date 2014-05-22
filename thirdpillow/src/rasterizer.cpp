@@ -209,6 +209,7 @@ void rasterizer::draw_mesh_painters(screen* s, mesh* m, matrix4* mt) {
 	for (int k = 0; k < m->faces.size(); k++) {
 		triangle2* flat = tris[k].flatten(mt);
 		this->draw_triangle_wire(s, flat); //draw the triangle
+		delete flat;
 	}
 }
 

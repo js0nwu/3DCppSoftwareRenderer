@@ -1,0 +1,32 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl Steve
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.442353 0.492549 0.505098
+Ks 0.165000 0.165000 0.165000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\steve\Steve.png
+
+newmtl diamond_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.614902 0.768627 0.752941
+Ks 0.165000 0.165000 0.165000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\steve\diamond_1.png
+
+newmtl diamond_2
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.715294 0.784314 0.778039
+Ks 0.165000 0.165000 0.165000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\steve\diamond_2.png
