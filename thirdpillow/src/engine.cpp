@@ -54,11 +54,12 @@ void engine::stop() {
 
 void engine::render() {
 	this->frame->cls();
-
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
-		this->rast->draw_mesh_painters(this->frame, m, t->t.get_projected_transformation());
+		matrix4* mt = t->t.get_projected_transformation();
+		this->rast->draw_mesh_painters(this->frame, m, mt);
+		delete mt;
 	}
 }
 
