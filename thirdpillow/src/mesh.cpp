@@ -55,6 +55,21 @@ void mesh::from_obj(char* filename) {
 	}
 }
 
+void mesh::sort() {
+	//bubble sort from greatest to least
+	for (int it = 0; it < this->faces.size(); it++) {
+		for (int i = 0; i < this->faces.size() - 1; i++) {
+			int a = i;
+			int b = a + 1;
+			if (faces[a].get_center()->get_z() < faces[b].get_center()->get_z()) {
+				triangle3 temp = faces[a];
+				faces[a] = faces[b];
+				faces[b] = temp;
+			}
+		}
+	}
+}
+
 mesh::mesh() {
 	// TODO Auto-generated constructor stub
 	transform* t = new transform();

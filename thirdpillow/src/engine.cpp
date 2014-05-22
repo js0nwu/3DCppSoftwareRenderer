@@ -36,6 +36,7 @@ void engine::initialize() {
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
 	m->from_obj("teststeve.obj");
+	m->sort();
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->t.set_scale(10, 10, 10);

@@ -22,6 +22,7 @@ public:
 	vector<triangle3> faces;
 	transform* get_transform();
 	void from_obj(char* filename);
+	void sort();
 	mesh();
 	virtual ~mesh();
 private:
