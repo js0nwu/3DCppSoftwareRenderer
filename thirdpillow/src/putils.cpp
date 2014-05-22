@@ -35,6 +35,7 @@ char* putils::read_file(char* filename, int* length) {
 	}
 	else {
 		cout << "unable to open file" << endl;
+		exit(1);
 	}
 	*length = text.length();
 	char* c_s = new char[text.size() + 1];
@@ -53,6 +54,7 @@ void putils::write_file(char* filename, char* contents) {
 	}
 	else {
 		cout << "unable to open file" << endl;
+		exit(1);
 	}
 }
 char** putils::split_string(char* text, char* delim, int* length) {
