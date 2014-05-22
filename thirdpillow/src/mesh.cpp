@@ -30,9 +30,9 @@ void mesh::from_obj(char* filename) {
 			int s_len;
 			char** line_split = putils::split_string(line, " ", &s_len);
 			if (s_len == 4) {
-				float a = atof((const char*)line[1]);
-				float b = atof((const char*)line[2]);
-				float c = atof((const char*)line[3]);
+				float a = atof((const char*)line_split[1]);
+				float b = atof((const char*)line_split[2]);
+				float c = atof((const char*)line_split[3]);
 				vector3* m_vertex_v = new vector3(a, b, c);
 				vertex* m_vertex = new vertex(*m_vertex_v);
 				vertices.push_back(m_vertex);
@@ -43,11 +43,11 @@ void mesh::from_obj(char* filename) {
 		char* line = lines[j];
 		if (strlen(line) > 0 && line[0] == 'f') {
 			int s_len;
-			char** line_slit = putils::split_string(line, " ", &s_len);
+			char** line_split = putils::split_string(line, " ", &s_len);
 			if (s_len == 4) {
-				int a = atoi((const char*)line[1]);
-				int b = atoi((const char*)line[2]);
-				int c = atoi((const char*)line[3]);
+				int a = atoi((const char*)line_split[1]);
+				int b = atoi((const char*)line_split[2]);
+				int c = atoi((const char*)line_split[3]);
 				triangle3* face = new triangle3(vertices[a], vertices[b], vertices[c]);
 				this->faces.push_back(*face);
 			}
