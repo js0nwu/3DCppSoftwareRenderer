@@ -16,11 +16,11 @@ triangle2::triangle2(vector2* a, vector2* b, vector2* c) {
 }
 
 vector2* triangle2::get_vertices() {
-	vector2 v[3];
+	vector2* v = new vector2[3];
 	v[0] = this->vertices[0];
 	v[1] = this->vertices[1];
 	v[2] = this->vertices[2];
-	return &v[0];
+	return v;
 }
 
 triangle2::~triangle2() {

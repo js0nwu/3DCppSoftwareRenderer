@@ -19,7 +19,7 @@ using namespace std;
 
 class mesh {
 public:
-	vector<triangle3*> faces;
+	vector<triangle3> faces;
 	transform* get_transform();
 	void from_obj(char* filename);
 	mesh();

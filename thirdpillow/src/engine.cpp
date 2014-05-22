@@ -26,7 +26,7 @@ float engine::RandomFloat(float a, float b) {
 
 void engine::initialize() {
 	printf("engine initializing\n");
-	color* default_color = new color(1, 1, 1, 1); //white
+	color* default_color = new color(1, 0, 0, 1);
 	rast = new rasterizer(default_color);
 	player = new transform();
 	mesh* m = new mesh();
@@ -42,7 +42,7 @@ void engine::initialize() {
 		tri_v[i] = *vertexp;
 	}
 	triangle3* tri = new triangle3(&tri_v[0]);
-	m->faces.push_back(tri);
+	m->faces.push_back(*tri);
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->t.set_scale(1, 1, 1);
@@ -61,7 +61,6 @@ void engine::stop() {
 void engine::render() {
 	this->frame->cls();
 
-	vector<vector2*> points;
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
@@ -70,42 +69,15 @@ void engine::render() {
 		vector3* delta = new vector3(0.01, 0.01, 0.01);
 		t->t.translate(delta);
 		delete delta;
+		/*
 		color* red = new color(1, 0, 0, 1);
 		color* green = new color(0, 1, 0, 1);
 		color* blue = new color(0, 0, 1, 1);
-		for (int j = 0; j < m->faces.size(); j++) {
-			for (int k = 0; k < 3; k++) {
-				vector4* point = new vector4(m->faces[j]->get_vertices()[k].get_position());
-				matrix4* move = t->t.get_projected_transformation();
-				point->multiply_first(move);
-				//vector4 normalization
-				point->set_x(point->get_x() / point->get_w());
-				point->set_y(point->get_y() / point->get_w());
-				point->set_z(point->get_z() / point->get_w());
-				if (point->get_z() > transform::get_camera()->get_z_near()) {
-					point->set_x(point->get_x() / point->get_z());
-					point->set_y(point->get_y() / point->get_z());
-					float x_offset = (float) this->frame->get_width() / (float)2;
-					float y_offset = (float) this->frame->get_height() / (float)2;
-					float scale = 300;
-					float z_offset = (float)0.5;
-					float p_x = x_offset + scale * point->get_x() / (point->get_z() + z_offset);
-					float p_y = y_offset + scale * point->get_y() / (point->get_z() + z_offset);
-					vector2* n_point = new vector2(p_x, p_y);
-					points.push_back(n_point);
-				}
-				delete point;
-				delete move;
-			}
-		}
-		if (points.size() == 3) {
-			rast->draw_triangle_wire_color(this->frame, points[0], red, points[1], green, points[2], blue);
-			rast->draw_triangle_fill_color(this->frame, points[0], red, points[1], green, points[2], blue);
-		}
-		points.clear();
 		delete red;
 		delete green;
 		delete blue;
+		*/
+		this->rast->draw_mesh_painters(this->frame, m, t->t.get_projected_transformation());
 	}
 }
 

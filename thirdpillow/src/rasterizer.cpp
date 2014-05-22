@@ -193,8 +193,24 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 	}
 }
 
-void rasterizer::draw_mesh_painter(screen* s, mesh* m, matrix4* mt) {
-
+void rasterizer::draw_mesh_painters(screen* s, mesh* m, matrix4* mt) {
+	triangle3* tris = &m->faces[0];
+	//bubble sort from greatest to least
+	for (int it = 0; it < m->faces.size(); it++) {
+		for (int i = 0; i < m->faces.size() - 1; i++) {
+			int a = i;
+			int b = a + 1;
+			if (tris[a].get_center()->get_z() < tris[b].get_center()->get_z()) {
+				triangle3 temp = tris[a];
+				tris[a] = tris[b];
+				tris[b] = temp;
+			}
+		}
+	}
+	for (int k = 0; k < m->faces.size(); k++) {
+		triangle2* flat = tris[k].flatten(mt);
+		this->draw_triangle_wire(s, flat); //draw the triangle
+	}
 }
 
 void rasterizer::set_pixel(screen* s, vector2* p, color* c) {

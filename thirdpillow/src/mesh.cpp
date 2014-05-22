@@ -49,7 +49,7 @@ void mesh::from_obj(char* filename) {
 				int b = atoi((const char*)line[2]);
 				int c = atoi((const char*)line[3]);
 				triangle3* face = new triangle3(vertices[a], vertices[b], vertices[c]);
-				this->faces.push_back(face);
+				this->faces.push_back(*face);
 			}
 		}
 	}
