@@ -25,11 +25,11 @@ float engine::RandomFloat(float a, float b) {
 }
 
 void engine::initialize() {
+	system("dir");
 	printf("engine initializing\n");
 	color* default_color = new color(1, 0, 0, 1);
 	rast = new rasterizer(default_color);
 	player = new transform();
-	//mesh* m = new mesh();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
 	vector3* start = new vector3(-100, 10, -1);

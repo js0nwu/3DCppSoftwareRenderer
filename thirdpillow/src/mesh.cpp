@@ -26,7 +26,7 @@ void mesh::from_obj(char* filename) {
 	char** lines = putils::split_string(model_c, "\n", &l_len);
 	for (int i = 0; i < l_len; i++) {
 		char* line = lines[i];
-		if (line[0] == 'v') {
+		if (strlen(line) > 0 && line[0] == 'v') {
 			int s_len;
 			char** line_split = putils::split_string(line, " ", &s_len);
 			if (s_len == 4) {
@@ -41,7 +41,7 @@ void mesh::from_obj(char* filename) {
 	}
 	for (int j = 0; j < l_len; j++) {
 		char* line = lines[j];
-		if (line[0] == 'f') {
+		if (strlen(line) > 0 && line[0] == 'f') {
 			int s_len;
 			char** line_slit = putils::split_string(line, " ", &s_len);
 			if (s_len == 4) {
