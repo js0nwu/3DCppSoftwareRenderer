@@ -51,8 +51,10 @@ triangle2* triangle3::flatten(matrix4* m) {
 		if (point->get_z() > transform::get_camera()->get_z_near()) {
 			point->set_x(point->get_x() / point->get_z());
 			point->set_y(point->get_y() / point->get_z());
-			float p_x = x_offset + scale * point->get_x() / (point->get_z() + z_offset);
-			float p_y = y_offset + scale * point->get_y() / (point->get_z() + z_offset);
+			float p_x = (point->get_x() / (float)2) + (float)0.5;
+			float p_y = (point->get_y() / (float)2) + (float)0.5;
+			p_x = p_x * (float)transform::get_camera()->get_render_width();
+			p_y = p_y * (float)transform::get_camera()->get_render_height();
 			vector2* v2 = new vector2(p_x, p_y);
 			tri2[i] = v2;
 		}
