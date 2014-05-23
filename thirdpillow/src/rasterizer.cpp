@@ -122,7 +122,7 @@ void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* 
 
 void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
 	vector2* v_t = t->get_vertices();
-	draw_triangle_wire_color(s, &v_t[0], &this->default_color, &v_t[1], &this->default_color, &v_t[2], &this->default_color);
+	draw_triangle_wire(s, &v_t[0], &v_t[1], &v_t[2]);
 	free(v_t);
 }
 
