@@ -14,6 +14,7 @@
 #include <sstream>
 #include <vector>
 #include <stdlib.h>
+#include <cstring>
 
 class putils {
 public:
