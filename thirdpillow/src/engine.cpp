@@ -58,7 +58,7 @@ void engine::render() {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
 		matrix4* mt = t->t.get_projected_transformation();
-		this->rast->draw_mesh_painters(this->frame, m, mt);
+		this->rast->draw_mesh_wire(this->frame, m, mt);
 		delete mt;
 	}
 }

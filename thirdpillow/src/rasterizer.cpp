@@ -199,12 +199,17 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 	}
 }
 
-void rasterizer::draw_mesh_painters(screen* s, mesh* m, matrix4* mt) {
+void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
+	triangle2* flat = t3->flatten(mt);
+	this->draw_triangle_wire(s, flat);
+	delete flat;
+}
+
+void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
+	using namespace std;
 	triangle3* tris = &m->faces[0];
 	for (int k = 0; k < m->faces.size(); k++) {
-		triangle2* flat = tris[k].flatten(mt);
-		this->draw_triangle_wire(s, flat); //draw the triangle
-		delete flat;
+		draw_triangle3_wire(s, &tris[k], mt);
 	}
 }
 
