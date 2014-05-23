@@ -37,10 +37,6 @@ vector3* triangle3::get_center() {
 }
 
 triangle2* triangle3::flatten(matrix4* m) {
-	float x_offset = (float)transform::get_camera()->get_render_width() / (float)2;
-	float y_offset = (float)transform::get_camera()->get_render_height() / (float)2;
-	float scale = 300;
-	float z_offset = (float)0.5;
 	vector2* tri2[3];
 	for (int i = 0; i < 3; i++) {
 		vector4* point = new vector4(this->vertices[i].get_position());
