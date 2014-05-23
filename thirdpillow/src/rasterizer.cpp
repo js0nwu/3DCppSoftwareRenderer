@@ -103,6 +103,9 @@ void rasterizer::draw_triangle_fill_color(screen* s, vector2* a, color* a_color,
 	int short_2 = (long_edge + 2) % 3;
 	draw_edge_span(s, edges[long_edge], edges[short_1]);
 	draw_edge_span(s, edges[long_edge], edges[short_2]);
+	for (int k = 0; k < 3; k++) {
+		delete edges[k];
+	}
 }
 
 void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
@@ -200,7 +203,7 @@ void rasterizer::draw_mesh_painters(screen* s, mesh* m, matrix4* mt) {
 	triangle3* tris = &m->faces[0];
 	for (int k = 0; k < m->faces.size(); k++) {
 		triangle2* flat = tris[k].flatten(mt);
-		this->draw_triangle_wire(s, flat); //draw the triangle
+		this->draw_triangle_fill(s, flat); //draw the triangle
 		delete flat;
 	}
 }
