@@ -205,14 +205,26 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 	delete flat;
 }
 
+void rasterizer::triangle3_wire_worker(screen* s, triangle3* tris, int size, matrix4* mt) {
+	for (int i = 0; i < size; i++) {
+		draw_triangle3_wire(s, &tris[i], mt);
+	}
+}
+
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
 	using namespace std;
-	triangle3* tris = &m->faces[0];
 	vector<thread> render_pool;
-	for (int i = 0; i < m->faces.size(); i++) {
-		render_pool.push_back(thread(&rasterizer::draw_triangle3_wire, this, s, &tris[i], mt));
+	int num_threads = 4;
+	//super inefficient
+	vector<vector<triangle3>> faces = vector<vector<triangle3>>(num_threads);
+	for (int k = 0; k < m->faces.size(); k++) {
+		int t_n = k % num_threads;
+		faces[t_n].push_back(m->faces[k]);
 	}
-	for (int j = 0; j < m->faces.size(); j++) {
+	for (int i = 0; i < num_threads; i++) {
+		render_pool.push_back(thread(&rasterizer::triangle3_wire_worker, this, s, &faces[i][0], faces[i].size(), mt));
+	}
+	for (int j = 0; j < num_threads; j++) {
 		render_pool[j].join();
 	}
 }

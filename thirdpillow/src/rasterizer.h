@@ -41,6 +41,7 @@ public:
 	virtual ~rasterizer();
 private:
 	color default_color;
+	void triangle3_wire_worker(screen* s, triangle3* tris, int size, matrix4* mt);
 };
 
 #endif /* RASTERIZER_H_ */
