@@ -56,8 +56,12 @@ triangle2* triangle3::flatten(matrix4* m) {
 			vector2* v2 = new vector2(p_x, p_y);
 			tri2[i] = v2;
 		}
+		delete point;
 	}
 	triangle2* result = new triangle2(tri2[0], tri2[1], tri2[2]);
+	for (int k = 0; k < 3; k++) {
+		delete tri2[k];
+	}
 	return result;
 }
 
