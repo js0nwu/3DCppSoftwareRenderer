@@ -208,8 +208,12 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
 	using namespace std;
 	triangle3* tris = &m->faces[0];
-	for (int k = 0; k < m->faces.size(); k++) {
-		draw_triangle3_wire(s, &tris[k], mt);
+	vector<thread> render_pool;
+	for (int i = 0; i < m->faces.size(); i++) {
+		render_pool.push_back(thread(&rasterizer::draw_triangle3_wire, this, s, &tris[i], mt));
+	}
+	for (int j = 0; j < m->faces.size(); j++) {
+		render_pool[j].join();
 	}
 }
 
