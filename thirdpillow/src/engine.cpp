@@ -35,11 +35,14 @@ void engine::initialize() {
 	cam->set_position(start);
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
-	m->from_obj("teststeve.obj");
+	m->from_obj("testbunny.obj");
 	m->sort();
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->t.set_scale(1, 1, 1);
+	vector3* r = t->t.get_rotation();
+	vector3* rotate = new vector3(90, 0, 0);
+	r->add(rotate);
 	this->scene.things.push_back(t);
 }
 
