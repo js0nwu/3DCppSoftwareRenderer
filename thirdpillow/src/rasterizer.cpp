@@ -115,7 +115,9 @@ void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color,
 }
 
 void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* c) {
-	draw_triangle_wire_color(s, a, &this->default_color, b, &this->default_color, c, &this->default_color);
+	draw_line_color(s, a, b, &this->default_color);
+	draw_line_color(s, b, c, &this->default_color);
+	draw_line_color(s, c, a, &this->default_color);
 }
 
 void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
@@ -135,13 +137,43 @@ void rasterizer::draw_triangle_fill(screen* s, triangle2* t) {
 }
 
 void rasterizer::draw_line_color(screen* s, vector2* a, vector2* b, color* c) {
-	int w = (int) (b->get_x() - a->get_x());
-	int h = (int) (b->get_y() - a->get_y());
-	float m = h / (float) w;
-	float j = a->get_y();
-	for (int i = a->get_x(); i < b->get_x(); i++) {
-		s->set_pixel(i, j, c);
-		j += m;
+	float x_diff = b->get_x() - a->get_x();
+	float y_diff = b->get_y() - a->get_y();
+	if (x_diff == 0 && y_diff == 0) {
+		s->set_pixel(a->get_x(), a->get_y(), c);
+		return;
+	}
+	if (fabs(x_diff) > fabs(y_diff)) {
+		float x_min, x_max;
+		if (a->get_x() < b->get_x()) {
+			x_min = a->get_x();
+			x_max = b->get_x();
+		}
+		else {
+			x_min = b->get_x();
+			x_max = a->get_x();
+		}
+		float slope = y_diff / x_diff;
+		for (float x = x_min; x <= x_max; x += (float)1) {
+			float y = a->get_y() + ((x - a->get_x()) * slope);
+			s->set_pixel((int)x, (int)y, c);
+		}
+	}
+	else {
+		float y_min, y_max;
+		if (a->get_y() < b->get_y()) {
+			y_min = a->get_y();
+			y_max = b->get_y();
+		}
+		else {
+			y_min = b->get_y();
+			y_max = a->get_y();
+		}
+		float slope = x_diff / y_diff;
+		for (float y = y_min; y <= y_max; y += (float)1) {
+			float x = a->get_x() + ((y - a->get_y()) * slope);
+			s->set_pixel((int)x, (int)y, c);
+		}
 	}
 }
 
