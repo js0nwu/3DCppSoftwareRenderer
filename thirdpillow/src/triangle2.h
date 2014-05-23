@@ -2,6 +2,7 @@
 #define TRIANGLE_2_H_
 
 #include "vector2.h"
+#include <stdlib.h>
 
 class triangle2 {
 public:

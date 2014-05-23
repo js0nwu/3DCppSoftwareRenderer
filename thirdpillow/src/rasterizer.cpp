@@ -116,7 +116,9 @@ void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* 
 }
 
 void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
-	draw_triangle_wire_color(s, &t->get_vertices()[0], &this->default_color, &t->get_vertices()[1], &this->default_color, &t->get_vertices()[2], &this->default_color);
+	vector2* v_t = t->get_vertices();
+	draw_triangle_wire_color(s, &v_t[0], &this->default_color, &v_t[1], &this->default_color, &v_t[2], &this->default_color);
+	free(v_t);
 }
 
 void rasterizer::draw_triangle_fill(screen* s, vector2* a, vector2* b, vector2* c) {
@@ -124,7 +126,9 @@ void rasterizer::draw_triangle_fill(screen* s, vector2* a, vector2* b, vector2* 
 }
 
 void rasterizer::draw_triangle_fill(screen* s, triangle2* t) {
-	draw_triangle_fill_color(s, &t->get_vertices()[0], &this->default_color, &t->get_vertices()[1], &this->default_color, &t->get_vertices()[2], &this->default_color);
+	vector2* v_t = t->get_vertices();
+	draw_triangle_fill_color(s, &v_t[0], &this->default_color, &v_t[1], &this->default_color, &v_t[2], &this->default_color);
+	free(v_t);
 }
 
 void rasterizer::draw_line_color(screen* s, vector2* a, vector2* b, color* c) {
