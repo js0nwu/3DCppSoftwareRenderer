@@ -14,9 +14,7 @@ screen::screen(int render_width, int render_height) {
 }
 
 void screen::cls() {
-	for (int i = 0; i < (render_width * render_height * 3); i++) {
-		this->buffer[i] = (float) 0;
-	}
+	memset(this->buffer, (float)0, (render_width*render_height*3) * sizeof(float));
 }
 
 int screen::get_width() {
