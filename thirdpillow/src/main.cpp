@@ -29,7 +29,6 @@ int timeu = 0;
 
 //engine
 engine* thirdpillow;
-world* w;
 
 void render() {
 	frames++;
