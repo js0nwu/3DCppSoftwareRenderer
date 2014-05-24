@@ -244,9 +244,15 @@ void rasterizer::triangle3_wire_worker(screen* s, triangle3* tris, int size, mat
 }
 
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
+	for (int i = 0; i < m->faces.size(); i++) {
+		draw_triangle3_wire(s, &m->faces[i], mt);
+	}
+}
+
+void rasterizer::draw_mesh_wire_thread(screen* s, mesh* m, matrix4* mt, int threads) {
 	using namespace std;
 	vector<thread> render_pool;
-	int num_threads = 4;
+	int num_threads = threads;
 	//super inefficient
 	vector<vector<triangle3>> faces = vector<vector<triangle3>>(num_threads);
 	for (int k = 0; k < m->faces.size(); k++) {
