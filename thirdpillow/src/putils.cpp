@@ -82,3 +82,7 @@ char** putils::split_string(char* text, char* delim, int* length) {
 	*length = elements.size();
 	return c_elems;
 }
+
+bool putils::string_contains(char* text, char* find) {
+	return strstr(text, find) != NULL;
+}

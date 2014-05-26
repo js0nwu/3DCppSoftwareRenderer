@@ -7,12 +7,14 @@ triangle3::triangle3(vector3* a, vector3* b, vector3* c) {
 	this->vertices[0] = *av;
 	this->vertices[1] = *bv;
 	this->vertices[2] = *cv;
+	calculate_normal();
 }
 
 triangle3::triangle3(vertex* a, vertex* b, vertex* c) {
 	this->vertices[0] = *a;
 	this->vertices[1] = *b;
 	this->vertices[2] = *c;
+	calculate_normal();
 }
 
 triangle3::triangle3(vector3* vertices) {
@@ -22,6 +24,20 @@ triangle3::triangle3(vector3* vertices) {
 	this->vertices[0] = *a;
 	this->vertices[1] = *b;
 	this->vertices[2] = *c;
+	calculate_normal();
+}
+
+vector3* triangle3::get_normal() {
+	return &this->normal;
+}
+
+void triangle3::calculate_normal() {
+	vector3* mean = new vector3();
+	for (int i = 0; i < 3; i++) {
+		mean->add(this->vertices[i].get_normal());
+	}
+	mean->divide((float)3);
+	this->normal = *mean;
 }
 
 vertex* triangle3::get_vertices() {
@@ -44,14 +60,12 @@ triangle2* triangle3::flatten(matrix4* m) {
 		point->set_x(point->get_x() / point->get_w());
 		point->set_y(point->get_y() / point->get_w());
 		point->set_z(point->get_z() / point->get_w());
-		if (point->get_z() > transform::get_camera()->get_z_near()) {
-			point->set_x(point->get_x() / point->get_z());
-			point->set_y(point->get_y() / point->get_z());
-			float p_x = ((point->get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-			float p_y = ((point->get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
-			vector2* v2 = new vector2(p_x, p_y);
-			tri2[i] = v2;
-		}
+		point->set_x(point->get_x() / point->get_z());
+		point->set_y(point->get_y() / point->get_z());
+		float p_x = ((point->get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
+		float p_y = ((point->get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+		vector2* v2 = new vector2(p_x, p_y);
+		tri2[i] = v2;
 		delete point;
 	}
 	triangle2* result = new triangle2(tri2[0], tri2[1], tri2[2]);

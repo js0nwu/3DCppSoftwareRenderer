@@ -243,6 +243,14 @@ void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
 	}
 }
 
+void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
+	for (int i = 0; i < m->faces.size(); i++) {
+		if (transform::get_camera()->get_forward()->angle_between(m->faces[i].get_normal()) < 90) {
+			draw_triangle3_wire(s, &m->faces[i], mt);
+		}
+	}
+}
+
 void rasterizer::set_pixel(screen* s, vector2* p, color* c) {
 	s->set_pixel((int) p->get_x(), (int) p->get_y(), c);
 }

@@ -24,6 +24,7 @@ public:
 	static char* read_file(char* filename, int* length);
 	static void write_file(char* filename, char* contents);
 	static char** split_string(char* text, char* delim, int* length);
+	static bool string_contains(char* text, char* find);
 };
 
 #endif /* PUTILS_H_ */

@@ -12,11 +12,14 @@ public:
 	triangle3(vector3* vertices);
 	triangle3(vertex* vertices);
 	vector3* get_center();
+	vector3* get_normal();
 	vertex* get_vertices();
 	void set_vertices(vertex* v);
 	triangle2* flatten(matrix4* m);
 	virtual ~triangle3();
 private:
 	vertex vertices[3];
+	vector3 normal;
+	void calculate_normal();
 };
 #endif
