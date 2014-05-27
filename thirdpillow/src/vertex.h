@@ -15,10 +15,6 @@ class vertex {
 public:
 	void set_position(vector3* p);
 	vector3* get_position();
-	void set_normal(vector3* p);
-	vector3* get_normal();
-	void set_uv(vector2* p);
-	vector2* get_uv();
 	vertex();
 	vertex(vector3 position);
 	virtual ~vertex();
