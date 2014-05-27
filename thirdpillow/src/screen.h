@@ -23,11 +23,14 @@ public:
 	void set_at(int i, float f);
 	color* get_pixel(int x, int y);
 	void set_pixel(int x, int y, color* c);
+	float* get_z_buffer();
+	void set_z_buffer(float* buffer);
 	virtual ~screen();
 private:
 	int render_width;
 	int render_height;
 	float* buffer;
+	float* z_buffer;
 };
 
 #endif /* SCREEN_H_ */

@@ -32,12 +32,13 @@ vector3* triangle3::get_normal() {
 }
 
 void triangle3::calculate_normal() {
-	vector3* mean = new vector3();
-	for (int i = 0; i < 3; i++) {
-		mean->add(this->vertices[i].get_normal());
-	}
-	mean->divide((float)3);
-	this->normal = *mean;
+	vector3* u = this->vertices[0].get_position()->clone();
+	u->subtract(this->vertices[1].get_position());
+	vector3* v = this->vertices[1].get_position()->clone();
+	v->subtract(this->vertices[2].get_position());
+	u->cross_product(v);
+	u->normalize();
+	this->normal = *u;
 }
 
 vertex* triangle3::get_vertices() {

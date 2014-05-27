@@ -11,6 +11,7 @@ screen::screen(int render_width, int render_height) {
 	this->render_width = render_width;
 	this->render_height = render_height;
 	this->buffer = new float[render_width * render_height * 3];
+	this->z_buffer = new float[render_width* render_height];
 }
 
 void screen::cls() {
@@ -31,6 +32,14 @@ void screen::set_buffer(float* buffer) {
 
 float* screen::get_buffer() {
 	return this->buffer;
+}
+
+void screen::set_z_buffer(float* buffer) {
+	this->z_buffer = buffer;
+}
+
+float* screen::get_z_buffer() {
+	return this->z_buffer; 
 }
 
 float screen::get_at(int i) {
