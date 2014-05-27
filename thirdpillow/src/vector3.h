@@ -44,6 +44,7 @@ public:
 	void lookat(vector3* v);
 	void rotate(float degree, vector3* axis);
 	void print();
+	bool is_zero();
 
 	vector3* clone();
 private:

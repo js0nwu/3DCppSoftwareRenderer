@@ -12,7 +12,6 @@ void vector3::print() {
 }
 
 void vector3::rotate(float degree, vector3* axis) {
-
 	float radians = (degree * (float) 3.14) / (float) 180;
 	float sin_half = sin(radians / 2);
 	float cos_half = cos(radians / 2);
@@ -29,6 +28,10 @@ void vector3::rotate(float degree, vector3* axis) {
 	this->x = w->get_x();
 	this->y = w->get_y();
 	this->z = w->get_z();
+}
+
+bool vector3::is_zero() {
+	return (this->x == 0 && this->y == 0 && this->z == 0);
 }
 
 void vector3::lookat(vector3* v) {
