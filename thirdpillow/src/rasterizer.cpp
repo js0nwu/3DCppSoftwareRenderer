@@ -59,7 +59,7 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 	float factor_1 = (float)(b->get_a()->get_y() - a->get_a()->get_y()) / y_diff_1;
 	float factor_step_1 = (float)1 / y_diff_1;
 	float factor_2 = (float)0;
-	float factor_step_2 = (float)1/y_diff_2;
+	float factor_step_2 = (float)1 / y_diff_2;
 	for (int y = (int)b->get_a()->get_y(); y < (int)b->get_b()->get_y(); y++) {
 		color* c = a->get_a_color()->clone();
 		color* c_1 = e_1->clone();
@@ -189,12 +189,13 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 		if (a->get_x() < b->get_x()) {
 			x_min = a->get_x();
 			x_max = b->get_x();
-		} else {
+		}
+		else {
 			x_min = b->get_x();
 			x_max = a->get_x();
 		}
 		float slope = y_diff / x_diff;
-		for (float x = x_min; x <= x_max; x += (float) 1) {
+		for (float x = x_min; x <= x_max; x += (float)1) {
 			float y = a->get_y() + ((x - a->get_x()) * slope);
 			color* c = a_color->clone();
 			float c_s = (x - a->get_x()) / x_diff;
@@ -202,21 +203,23 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 			d->subtract(a_color);
 			d->multiply(c_s);
 			c->add(d);
-			s->set_pixel((int) x, (int) y, c);
+			s->set_pixel((int)x, (int)y, c);
 			delete c;
 			delete d;
 		}
-	} else {
+	}
+	else {
 		float y_min, y_max;
 		if (a->get_y() < b->get_y()) {
 			y_min = a->get_y();
 			y_max = b->get_y();
-		} else {
+		}
+		else {
 			y_min = b->get_y();
 			y_max = a->get_y();
 		}
 		float slope = x_diff / y_diff;
-		for (float y = y_min; y <= y_max; y += (float) 1) {
+		for (float y = y_min; y <= y_max; y += (float)1) {
 			float x = a->get_x() + ((y - a->get_y()) * slope);
 			color* c = a_color->clone();
 			float c_s = ((y - a->get_y()) / y_diff);
@@ -224,7 +227,7 @@ void rasterizer::draw_line_color(screen* s, vector2* a, color* a_color, vector2*
 			d->subtract(a_color);
 			d->multiply(c_s);
 			c->add(d);
-			s->set_pixel((int) x, (int) y, c);
+			s->set_pixel((int)x, (int)y, c);
 			delete c;
 			delete d;
 		}
@@ -243,6 +246,30 @@ void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
 	}
 }
 
+void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
+	for (int i = 0; i < m->faces.size(); i++) {
+		vector3* local_normal = m->faces[i].get_triangle()->get_normal();
+		vector3* barycenter = m->faces[i].get_triangle()->get_center();
+		vector3* normal = barycenter->clone();
+		normal->add(local_normal);
+		vector4* a4 = new vector4(barycenter);
+		vector4* b4 = new vector4(normal);
+		a4->multiply_first(mt);
+		b4->multiply_first(mt);
+		vector2* a = new vector2((a4->get_x() / a4->get_w()) / (a4->get_z() / a4->get_w()), (a4->get_y() / a4->get_w()) / (a4->get_z() / a4->get_w()));
+		vector2* b = new vector2((b4->get_x() / b4->get_w()) / (b4->get_z() / b4->get_w()), (b4->get_y() / b4->get_w()) / (b4->get_z() / b4->get_w()));
+		delete a4;
+		delete b4;
+		delete barycenter;
+		delete normal;
+		color* white = new color(1, 1, 1, 1);
+		draw_line_color(s, a, b, white);
+		delete a;
+		delete b;
+		delete white;
+	}
+}
+
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float angle = transform::get_camera()->get_forward()->angle_between(m->faces[i].get_triangle()->get_normal());
@@ -253,7 +280,7 @@ void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 }
 
 void rasterizer::set_pixel(screen* s, vector2* p, color* c) {
-	s->set_pixel((int) p->get_x(), (int) p->get_y(), c);
+	s->set_pixel((int)p->get_x(), (int)p->get_y(), c);
 }
 
 rasterizer::~rasterizer() {
