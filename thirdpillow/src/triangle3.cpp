@@ -1,16 +1,15 @@
 #include "triangle3.h"
 
-triangle3::triangle3(vector3* a, vector3* b, vector3* c) {
-	vertex* av = new vertex(*a);
-	vertex* bv = new vertex(*b);
-	vertex* cv = new vertex(*c);
-	this->vertices[0] = *av;
-	this->vertices[1] = *bv;
-	this->vertices[2] = *cv;
-	calculate_normal();
+triangle3::triangle3() {
+	vector3* a = new vector3();
+	vector3* b = new vector3();
+	vector3* c = new vector3();
+	this->vertices[0] = *a;
+	this->vertices[1] = *b;
+	this->vertices[2] = *c;
 }
 
-triangle3::triangle3(vertex* a, vertex* b, vertex* c) {
+triangle3::triangle3(vector3* a, vector3* b, vector3* c) {
 	this->vertices[0] = *a;
 	this->vertices[1] = *b;
 	this->vertices[2] = *c;
@@ -18,12 +17,9 @@ triangle3::triangle3(vertex* a, vertex* b, vertex* c) {
 }
 
 triangle3::triangle3(vector3* vertices) {
-	vertex* a = new vertex(vertices[0]);
-	vertex* b = new vertex(vertices[1]);
-	vertex* c = new vertex(vertices[2]);
-	this->vertices[0] = *a;
-	this->vertices[1] = *b;
-	this->vertices[2] = *c;
+	this->vertices[0] = vertices[0];
+	this->vertices[1] = vertices[1];
+	this->vertices[2] = vertices[2];
 	calculate_normal();
 }
 
@@ -32,23 +28,23 @@ vector3* triangle3::get_normal() {
 }
 
 void triangle3::calculate_normal() {
-	vector3* u = this->vertices[1].get_position()->clone();
-	u->subtract(this->vertices[0].get_position());
-	vector3* v = this->vertices[2].get_position()->clone();
-	v->subtract(this->vertices[0].get_position());
+	vector3* u = this->vertices[1].clone();
+	u->subtract(&this->vertices[0]);
+	vector3* v = this->vertices[2].clone();
+	v->subtract(&this->vertices[0]);
 	u->cross_product(v);
 	u->normalize();
 	this->normal = *u;
 }
 
-vertex* triangle3::get_vertices() {
+vector3* triangle3::get_vertices() {
 	return &this->vertices[0];
 }
 
 vector3* triangle3::get_center() {
-	float x = (vertices[0].get_position()->get_x() + vertices[1].get_position()->get_x() + vertices[2].get_position()->get_x()) / 3;
-	float y = (vertices[0].get_position()->get_y() + vertices[1].get_position()->get_y() + vertices[2].get_position()->get_y()) / 3;
-	float z = (vertices[0].get_position()->get_z() + vertices[1].get_position()->get_z() + vertices[2].get_position()->get_z()) / 3;
+	float x = (vertices[0].get_x() + vertices[1].get_x() + vertices[2].get_x()) / 3;
+	float y = (vertices[0].get_y() + vertices[1].get_y() + vertices[2].get_y()) / 3;
+	float z = (vertices[0].get_z() + vertices[1].get_z() + vertices[2].get_z()) / 3;
 	vector3* center = new vector3(x, y, z);
 	return center;
 }
@@ -56,7 +52,7 @@ vector3* triangle3::get_center() {
 triangle2* triangle3::flatten(matrix4* m) {
 	vector2* tri2[3];
 	for (int i = 0; i < 3; i++) {
-		vector4* point = new vector4(this->vertices[i].get_position());
+		vector4* point = new vector4(&this->vertices[i]);
 		point->multiply_first(m);
 		point->set_x(point->get_x() / point->get_w());
 		point->set_y(point->get_y() / point->get_w());

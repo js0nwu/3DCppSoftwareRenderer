@@ -72,6 +72,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\cube.cpp" />
+    <ClCompile Include="src\face.cpp" />
     <ClCompile Include="src\span.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\cube.h" />
+    <ClInclude Include="src\face.h" />
     <ClInclude Include="src\span.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\color.h" />

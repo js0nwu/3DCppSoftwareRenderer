@@ -19,9 +19,8 @@ void mesh::from_obj(char* filename) {
 		printf("file extension is not .obj\n");
 		exit(1);
 	}
-	vector<vector3*> positions;
 	vector<vector2*> uvs;
-	vector<vertex*> vertices;
+	vector<vector3*> vertices;
 	int f_len;
 	char* model_c = putils::read_file(filename, &f_len);
 	int l_len;
@@ -37,8 +36,7 @@ void mesh::from_obj(char* filename) {
 					float b = atof((const char*)line_split[2]);
 					float c = atof((const char*)line_split[3]);
 					vector3* m_vertex_v = new vector3(a, b, c);
-					vertex* m_vertex = new vertex(*m_vertex_v);
-					vertices.push_back(m_vertex);
+					vertices.push_back(m_vertex_v);
 				}
 			}
 			else if (s_len == 3) {
@@ -58,6 +56,7 @@ void mesh::from_obj(char* filename) {
 			char** line_split = putils::split_string(line, " ", &s_len);
 			if (s_len == 4) {
 				int a = 0, b = 0, c = 0;
+				int at = 0, bt = 0, ct = 0;
 				if (putils::string_contains(line_split[1], "/")) {
 					int f_len;
 					char** face_split = putils::split_string(line_split[1], "/", &f_len);
