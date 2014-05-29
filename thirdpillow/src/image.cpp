@@ -21,7 +21,9 @@ int image::get_height() {
 
 color* image::get_color(int x, int y) {
 	int index = putils::get_index_2d(x, y, width);
-	return &this->data[index];
+	if (index < (this->width * this->height)) {
+		return &this->data[index];
+	}
 }
 
 void image::set_color(int x, int y, color* value) {
