@@ -20,10 +20,8 @@ int image::get_height() {
 }
 
 color* image::get_color(int x, int y) {
-	int index = putils::get_index_2d(x, y, width);
-	if (index < (this->width * this->height)) {
-		return &this->data[index];
-	}
+	int index = putils::get_index_2d(width % x, height % y, width);
+	return &this->data[index];
 }
 
 void image::set_color(int x, int y, color* value) {
@@ -32,7 +30,7 @@ void image::set_color(int x, int y, color* value) {
 }
 
 //http://stackoverflow.com/questions/2693631/read-ppm-file-and-store-it-in-an-array-coded-with-c
-void image::from_ppm_binary(char* filename) {
+void image::from_ppm_raw(char* filename) {
 	printf("loading image from %s\n", filename);
 	typedef struct {
 		unsigned char red, green, blue;

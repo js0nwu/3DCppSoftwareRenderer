@@ -12,7 +12,7 @@ public:
 	int get_height();
 	color* get_color(int x, int y);
 	void set_color(int x, int y, color* value);
-	void from_ppm_binary(char* filename);
+	void from_ppm_raw(char* filename);
 	void from_ppm_ascii(char* filename); //to do later?
 	virtual ~image();
 private:
