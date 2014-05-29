@@ -18,6 +18,7 @@
 #include "triangle2.h"
 #include "mesh.h"
 #include "matrix4.h"
+#include "image.h"
 
 class rasterizer {
 public:
@@ -38,6 +39,7 @@ public:
 	void draw_mesh_wire(screen* s, mesh* m, matrix4* mt);
 	void draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt);
 	void draw_mesh_normals(screen* s, mesh* m, matrix4* mt);
+	void draw_mesh_textured(screen* s, mesh* m, image* texture, matrix4* mt);
 	void set_pixel(screen* s, vector2* p, color* c);
 	virtual ~rasterizer();
 private:
