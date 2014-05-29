@@ -36,14 +36,14 @@ void engine::initialize() {
 	cam->set_position(start);
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
-	m->from_obj("res/testbunny.obj");
+	m->from_obj("res/teststeve.obj");
 	m->sort();
+	image* texture = new image();
+	texture->from_ppm_binary("res/teststeve.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
+	t->set_texture(texture);
 	t->t.set_scale(1, 1, 1);
-	vector3* r = t->t.get_rotation();
-	vector3* rotate = new vector3(90, 0, 0);
-	r->add(rotate);
 	this->scene.things.push_back(t);
 }
 
@@ -61,8 +61,10 @@ void engine::render() {
 	for (int i = 0; i < this->scene.things.size(); i++) {
 		thing* t = this->scene.things[i];
 		mesh* m = t->get_mesh();
+		image* texture = t->get_texture();
 		matrix4* mt = t->t.get_projected_transformation();
-		this->rast->draw_mesh_wire_cull(this->frame, m, mt);
+		this->rast->draw_mesh_textured(this->frame, m, texture, mt);
+		//this->rast->draw_mesh_wire_cull(this->frame, m, mt);
 		//this->rast->draw_mesh_normals(this->frame, m, mt);
 		delete mt;
 	}

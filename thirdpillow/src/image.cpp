@@ -91,11 +91,15 @@ void image::from_ppm_binary(char* filename) {
 	}
 	this->width = img->x;
 	this->height = img->y;
+	this->data = new color[this->width * this->height];
 	for (int i = 0; i < this->width; i++) {
 		for (int j = 0; j < this->height; j++) {
 			int index = putils::get_index_2d(i, j, this->width);
-			color* c = new color(((float)img->data[index].red / (float)255), ((float)img->data[index].green / (float)255), ((float)img->data[index].blue / (float)255), (float)1);
-			this->data[index] = *c;
+			float c_r = (float)img->data[index].red;
+			float c_g = (float)img->data[index].green;
+			float c_b = (float)img->data[index].blue;
+			color* pixel_c = new color((c_r / (float)255), (c_g / (float)255), (c_b / (float)255), (float)1);
+			this->data[index] = *pixel_c;
 		}
 	}
 }

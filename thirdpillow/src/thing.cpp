@@ -15,6 +15,14 @@ mesh* thing::get_mesh() {
 	return this->geometry;
 }
 
+void thing::set_texture(image* i) {
+	this->texture = i;
+}
+
+image* thing::get_texture() {
+	return this->texture;
+}
+
 thing::thing() {
 	transform* t = new transform();
 	this->t = *t;
