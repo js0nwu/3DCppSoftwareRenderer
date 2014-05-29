@@ -256,8 +256,22 @@ void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
 		vector4* b4 = new vector4(normal);
 		a4->multiply_first(mt);
 		b4->multiply_first(mt);
-		vector2* a = new vector2((a4->get_x() / a4->get_w()) / (a4->get_z() / a4->get_w()), (a4->get_y() / a4->get_w()) / (a4->get_z() / a4->get_w()));
-		vector2* b = new vector2((b4->get_x() / b4->get_w()) / (b4->get_z() / b4->get_w()), (b4->get_y() / b4->get_w()) / (b4->get_z() / b4->get_w()));
+		a4->set_x(a4->get_x() / a4->get_w());
+		a4->set_y(a4->get_y() / a4->get_w());
+		a4->set_z(a4->get_z() / a4->get_w());
+		a4->set_x(a4->get_x() / a4->get_z());
+		a4->set_y(a4->get_y() / a4->get_z());
+		b4->set_x(b4->get_x() / b4->get_w());
+		b4->set_y(b4->get_y() / b4->get_w());
+		b4->set_z(b4->get_z() / b4->get_w());
+		b4->set_x(b4->get_x() / b4->get_z());
+		b4->set_y(b4->get_y() / b4->get_z());
+		float p_x_a = ((a4->get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
+		float p_y_a = ((a4->get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+		float p_x_b = ((b4->get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
+		float p_y_b = ((b4->get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+		vector2* a = new vector2(p_x_a, p_y_a);
+		vector2* b = new vector2(p_x_b, p_y_b);
 		delete a4;
 		delete b4;
 		delete barycenter;
@@ -272,8 +286,8 @@ void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
 
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
-		float angle = transform::get_camera()->get_forward()->angle_between(m->faces[i].get_triangle()->get_normal());
-		if (angle > 100 && angle < 270) {
+		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
+		if (dot <= 0.5) {
 			draw_triangle3_wire(s, m->faces[i].get_triangle(), mt);
 		}
 	}

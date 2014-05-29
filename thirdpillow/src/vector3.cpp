@@ -12,7 +12,7 @@ void vector3::print() {
 }
 
 void vector3::rotate(float degree, vector3* axis) {
-	float radians = (degree * (float) 3.14) / (float) 180;
+	float radians = (degree * (float) 3.14) / (float)180;
 	float sin_half = sin(radians / 2);
 	float cos_half = cos(radians / 2);
 	float r_x = axis->get_x() * sin_half;
@@ -36,7 +36,7 @@ bool vector3::is_zero() {
 
 void vector3::lookat(vector3* v) {
 	vector3* r = new vector3(v->get_x() - this->x, v->get_y() - this->y,
-			v->get_z() - this->z);
+		v->get_z() - this->z);
 	r->normalize();
 	this->x = r->get_x();
 	this->y = r->get_y();
@@ -73,7 +73,7 @@ void vector3::set_z(float z) {
 
 float vector3::magnitude() {
 	float magnitude = sqrt(
-			(this->x * this->x) + (this->y * this->y) + (this->z * this->z));
+		(this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 	return magnitude;
 }
 
@@ -82,9 +82,9 @@ float vector3::distance_from(vector3* v) {
 	float y_2 = v->get_y();
 	float z_2 = v->get_z();
 	float distance = sqrt(
-			(x_2 - v->get_x()) * (x_2 - v->get_x())
-					+ (y_2 - v->get_y()) * (y_2 - v->get_y())
-					+ (z_2 - v->get_z()) * (z_2 - v->get_z()));
+		(x_2 - v->get_x()) * (x_2 - v->get_x())
+		+ (y_2 - v->get_y()) * (y_2 - v->get_y())
+		+ (z_2 - v->get_z()) * (z_2 - v->get_z()));
 	return distance;
 }
 
@@ -103,7 +103,7 @@ void vector3::negative() {
 
 float vector3::dot_product(vector3* v) {
 	return (this->x * v->get_x()) + (this->y * v->get_y())
-			+ (this->z * v->get_z());
+		+ (this->z * v->get_z());
 }
 
 void vector3::cross_product(vector3* v) {
@@ -119,7 +119,7 @@ float vector3::angle_between(vector3* v) {
 	float total_magnitude = this->magnitude() + v->magnitude();
 	float dot_product = this->dot_product(v);
 	float angle_radian = acos(dot_product / total_magnitude);
-	float angle = ((float) 180 * angle_radian) / (float) 3.14;
+	float angle = ((float)180 * angle_radian) / (float) 3.14;
 	return angle;
 }
 
