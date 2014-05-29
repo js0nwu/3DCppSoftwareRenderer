@@ -69,5 +69,6 @@ void screen::set_pixel(int x, int y, color* c) {
 
 screen::~screen() {
 	delete this->buffer;
+	delete this->z_buffer;
 }
 

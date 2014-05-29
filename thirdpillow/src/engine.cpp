@@ -15,6 +15,7 @@ world* engine::get_scene() {
 
 void engine::cleanup() {
 	printf("cleaning up\n");
+	delete this->frame;
 }
 
 float engine::RandomFloat(float a, float b) {
