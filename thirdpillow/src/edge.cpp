@@ -7,19 +7,19 @@
 
 #include "edge.h"
 
-edge::edge(vector2 a, color a_color, vector2 b, color b_color) {
+edge::edge(vector2 a, vector2 uv_a, vector2 b, vector2 uv_b) {
 	
 	if (a.get_y() > b.get_y()) {
 		this->a = b;
-		this->a_color = b_color;
+		this->uv_a = uv_b;
 		this->b = a;
-		this->b_color = a_color;
+		this->uv_b = uv_a;
 	}
 	else {
 		this->a = a;
 		this->b = b;
-		this->a_color = a_color;
-		this->b_color = b_color;
+		this->uv_a = uv_a;
+		this->uv_b = uv_b;
 	}
 }
 
@@ -31,12 +31,12 @@ vector2* edge::get_b() {
 	return &this->b;
 }
 
-color* edge::get_a_color() {
-	return &this->a_color;
+vector2* edge::get_uv_a() {
+	return &this->uv_a;
 }
 
-color* edge::get_b_color() {
-	return &this->b_color;
+vector2* edge::get_uv_b() {
+	return &this->uv_b;
 }
 
 void edge::set_a(vector2* v) {
@@ -47,21 +47,21 @@ void edge::set_b(vector2* v) {
 	this->b = *v;
 }
 
-void edge::set_a_color(color* c) {
-	this->a_color = *c;
+void edge::set_uv_a(vector2* v) {
+	this->uv_a = *v;
 }
 
-void edge::set_b_color(color* c) {
-	this->b_color = *c;
+void edge::set_uv_b(vector2* v) {
+	this->uv_b = *v;
 }
 
 edge* edge::clone() {
-	edge* clone = new edge(this->a, this->a_color, this->b, this->b_color);
+	edge* clone = new edge(this->a, this->uv_a, this->b, this->uv_b);
 	return clone;
 }
 
 void edge::print() {
-	printf("a (%f, %f) color (%f, %f, %f, %f) b(%f, %f) color (%f, %f, %f, %f)\n", this->a.get_x(), this->b.get_y(), this->a_color.get_r(), this->a_color.get_g(), this->a_color.get_b(), this->a_color.get_a(), this->b.get_x(), this->b.get_y(), this->b_color.get_r(), this->b_color.get_g(), this->b_color.get_b(), this->b_color.get_a());
+	printf("a (%f, %f) uv_a (%f, %f) b(%f, %f) uv_b (%f, %f)\n", this->a.get_x(), this->a.get_y(), this->uv_a.get_x(), this->uv_a.get_y(), this->b.get_x(), this->b.get_y(), this->uv_b.get_x(), this->uv_b.get_y());
 }
 
 edge::~edge() {

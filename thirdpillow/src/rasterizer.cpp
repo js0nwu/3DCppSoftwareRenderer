@@ -19,29 +19,30 @@ void rasterizer::set_default_color(color* c) {
 	this->default_color = *c;
 }
 
-void rasterizer::draw_span(screen* s, span* a, int y) {
+void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 	int x_diff = (int)a->get_x_2() - (int)a->get_x_1();
 	if (x_diff == 0) {
 		return;
 	}
-	color* c_diff = a->get_b_color()->clone();
-	c_diff->subtract(a->get_a_color());
+	vector2* t_diff = a->get_uv_b()->clone();
+	t_diff->subtract(a->get_uv_a());
 	float factor = (float)0;
 	float factor_step = (float)1 / (float)x_diff;
 	for (int x = (int)a->get_x_1(); x < (int)a->get_x_2(); x++) {
-		color* c = a->get_a_color()->clone();
-		color* c_1 = c_diff->clone();
-		c_1->multiply(factor);
-		c->add(c_1);
-		s->set_pixel(x, y, c);
+		vector2* t = a->get_uv_a()->clone();
+		vector2* t_1 = t_diff->clone();
+		t_1->multiply(factor);
+		t->add(t_1);
+		color* i = texture->get_color((int)t->get_x(), (int)t->get_y());
+		s->set_pixel(x, y, i);
 		factor += factor_step;
-		delete c;
-		delete c_1;
+		delete t;
+		delete t_1;
 	}
-	delete c_diff;
+	delete t_diff;
 }
 
-void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
+void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 	float y_diff_1 = (float)(a->get_b()->get_y() - a->get_a()->get_y());
 	if (y_diff_1 == (float)0) {
 		return;
@@ -52,27 +53,27 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 	}
 	float x_diff_1 = (float)(a->get_b()->get_x() - a->get_a()->get_x());
 	float x_diff_2 = (float)(b->get_b()->get_x() - b->get_a()->get_x());
-	color* e_1 = a->get_b_color()->clone();
-	e_1->subtract(a->get_a_color());
-	color* e_2 = b->get_b_color()->clone();
-	e_2->subtract(b->get_a_color());
+	vector2* e_1 = a->get_uv_b()->clone();
+	e_1->subtract(a->get_uv_a());
+	vector2* e_2 = b->get_uv_b()->clone();
+	e_2->subtract(b->get_uv_a());
 	float factor_1 = (float)(b->get_a()->get_y() - a->get_a()->get_y()) / y_diff_1;
 	float factor_step_1 = (float)1 / y_diff_1;
 	float factor_2 = (float)0;
 	float factor_step_2 = (float)1 / y_diff_2;
 	for (int y = (int)b->get_a()->get_y(); y < (int)b->get_b()->get_y(); y++) {
-		color* c = a->get_a_color()->clone();
-		color* c_1 = e_1->clone();
+		vector2* c = a->get_uv_a()->clone();
+		vector2* c_1 = e_1->clone();
 		c_1->multiply(factor_1);
 		c->add(c_1);
 		int c_x_1 = (int)a->get_a()->get_x() + (int)(x_diff_1 * factor_1);
-		color* d = b->get_a_color()->clone();
-		color* d_1 = e_2->clone();
+		vector2* d = b->get_uv_a()->clone();
+		vector2* d_1 = e_2->clone();
 		d_1->multiply(factor_2);
 		d->add(d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
 		span* sp = new span(*c, c_x_1, *d, c_x_2);
-		draw_span(s, sp, y);
+		draw_span(s, sp, texture, y);
 		delete c;
 		delete c_1;
 		delete d;
@@ -83,29 +84,6 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b) {
 	}
 	delete e_1;
 	delete e_2;
-}
-
-void rasterizer::draw_triangle_fill_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
-	edge* edges[3];
-	edges[0] = new edge(*a, *a_color, *b, *b_color);
-	edges[1] = new edge(*b, *b_color, *c, *c_color);
-	edges[2] = new edge(*c, *c_color, *a, *a_color);
-	float max_length = (float)0;
-	int long_edge = 0;
-	for (int i = 0; i < 3; i++) {
-		float length = edges[i]->get_b()->get_y() - edges[i]->get_a()->get_y();
-		if (length > max_length) {
-			max_length = length;
-			long_edge = i;
-		}
-	}
-	int short_1 = (long_edge + 1) % 3;
-	int short_2 = (long_edge + 2) % 3;
-	draw_edge_span(s, edges[long_edge], edges[short_1]);
-	draw_edge_span(s, edges[long_edge], edges[short_2]);
-	for (int k = 0; k < 3; k++) {
-		delete edges[k];
-	}
 }
 
 void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {
@@ -123,16 +101,6 @@ void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* 
 void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
 	vector2* v_t = t->get_vertices();
 	draw_triangle_wire(s, &v_t[0], &v_t[1], &v_t[2]);
-	free(v_t);
-}
-
-void rasterizer::draw_triangle_fill(screen* s, vector2* a, vector2* b, vector2* c) {
-	draw_triangle_fill_color(s, a, &this->default_color, b, &this->default_color, c, &this->default_color);
-}
-
-void rasterizer::draw_triangle_fill(screen* s, triangle2* t) {
-	vector2* v_t = t->get_vertices();
-	draw_triangle_fill_color(s, &v_t[0], &this->default_color, &v_t[1], &this->default_color, &v_t[2], &this->default_color);
 	free(v_t);
 }
 
@@ -284,10 +252,14 @@ void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
 	}
 }
 
+void rasterizer::draw_mesh_textured(screen *s, mesh* m, image* texture, matrix4* mt) {
+
+}
+
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
-		if (dot <= 0.75) {
+		if (dot <= 0.8) {
 			draw_triangle3_wire(s, m->faces[i].get_triangle(), mt);
 		}
 	}
