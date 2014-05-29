@@ -32,6 +32,7 @@ public:
 	void draw_triangle_wire_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color);
 	void draw_line_color(screen* s, vector2* a, vector2* b, color* c);
 	void draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt);
+	void draw_face_textured(screen* s, face* f, image* texture, matrix4* mt);
 	void draw_line_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color);
 	void draw_mesh_wire(screen* s, mesh* m, matrix4* mt);
 	void draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt);

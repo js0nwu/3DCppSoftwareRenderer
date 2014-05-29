@@ -33,7 +33,7 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 		vector2* t_1 = t_diff->clone();
 		t_1->multiply(factor);
 		t->add(t_1);
-		color* i = texture->get_color((int)t->get_x(), (int)t->get_y());
+		color* i = texture->get_color((int)(t->get_x() * texture->get_width()), (int)(t->get_y() * texture->get_height()));
 		s->set_pixel(x, y, i);
 		factor += factor_step;
 		delete t;
@@ -208,6 +208,33 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 	delete flat;
 }
 
+void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4* mt) {
+	triangle2* flat = f->get_triangle()->flatten(mt);
+	vector2* vertices = flat->get_vertices();
+	vector2* uvs = f->get_uvs();
+	edge* edges[3];
+	edges[0] = new edge(vertices[0], uvs[0], vertices[1], uvs[1]);
+	edges[1] = new edge(vertices[1], uvs[1], vertices[2], uvs[2]);
+	edges[2] = new edge(vertices[2], uvs[2], vertices[0], uvs[0]);
+	float max_length = (float)0;
+	int long_edge = 0;
+	for (int i = 0; i < 3; i++) {
+		float length = edges[i]->get_b()->get_y() - edges[i]->get_a()->get_y();
+		if (length > max_length) {
+			max_length = length;
+			long_edge = i;
+		}
+	}
+	int short_1 = (long_edge + 1) % 3;
+	int short_2 = (long_edge + 2) % 3;
+	draw_edge_span(s, edges[long_edge], edges[short_1], texture);
+	draw_edge_span(s, edges[long_edge], edges[short_2], texture);
+	for (int k = 0; k < 3; k++) {
+		delete edges[k];
+	}
+	delete flat;
+}
+
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		draw_triangle3_wire(s, m->faces[i].get_triangle(), mt);
@@ -253,7 +280,9 @@ void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
 }
 
 void rasterizer::draw_mesh_textured(screen *s, mesh* m, image* texture, matrix4* mt) {
-
+	for (int i = 0; i < m->faces.size(); i++) {
+		draw_face_textured(s, &m->faces[i], texture, mt);
+	}
 }
 
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
