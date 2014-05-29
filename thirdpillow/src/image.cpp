@@ -31,7 +31,7 @@ void image::set_color(int x, int y, color* value) {
 
 //http://stackoverflow.com/questions/2693631/read-ppm-file-and-store-it-in-an-array-coded-with-c
 void image::from_ppm_binary(char* filename) {
-
+	printf("loading image from %s\n", filename);
 	typedef struct {
 		unsigned char red, green, blue;
 	} PPMPixel;
