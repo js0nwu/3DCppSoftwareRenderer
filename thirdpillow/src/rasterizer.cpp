@@ -287,7 +287,7 @@ void rasterizer::draw_mesh_normals(screen* s, mesh* m, matrix4* mt) {
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
-		if (dot <= 0.5) {
+		if (dot <= 0.75) {
 			draw_triangle3_wire(s, m->faces[i].get_triangle(), mt);
 		}
 	}

@@ -31,11 +31,11 @@ void image::set_color(int x, int y, color* value) {
 
 //http://stackoverflow.com/questions/2693631/read-ppm-file-and-store-it-in-an-array-coded-with-c
 void image::from_ppm_binary(char* filename) {
-	
+
 	typedef struct {
 		unsigned char red, green, blue;
 	} PPMPixel;
-	
+
 	typedef struct {
 		int x, y;
 		PPMPixel* data;
@@ -91,6 +91,13 @@ void image::from_ppm_binary(char* filename) {
 	}
 	this->width = img->x;
 	this->height = img->y;
+	for (int i = 0; i < this->width; i++) {
+		for (int j = 0; j < this->height; j++) {
+			int index = putils::get_index_2d(i, j, this->width);
+			color* c = new color(((float)img->data[index].red / (float)255), ((float)img->data[index].green / (float)255), ((float)img->data[index].blue / (float)255), (float)1);
+			this->data[index] = *c;
+		}
+	}
 }
 
 image::~image() {
