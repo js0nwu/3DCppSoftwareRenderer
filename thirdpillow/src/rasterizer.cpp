@@ -29,17 +29,20 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 	float factor = (float)0;
 	float factor_step = (float)1 / (float)x_diff;
 	for (int x = (int)a->get_x_1(); x < (int)a->get_x_2(); x++) {
-		vector2* t = a->get_uv_a()->clone();
-		vector2* t_1 = t_diff->clone();
-		t_1->multiply(factor);
-		t->add(t_1);
-		float uv_x = t->get_x() * (float)texture->get_width();
-		float uv_y = t->get_y() * (float)texture->get_height();
-		color* i = texture->get_color(uv_x, uv_y);
-		s->set_pixel(x, y, i);
-		factor += factor_step;
-		delete t;
-		delete t_1;
+		float z_depth = putils::linear_interpolate(a->get_z_1(), a->get_z_2(), (float)x / (a->get_x_2() - a->get_x_1()));
+		if (z_depth < s->get_z(x, y) || true) {
+			vector2* t = a->get_uv_a()->clone();
+			vector2* t_1 = t_diff->clone();
+			t_1->multiply(factor);
+			t->add(t_1);
+			float uv_x = t->get_x() * (float)texture->get_width();
+			float uv_y = t->get_y() * (float)texture->get_height();
+			color* i = texture->get_color(uv_x, uv_y);
+			s->set_pixel(x, y, i);
+			factor += factor_step;
+			delete t;
+			delete t_1;
+		}
 	}
 	delete t_diff;
 }
@@ -55,8 +58,6 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 	}
 	float x_diff_1 = (float)(a->get_b()->get_x() - a->get_a()->get_x());
 	float x_diff_2 = (float)(b->get_b()->get_x() - b->get_a()->get_x());
-	float z_diff_1 = a->get_z_b() - a->get_z_a();
-	float z_diff_2 = b->get_z_b() - a->get_z_a();
 	vector2* e_1 = a->get_uv_b()->clone();
 	e_1->subtract(a->get_uv_a());
 	vector2* e_2 = b->get_uv_b()->clone();
@@ -76,7 +77,9 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 		d_1->multiply(factor_2);
 		d->add(d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
-		span* sp = new span(*c, c_x_1, *d, c_x_2);
+		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), (float)y/(b->get_a()->get_y() - b->get_a()->get_y()));
+		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), (float)y/(b->get_a()->get_y() - b->get_a()->get_y()));
+		span* sp = new span(*c, z_1, c_x_1, *d, z_2, c_x_2);
 		draw_span(s, sp, texture, y);
 		delete c;
 		delete c_1;

@@ -25,6 +25,8 @@ public:
 	void set_pixel(int x, int y, color* c);
 	float* get_z_buffer();
 	void set_z_buffer(float* buffer);
+	float get_z(int x, int y);
+	void set_z(int x, int y, float z);
 	virtual ~screen();
 private:
 	int render_width;

@@ -19,6 +19,7 @@
 #include "mesh.h"
 #include "matrix4.h"
 #include "image.h"
+#include "putils.h"
 
 class rasterizer {
 public:

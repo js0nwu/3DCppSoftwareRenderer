@@ -16,7 +16,7 @@ screen::screen(int render_width, int render_height) {
 
 void screen::cls() {
 	memset(this->buffer, (float)0, (render_width*render_height*3) * sizeof(float));
-	memset(this->z_buffer, (float)0, (render_width*render_height) * sizeof(float));
+	memset(this->z_buffer, (float)9999, (render_width*render_height) * sizeof(float));
 }
 
 int screen::get_width() {
@@ -66,6 +66,16 @@ void screen::set_pixel(int x, int y, color* c) {
 		this->buffer[index + 2] = c->get_b();
 	}
 
+}
+
+float screen::get_z(int x, int y) {
+	int index = putils::get_index_2d(x, y, this->render_width);
+	return this->buffer[index];
+}
+
+void screen::set_z(int x, int y, float z) {
+	int index = putils::get_index_2d(x, y, this->render_width);
+	this->buffer[index] = z;
 }
 
 screen::~screen() {
