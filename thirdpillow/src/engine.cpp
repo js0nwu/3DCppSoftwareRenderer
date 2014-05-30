@@ -39,7 +39,7 @@ void engine::initialize() {
 	m->from_obj("res/teststeve.obj");
 	m->sort();
 	image* texture = new image();
-	texture->from_ppm_raw("res/bla.ppm");
+	texture->from_ppm_raw("res/teststeve.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->set_texture(texture);

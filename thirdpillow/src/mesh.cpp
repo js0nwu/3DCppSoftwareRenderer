@@ -61,6 +61,9 @@ void mesh::from_obj(char* filename) {
 					int f_len;
 					char** face_split = putils::split_string(line_split[1], "/", &f_len);
 					a = atoi((const char*)face_split[0]);
+					if (strcmp(face_split[1], "") != 0) {
+						at = atoi((const char*)face_split[1]);
+					}
 				}
 				else {
 					a = atoi((const char*)line_split[1]);
@@ -69,6 +72,9 @@ void mesh::from_obj(char* filename) {
 					int f_len;
 					char** face_split = putils::split_string(line_split[2], "/", &f_len);
 					b = atoi((const char*)face_split[0]);
+					if (strcmp(face_split[1], "") != 0) {
+						bt = atoi((const char*)face_split[1]);
+					}
 				}
 				else {
 					b = atoi((const char*)line_split[2]);
@@ -77,6 +83,9 @@ void mesh::from_obj(char* filename) {
 					int f_len;
 					char** face_split = putils::split_string(line_split[3], "/", &f_len);
 					c = atoi((const char*)face_split[0]);
+					if (strcmp(face_split[1], "") != 0) {
+						ct = atoi((const char*)face_split[1]);
+					}
 				}
 				else {
 					c = atoi((const char*)line_split[3]);
@@ -84,6 +93,13 @@ void mesh::from_obj(char* filename) {
 				if (a != 0 && b != 0 && c != 0) {
 					triangle3* face_t = new triangle3(vertices[a - 1], vertices[b - 1], vertices[c - 1]);
 					face* f = new face(face_t);
+					if (at != 0 && bt != 0 && ct != 0) {
+						vector2* f_uvs = (vector2*)malloc(3 * sizeof(vector2));
+						f_uvs[0] = *uvs[at - 1];
+						f_uvs[1] = *uvs[bt - 1];
+						f_uvs[2] = *uvs[ct - 1];
+						f->set_uvs(f_uvs);
+					}
 					this->faces.push_back(*f);
 				}
 			}
