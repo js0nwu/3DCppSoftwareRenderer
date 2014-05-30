@@ -63,7 +63,6 @@ void engine::render() {
 		image* texture = t->get_texture();
 		matrix4* mt = t->t.get_projected_transformation();
 		this->rast->draw_mesh_textured(this->frame, m, texture, mt);
-		//this->rast->draw_image(this->frame, texture);
 		delete mt;
 	}
 }
