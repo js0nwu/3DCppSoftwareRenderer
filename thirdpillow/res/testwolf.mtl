@@ -18,7 +18,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jwpilly\Downloads\MC Rigs 291212\Textures\wolf.png
+map_Kd C:\Users\jwpilly\Desktop\MC\Textures\wolf.png
 
 newmtl Wolf_Eye
 Ns 92.156863
@@ -28,7 +28,7 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jwpilly\Downloads\MC Rigs 291212\Textures\wolf.png
+map_Kd C:\Users\jwpilly\Desktop\MC\Textures\wolf.png
 
 newmtl Wolf_Mouth
 Ns 286.274510
@@ -38,4 +38,4 @@ Ks 0.057377 0.057377 0.057377
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd C:\Users\jwpilly\Downloads\MC Rigs 291212\Textures\wolf.png
+map_Kd C:\Users\jwpilly\Desktop\MC\Textures\wolf.png

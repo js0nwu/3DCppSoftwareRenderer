@@ -15,6 +15,7 @@ public:
 	vector3* get_center();
 	vector3* get_normal();
 	triangle2* flatten(matrix4* m);
+	triangle2* flatten_z(matrix4* m, float* z_depth);
 	virtual ~triangle3();
 private:
 	vector3 vertices[3];

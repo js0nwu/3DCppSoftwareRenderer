@@ -29,8 +29,8 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 	float factor = (float)0;
 	float factor_step = (float)1 / (float)x_diff;
 	for (int x = (int)a->get_x_1(); x < (int)a->get_x_2(); x++) {
-		float z_depth = putils::linear_interpolate(a->get_z_1(), a->get_z_2(), (float)x / (a->get_x_2() - a->get_x_1()));
-		if (z_depth < s->get_z(x, y) || true) {
+		float z_depth = putils::linear_interpolate(a->get_z_1(), a->get_z_2(), ((float)x - a->get_x_1()) / (a->get_x_2() - a->get_x_1()));
+		if (z_depth < s->get_z(x, y)) {
 			vector2* t = a->get_uv_a()->clone();
 			vector2* t_1 = t_diff->clone();
 			t_1->multiply(factor);
@@ -39,6 +39,7 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 			float uv_y = t->get_y() * (float)texture->get_height();
 			color* i = texture->get_color(uv_x, uv_y);
 			s->set_pixel(x, y, i);
+			s->set_z(x, y, z_depth);
 			factor += factor_step;
 			delete t;
 			delete t_1;
@@ -77,8 +78,8 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 		d_1->multiply(factor_2);
 		d->add(d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
-		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), (float)y/(b->get_a()->get_y() - b->get_a()->get_y()));
-		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), (float)y/(b->get_a()->get_y() - b->get_a()->get_y()));
+		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), ((float)y - b->get_a()->get_y())/(b->get_b()->get_y() - b->get_a()->get_y()));
+		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), ((float)y - b->get_a()->get_y())/(b->get_b()->get_y() - b->get_a()->get_y()));
 		span* sp = new span(*c, z_1, c_x_1, *d, z_2, c_x_2);
 		draw_span(s, sp, texture, y);
 		delete c;
@@ -216,13 +217,14 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 }
 
 void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4* mt) {
-	triangle2* flat = f->get_triangle()->flatten(mt); //get local z value
+	float* z_depth = (float*)malloc(3 * sizeof(float));
+	triangle2* flat = f->get_triangle()->flatten_z(mt, z_depth); //get local z value
 	vector2* vertices = flat->get_vertices();
 	vector2* uvs = f->get_uvs();
 	edge* edges[3];
-	edges[0] = new edge(vertices[0], uvs[0], f->get_triangle()->get_vertices()[0].get_z(), vertices[1], uvs[1], f->get_triangle()->get_vertices()[1].get_z());
-	edges[1] = new edge(vertices[1], uvs[1], f->get_triangle()->get_vertices()[1].get_z(), vertices[2], uvs[2], f->get_triangle()->get_vertices()[2].get_z());
-	edges[2] = new edge(vertices[2], uvs[2], f->get_triangle()->get_vertices()[2].get_z(), vertices[0], uvs[0], f->get_triangle()->get_vertices()[0].get_z());
+	edges[0] = new edge(vertices[0], uvs[0], z_depth[0], vertices[1], uvs[1], z_depth[1]);
+	edges[1] = new edge(vertices[1], uvs[1], z_depth[1], vertices[2], uvs[2], z_depth[2]);
+	edges[2] = new edge(vertices[2], uvs[2], z_depth[2], vertices[0], uvs[0], z_depth[0]);
 	float max_length = (float)0;
 	int long_edge = 0;
 	for (int i = 0; i < 3; i++) {
@@ -240,6 +242,7 @@ void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4*
 		delete edges[k];
 	}
 	delete flat;
+	free(z_depth);
 }
 
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
