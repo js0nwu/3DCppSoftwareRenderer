@@ -1,0 +1,41 @@
+# Blender MTL File: 'None'
+# Material Count: 4
+
+newmtl Teeth
+Ns 190.196078
+Ka 0.000000 0.000000 0.000000
+Kd 0.524818 0.556078 0.522920
+Ks 0.245902 0.245902 0.245902
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Wolf
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\MC Rigs 291212\Textures\wolf.png
+
+newmtl Wolf_Eye
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.005771 0.004980 0.004528
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\MC Rigs 291212\Textures\wolf.png
+
+newmtl Wolf_Mouth
+Ns 286.274510
+Ka 0.000000 0.000000 0.000000
+Kd 0.446836 0.184358 0.178668
+Ks 0.057377 0.057377 0.057377
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\jwpilly\Desktop\MC Rigs 291212\Textures\wolf.png
