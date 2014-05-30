@@ -107,8 +107,9 @@ void mesh::from_obj(char* filename) {
 	}
 }
 
-void mesh::sort() {
+void mesh::sort(matrix4* mt) {
 	//bubble sort from greatest to least
+	//fix this later
 	for (int it = 0; it < this->faces.size(); it++) {
 		for (int i = 0; i < this->faces.size() - 1; i++) {
 			int a = i;

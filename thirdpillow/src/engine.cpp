@@ -37,7 +37,6 @@ void engine::initialize() {
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
 	m->from_obj("res/testwolf.obj");
-	m->sort();
 	image* texture = new image();
 	texture->from_ppm_raw("res/testwolf.ppm");
 	thing* t = new thing();

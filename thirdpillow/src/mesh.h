@@ -22,7 +22,7 @@ public:
 	vector<face> faces;
 	transform* get_transform();
 	void from_obj(char* filename);
-	void sort();
+	void sort(matrix4* mt);
 	mesh();
 	virtual ~mesh();
 private:
