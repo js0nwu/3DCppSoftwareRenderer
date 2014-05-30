@@ -71,13 +71,17 @@ void screen::set_pixel(int x, int y, color* c) {
 }
 
 float screen::get_z(int x, int y) {
-	int index = putils::get_index_2d(x, y, this->render_width);
-	return this->z_buffer[index];
+	if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
+		int index = putils::get_index_2d(x, y, this->render_width);
+		return this->z_buffer[index];
+	}
 }
 
 void screen::set_z(int x, int y, float z) {
-	int index = putils::get_index_2d(x, y, this->render_width);
-	this->z_buffer[index] = z;
+	if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
+		int index = putils::get_index_2d(x, y, this->render_width);
+		this->z_buffer[index] = z;
+	}
 }
 
 screen::~screen() {
