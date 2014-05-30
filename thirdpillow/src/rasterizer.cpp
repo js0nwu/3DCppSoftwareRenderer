@@ -304,6 +304,14 @@ void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	}
 }
 
+void rasterizer::draw_image(screen* s, image* texture) {
+	for (int x = 0; x < texture->get_width(); x++) {
+		for (int y = 0; y < texture->get_height(); y++) {
+			s->set_pixel(x, s->get_height() - y, texture->get_color(x, y));
+		}
+	}
+}
+
 void rasterizer::set_pixel(screen* s, vector2* p, color* c) {
 	s->set_pixel((int)p->get_x(), (int)p->get_y(), c);
 }
