@@ -20,12 +20,12 @@ int image::get_height() {
 }
 
 color* image::get_color(int x, int y) {
-	int index = putils::get_index_2d(x, y, width);
+	int index = putils::get_index_2d(x, y, this->width);
 	return &this->data[index];
 }
 
 void image::set_color(int x, int y, color* value) {
-	int index = putils::get_index_2d(x, y, width);
+	int index = putils::get_index_2d(x, y, this->width);
 	this->data[index] = *value;
 }
 

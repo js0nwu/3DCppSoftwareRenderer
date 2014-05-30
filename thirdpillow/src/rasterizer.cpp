@@ -36,8 +36,8 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 			t_1->multiply(factor);
 			t->add(t_1);
 			float uv_x = t->get_x() * (float)texture->get_width();
-			float uv_y = t->get_y() * (float)texture->get_height();
-			color* i = texture->get_color(uv_x, uv_y);
+			float uv_y = ((float)1 - t->get_y()) * (float)texture->get_height();
+			color* i = texture->get_color((int)uv_x, (int)uv_y);
 			s->set_pixel(x, y, i);
 			s->set_z(x, y, z_depth);
 			factor += factor_step;
