@@ -216,7 +216,7 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 }
 
 void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4* mt) {
-	triangle2* flat = f->get_triangle()->flatten(mt);
+	triangle2* flat = f->get_triangle()->flatten(mt); //get local z value
 	vector2* vertices = flat->get_vertices();
 	vector2* uvs = f->get_uvs();
 	edge* edges[3];
