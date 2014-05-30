@@ -55,6 +55,8 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 	}
 	float x_diff_1 = (float)(a->get_b()->get_x() - a->get_a()->get_x());
 	float x_diff_2 = (float)(b->get_b()->get_x() - b->get_a()->get_x());
+	float z_diff_1 = a->get_z_b() - a->get_z_a();
+	float z_diff_2 = b->get_z_b() - a->get_z_a();
 	vector2* e_1 = a->get_uv_b()->clone();
 	e_1->subtract(a->get_uv_a());
 	vector2* e_2 = b->get_uv_b()->clone();
@@ -215,9 +217,9 @@ void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4*
 	vector2* vertices = flat->get_vertices();
 	vector2* uvs = f->get_uvs();
 	edge* edges[3];
-	edges[0] = new edge(vertices[0], uvs[0], vertices[1], uvs[1]);
-	edges[1] = new edge(vertices[1], uvs[1], vertices[2], uvs[2]);
-	edges[2] = new edge(vertices[2], uvs[2], vertices[0], uvs[0]);
+	edges[0] = new edge(vertices[0], uvs[0], f->get_triangle()->get_vertices()[0].get_z(), vertices[1], uvs[1], f->get_triangle()->get_vertices()[1].get_z());
+	edges[1] = new edge(vertices[1], uvs[1], f->get_triangle()->get_vertices()[1].get_z(), vertices[2], uvs[2], f->get_triangle()->get_vertices()[2].get_z());
+	edges[2] = new edge(vertices[2], uvs[2], f->get_triangle()->get_vertices()[2].get_z(), vertices[0], uvs[0], f->get_triangle()->get_vertices()[0].get_z());
 	float max_length = (float)0;
 	int long_edge = 0;
 	for (int i = 0; i < 3; i++) {

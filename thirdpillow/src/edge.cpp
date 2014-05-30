@@ -7,20 +7,40 @@
 
 #include "edge.h"
 
-edge::edge(vector2 a, vector2 uv_a, vector2 b, vector2 uv_b) {
+edge::edge(vector2 a, vector2 uv_a, float z_a, vector2 b, vector2 uv_b, float z_b) {
 	
 	if (a.get_y() > b.get_y()) {
 		this->a = b;
 		this->uv_a = uv_b;
 		this->b = a;
 		this->uv_b = uv_a;
+		this->z_b = z_a;
+		this->z_a = z_b;
 	}
 	else {
 		this->a = a;
 		this->b = b;
 		this->uv_a = uv_a;
 		this->uv_b = uv_b;
+		this->z_a = z_a;
+		this->z_b = z_b;
 	}
+}
+
+float edge::get_z_a() {
+	return this->z_a;
+}
+
+float edge::get_z_b() {
+	return this->z_b;
+}
+
+void edge::set_z_a(float z) {
+	this->z_a = z;
+}
+
+void edge::set_z_b(float z) {
+	this->z_b = z;
 }
 
 vector2* edge::get_a() {
@@ -56,7 +76,7 @@ void edge::set_uv_b(vector2* v) {
 }
 
 edge* edge::clone() {
-	edge* clone = new edge(this->a, this->uv_a, this->b, this->uv_b);
+	edge* clone = new edge(this->a, this->uv_a, this->z_a, this->b, this->uv_b, this->z_b);
 	return clone;
 }
 
