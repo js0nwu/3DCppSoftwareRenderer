@@ -16,7 +16,7 @@ triangle2::triangle2(vector2* a, vector2* b, vector2* c) {
 }
 
 vector2* triangle2::get_vertices() {
-	vector2* v = (vector2*)malloc(3 * sizeof(vector2));
+	vector2* v = new vector2[3];
 	v[0] = this->vertices[0];
 	v[1] = this->vertices[1];
 	v[2] = this->vertices[2];

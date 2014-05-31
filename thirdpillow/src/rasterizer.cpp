@@ -109,7 +109,7 @@ void rasterizer::draw_triangle_wire(screen* s, vector2* a, vector2* b, vector2* 
 void rasterizer::draw_triangle_wire(screen* s, triangle2* t) {
 	vector2* v_t = t->get_vertices();
 	draw_triangle_wire(s, &v_t[0], &v_t[1], &v_t[2]);
-	free(v_t);
+	delete[] v_t;
 }
 
 void rasterizer::draw_line_color(screen* s, vector2* a, vector2* b, color* c) {
@@ -217,7 +217,7 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 }
 
 void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4* mt) {
-	float* z_depth = (float*)malloc(3 * sizeof(float));
+	float* z_depth = new float[3];
 	triangle2* flat = f->get_triangle()->flatten_z(mt, z_depth); //get local z value
 	vector2* vertices = flat->get_vertices();
 	vector2* uvs = f->get_uvs();
@@ -242,7 +242,7 @@ void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4*
 		delete edges[k];
 	}
 	delete flat;
-	free(z_depth);
+	delete[] z_depth;
 }
 
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {
