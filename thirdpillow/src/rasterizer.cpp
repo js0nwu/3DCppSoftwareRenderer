@@ -78,8 +78,8 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 		d_1->multiply(factor_2);
 		d->add(d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
-		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), ((float)y - b->get_a()->get_y())/(b->get_b()->get_y() - b->get_a()->get_y()));
-		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), ((float)y - b->get_a()->get_y())/(b->get_b()->get_y() - b->get_a()->get_y()));
+		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), ((float)y - b->get_a()->get_y()) / (b->get_b()->get_y() - b->get_a()->get_y()));
+		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), ((float)y - b->get_a()->get_y()) / (b->get_b()->get_y() - b->get_a()->get_y()));
 		span* sp = new span(*c, z_1, c_x_1, *d, z_2, c_x_2);
 		draw_span(s, sp, texture, y);
 		delete c;
@@ -295,10 +295,19 @@ void rasterizer::draw_mesh_textured(screen *s, mesh* m, image* texture, matrix4*
 	}
 }
 
+void rasterizer::draw_mesh_textured_cull(screen *s, mesh* m, image* texture, matrix4* mt) {
+	for (int i = 0; i < m->faces.size(); i++) {
+		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
+		if (dot <= 0.5) {
+			draw_face_textured(s, &m->faces[i], texture, mt);
+		}
+	}
+}
+
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
-		if (dot <= 0.8) {
+		if (dot <= 0.5) {
 			draw_triangle3_wire(s, m->faces[i].get_triangle(), mt);
 		}
 	}

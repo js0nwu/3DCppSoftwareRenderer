@@ -39,6 +39,7 @@ public:
 	void draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt);
 	void draw_mesh_normals(screen* s, mesh* m, matrix4* mt);
 	void draw_mesh_textured(screen* s, mesh* m, image* texture, matrix4* mt);
+	void draw_mesh_textured_cull(screen* s, mesh* m, image* texture, matrix4* mt);
 	void draw_image(screen *s, image* texture);
 	void set_pixel(screen* s, vector2* p, color* c);
 	virtual ~rasterizer();
