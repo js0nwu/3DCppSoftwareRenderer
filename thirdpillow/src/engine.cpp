@@ -36,13 +36,16 @@ void engine::initialize() {
 	cam->set_position(start);
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
-	m->from_obj("res/testwolf.obj");
+	m->from_obj("res/testgolem.obj");
 	image* texture = new image();
-	texture->from_ppm_raw("res/testwolf.ppm");
+	texture->from_ppm_raw("res/testgolem.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->set_texture(texture);
 	t->t.set_scale(1, 1, 1);
+	vector3* r = t->t.get_rotation();
+	vector3* r_delta = new vector3(0, 180, 0);
+	r->add(r_delta);
 	this->scene.things.push_back(t);
 }
 
