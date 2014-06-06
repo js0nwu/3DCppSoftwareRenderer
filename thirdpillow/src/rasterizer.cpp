@@ -24,28 +24,25 @@ void rasterizer::draw_span(screen* s, span* a, image* texture, int y) {
 	if (x_diff == 0) {
 		return;
 	}
-	vector2* t_diff = a->get_uv_b()->clone();
-	t_diff->subtract(a->get_uv_a());
+	vector2 t_diff = *a->get_uv_b();
+	t_diff.subtract(a->get_uv_a());
 	float factor = (float)0;
 	float factor_step = (float)1 / (float)x_diff;
 	for (int x = (int)a->get_x_1(); x < (int)a->get_x_2(); x++) {
 		float z_depth = putils::linear_interpolate(a->get_z_1(), a->get_z_2(), ((float)x - a->get_x_1()) / (a->get_x_2() - a->get_x_1()));
 		if (z_depth < s->get_z(x, y)) {
-			vector2* t = a->get_uv_a()->clone();
-			vector2* t_1 = t_diff->clone();
-			t_1->multiply(factor);
-			t->add(t_1);
-			float uv_x = t->get_x() * (float)texture->get_width();
-			float uv_y = ((float)1 - t->get_y()) * (float)texture->get_height();
+			vector2 t = *a->get_uv_a();
+			vector2 t_1 = t_diff;
+			t_1.multiply(factor);
+			t.add(&t_1);
+			float uv_x = t.get_x() * (float)texture->get_width();
+			float uv_y = ((float)1 - t.get_y()) * (float)texture->get_height();
 			color* i = texture->get_color((int)uv_x, (int)uv_y);
 			s->set_pixel(x, y, i);
 			s->set_z(x, y, z_depth);
 			factor += factor_step;
-			delete t;
-			delete t_1;
 		}
 	}
-	delete t_diff;
 }
 
 void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
@@ -59,39 +56,31 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 	}
 	float x_diff_1 = (float)(a->get_b()->get_x() - a->get_a()->get_x());
 	float x_diff_2 = (float)(b->get_b()->get_x() - b->get_a()->get_x());
-	vector2* e_1 = a->get_uv_b()->clone();
-	e_1->subtract(a->get_uv_a());
-	vector2* e_2 = b->get_uv_b()->clone();
-	e_2->subtract(b->get_uv_a());
+	vector2 e_1 = *a->get_uv_b();
+	e_1.subtract(a->get_uv_a());
+	vector2 e_2 = *b->get_uv_b();
+	e_2.subtract(b->get_uv_a());
 	float factor_1 = (float)(b->get_a()->get_y() - a->get_a()->get_y()) / y_diff_1;
 	float factor_step_1 = (float)1 / y_diff_1;
 	float factor_2 = (float)0;
 	float factor_step_2 = (float)1 / y_diff_2;
 	for (int y = (int)b->get_a()->get_y(); y < (int)b->get_b()->get_y(); y++) {
-		vector2* c = a->get_uv_a()->clone();
-		vector2* c_1 = e_1->clone();
-		c_1->multiply(factor_1);
-		c->add(c_1);
+		vector2 c = *a->get_uv_a();
+		vector2 c_1 = e_1;
+		c_1.multiply(factor_1);
+		c.add(&c_1);
 		int c_x_1 = (int)a->get_a()->get_x() + (int)(x_diff_1 * factor_1);
-		vector2* d = b->get_uv_a()->clone();
-		vector2* d_1 = e_2->clone();
-		d_1->multiply(factor_2);
-		d->add(d_1);
+		vector2 d = *b->get_uv_a();
+		vector2 d_1 = e_2;
+		d.add(&d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
 		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), ((float)y - b->get_a()->get_y()) / (b->get_b()->get_y() - b->get_a()->get_y()));
 		float z_2 = putils::linear_interpolate(a->get_z_b(), b->get_z_b(), ((float)y - b->get_a()->get_y()) / (b->get_b()->get_y() - b->get_a()->get_y()));
-		span* sp = new span(*c, z_1, c_x_1, *d, z_2, c_x_2);
-		draw_span(s, sp, texture, y);
-		delete c;
-		delete c_1;
-		delete d;
-		delete d_1;
-		delete sp;
+		span sp(c, z_1, c_x_1, d, z_2, c_x_2);
+		draw_span(s, &sp, texture, y);
 		factor_1 += factor_step_1;
 		factor_2 += factor_step_2;
 	}
-	delete e_1;
-	delete e_2;
 }
 
 void rasterizer::draw_triangle_wire_color(screen* s, vector2* a, color* a_color, vector2* b, color* b_color, vector2* c, color* c_color) {

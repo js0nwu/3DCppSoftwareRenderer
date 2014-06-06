@@ -13,8 +13,8 @@
 
 using namespace std;
 
-static const int width = 800;
-static const int height = 600;
+static const int width = 1280;
+static const int height = 720;
 
 //time keeping
 static const int FRAME_CAP = 60;
