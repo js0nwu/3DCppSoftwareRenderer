@@ -207,18 +207,21 @@ void rasterizer::draw_triangle3_wire(screen* s, triangle3* t3, matrix4* mt) {
 }
 
 void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4* mt) {
-	float* z_depth = new float[3];
+	float z_depth[3];
 	triangle2* flat = f->get_triangle()->flatten_z(mt, z_depth); //get local z value
 	vector2* vertices = flat->get_vertices();
 	vector2* uvs = f->get_uvs();
-	edge* edges[3];
-	edges[0] = new edge(vertices[0], uvs[0], z_depth[0], vertices[1], uvs[1], z_depth[1]);
-	edges[1] = new edge(vertices[1], uvs[1], z_depth[1], vertices[2], uvs[2], z_depth[2]);
-	edges[2] = new edge(vertices[2], uvs[2], z_depth[2], vertices[0], uvs[0], z_depth[0]);
+	edge edges[3];
+	edge a(vertices[0], uvs[0], z_depth[0], vertices[1], uvs[1], z_depth[1]);
+	edge b(vertices[1], uvs[1], z_depth[1], vertices[2], uvs[2], z_depth[2]);
+	edge c(vertices[2], uvs[2], z_depth[2], vertices[0], uvs[0], z_depth[0]);
+	edges[0] = a;
+	edges[1] = b;
+	edges[2] = c;
 	float max_length = (float)0;
 	int long_edge = 0;
 	for (int i = 0; i < 3; i++) {
-		float length = edges[i]->get_b()->get_y() - edges[i]->get_a()->get_y();
+		float length = edges[i].get_b()->get_y() - edges[i].get_a()->get_y();
 		if (length > max_length) {
 			max_length = length;
 			long_edge = i;
@@ -226,13 +229,9 @@ void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4*
 	}
 	int short_1 = (long_edge + 1) % 3;
 	int short_2 = (long_edge + 2) % 3;
-	draw_edge_span(s, edges[long_edge], edges[short_1], texture);
-	draw_edge_span(s, edges[long_edge], edges[short_2], texture);
-	for (int k = 0; k < 3; k++) {
-		delete edges[k];
-	}
+	draw_edge_span(s, &edges[long_edge], &edges[short_1], texture);
+	draw_edge_span(s, &edges[long_edge], &edges[short_2], texture);
 	delete flat;
-	delete[] z_depth;
 }
 
 void rasterizer::draw_mesh_wire(screen* s, mesh* m, matrix4* mt) {

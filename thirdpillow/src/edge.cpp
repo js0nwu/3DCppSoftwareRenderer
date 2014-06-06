@@ -7,6 +7,9 @@
 
 #include "edge.h"
 
+edge::edge() {
+}
+
 edge::edge(vector2 a, vector2 uv_a, float z_a, vector2 b, vector2 uv_b, float z_b) {
 	
 	if (a.get_y() > b.get_y()) {

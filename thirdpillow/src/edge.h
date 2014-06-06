@@ -13,6 +13,7 @@
 
 class edge {
 public:
+	edge();
 	edge(vector2 a, vector2 uv_a, float z_a, vector2 b, vector2 uv_b, float z_b);
 	vector2* get_a();
 	vector2* get_b();
