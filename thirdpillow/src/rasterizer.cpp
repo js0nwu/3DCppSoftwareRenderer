@@ -72,6 +72,7 @@ void rasterizer::draw_edge_span(screen* s, edge* a, edge* b, image* texture) {
 		int c_x_1 = (int)a->get_a()->get_x() + (int)(x_diff_1 * factor_1);
 		vector2 d = *b->get_uv_a();
 		vector2 d_1 = e_2;
+		d_1.multiply(factor_2);
 		d.add(&d_1);
 		int c_x_2 = (int)b->get_a()->get_x() + (int)(x_diff_2 * factor_2);
 		float z_1 = putils::linear_interpolate(a->get_z_a(), b->get_z_a(), ((float)y - b->get_a()->get_y()) / (b->get_b()->get_y() - b->get_a()->get_y()));
