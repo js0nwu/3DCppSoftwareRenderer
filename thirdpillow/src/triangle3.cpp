@@ -73,27 +73,23 @@ triangle2* triangle3::flatten(matrix4* m) {
 }
 
 triangle2* triangle3::flatten_z(matrix4* m, float* z_depth) {
-	vector2* tri2[3];
+	vector2 tri2[3];
 	float z_values[3];
 	for (int i = 0; i < 3; i++) {
-		vector4* point = new vector4(&this->vertices[i]);
-		point->multiply_first(m);
-		point->set_x(point->get_x() / point->get_w());
-		point->set_y(point->get_y() / point->get_w());
-		point->set_z(point->get_z() / point->get_w());
-		z_values[i] = point->get_z();
-		point->set_x(point->get_x() / point->get_z());
-		point->set_y(point->get_y() / point->get_z());
-		float p_x = ((point->get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-		float p_y = ((point->get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
-		vector2* v2 = new vector2(p_x, p_y);
+		vector4 point(&this->vertices[i]);
+		point.multiply_first(m);
+		point.set_x(point.get_x() / point.get_w());
+		point.set_y(point.get_y() / point.get_w());
+		point.set_z(point.get_z() / point.get_w());
+		z_values[i] = point.get_z();
+		point.set_x(point.get_x() / point.get_z());
+		point.set_y(point.get_y() / point.get_z());
+		float p_x = ((point.get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
+		float p_y = ((point.get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+		vector2 v2(p_x, p_y);
 		tri2[i] = v2;
-		delete point;
 	}
-	triangle2* result = new triangle2(tri2[0], tri2[1], tri2[2]);
-	for (int k = 0; k < 3; k++) {
-		delete tri2[k];
-	}
+	triangle2* result = new triangle2(&tri2[0], &tri2[1], &tri2[2]);
 	for (int j = 0; j < 3; j++) {
 		z_depth[j] = z_values[j];
 	}
