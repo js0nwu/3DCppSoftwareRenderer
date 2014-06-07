@@ -102,6 +102,8 @@ void image::from_ppm_raw(char* filename) {
 			this->data[index] = *pixel_c;
 		}
 	}
+	free(img->data);
+	free(img);
 }
 
 image::~image() {

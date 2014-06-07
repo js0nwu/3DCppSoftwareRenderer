@@ -36,9 +36,9 @@ void engine::initialize() {
 	cam->set_position(start);
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
 	mesh* m = new mesh();
-	m->from_obj("res/testwolf.obj");
+	m->from_obj("res/testalduinsmall.obj");
 	image* texture = new image();
-	texture->from_ppm_raw("res/testwolf.ppm");
+	texture->from_ppm_raw("res/alduinsmall.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->set_texture(texture);
