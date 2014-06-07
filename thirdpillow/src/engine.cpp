@@ -38,7 +38,7 @@ void engine::initialize() {
 	mesh* m = new mesh();
 	m->from_obj("res/testalduinsmall.obj");
 	image* texture = new image();
-	texture->from_ppm_raw("res/alduinsmall.ppm");
+	texture->from_ppm_raw("res/alduin_lod.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->set_texture(texture);
