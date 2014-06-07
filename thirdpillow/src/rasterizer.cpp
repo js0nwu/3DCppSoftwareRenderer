@@ -231,6 +231,7 @@ void rasterizer::draw_face_textured(screen* s, face* f, image* texture, matrix4*
 	int short_2 = (long_edge + 2) % 3;
 	draw_edge_span(s, &edges[long_edge], &edges[short_1], texture);
 	draw_edge_span(s, &edges[long_edge], &edges[short_2], texture);
+	delete[] vertices;
 	delete flat;
 }
 
