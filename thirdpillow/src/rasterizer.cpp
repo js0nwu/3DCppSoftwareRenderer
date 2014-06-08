@@ -288,7 +288,7 @@ void rasterizer::draw_mesh_textured(screen *s, mesh* m, image* texture, matrix4*
 void rasterizer::draw_mesh_textured_cull(screen *s, mesh* m, image* texture, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());
-		if (dot <= 0.5) {
+		if (dot <= 0) {
 			draw_face_textured(s, &m->faces[i], texture, mt);
 		}
 	}
