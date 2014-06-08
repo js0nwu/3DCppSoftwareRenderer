@@ -94,7 +94,7 @@ void mesh::from_obj(char* filename) {
 					triangle3* face_t = new triangle3(vertices[a - 1], vertices[b - 1], vertices[c - 1]);
 					face* f = new face(face_t);
 					if (at != 0 && bt != 0 && ct != 0) {
-						vector2* f_uvs = (vector2*)malloc(3 * sizeof(vector2));
+						vector2 f_uvs[3];
 						f_uvs[0] = *uvs[at - 1];
 						f_uvs[1] = *uvs[bt - 1];
 						f_uvs[2] = *uvs[ct - 1];

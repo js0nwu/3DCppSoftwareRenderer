@@ -32,13 +32,15 @@ void engine::initialize() {
 	player = new transform();
 	cam = new camera(this->frame->get_width(), this->frame->get_height());
 	transform::set_camera(cam);
-	vector3* start = new vector3(-100, 10, -1);
+	vector3* start = new vector3(-20, 0, 0);
 	cam->set_position(start);
-	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 0.1, (float)1000);
+	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
 	mesh* m = new mesh();
 	m->from_obj("res/testalduinsmall.obj");
+	//m->from_obj("res/teststeve.obj");
 	image* texture = new image();
 	texture->from_ppm_raw("res/alduin_lod.ppm");
+	//texture->from_ppm_raw("res/teststeve.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);
 	t->set_texture(texture);
@@ -62,7 +64,7 @@ void engine::render() {
 		mesh* m = t->get_mesh();
 		image* texture = t->get_texture();
 		matrix4* mt = t->t.get_projected_transformation();
-		this->rast->draw_mesh_textured_cull(this->frame, m, t->get_texture(), mt);
+		this->rast->draw_mesh_textured(this->frame, m, t->get_texture(), mt);
 		delete mt;
 	}
 }
