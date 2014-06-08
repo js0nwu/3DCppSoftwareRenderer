@@ -294,6 +294,29 @@ void rasterizer::draw_mesh_textured_cull(screen *s, mesh* m, image* texture, mat
 	}
 }
 
+void rasterizer::draw_mesh_worker(screen* s, face* f, int size, image* texture, matrix4* mt) {
+	for (int i = 0; i < size; i++) {
+		draw_face_textured(s, &f[i], texture, mt);
+	}
+}
+
+void rasterizer::draw_mesh_textured_cull_thread(screen *s, mesh* m, image* texture, matrix4* mt) {
+	using namespace std;
+	vector<thread> render_pool;
+	int num_threads = 4; //put in params
+	vector<vector<face>> faces = vector<vector<face>>(num_threads);
+	for (int k = 0; k < m->faces.size(); k++) {
+		int t_n = k % num_threads;
+		faces[t_n].push_back(m->faces[k]);
+	}
+	for (int i = 0; i < num_threads; i++) {
+		render_pool.push_back(thread(&rasterizer::draw_mesh_worker, this, s, &faces[i][0], faces[i].size(), texture, mt));
+	}
+	for (int j = 0; j < num_threads; j++) {
+		render_pool[j].join();
+	}
+}
+
 void rasterizer::draw_mesh_wire_cull(screen* s, mesh* m, matrix4* mt) {
 	for (int i = 0; i < m->faces.size(); i++) {
 		float dot = m->faces[i].get_triangle()->get_normal()->dot_product(transform::get_camera()->get_forward());

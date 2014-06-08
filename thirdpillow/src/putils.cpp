@@ -16,7 +16,7 @@ int putils::get_index_3d(int x, int y, int z, int wide, int thick) {
 }
 
 float putils::linear_interpolate(float a, float b, float mu) {
-	return a * (1 - mu) + b * mu;
+	return a + mu * (b - a);
 }
 
 char* putils::read_file(char* filename, int* length) {
