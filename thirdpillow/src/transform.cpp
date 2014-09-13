@@ -31,7 +31,6 @@ matrix4* transform::get_projected_transformation() {
 	matrix4* camera_rotation = new matrix4();
 	camera_rotation->initialize_camera(transform::get_camera()->get_forward(), transform::get_camera()->get_up());
 	matrix4* camera_translation = new matrix4();
-	//camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
 	camera_translation->initialize_translation(-transform::get_camera()->get_position()->get_x(), -transform::get_camera()->get_position()->get_y(), -transform::get_camera()->get_position()->get_z());
 	camera_translation->multiply(m_transformation);
 	camera_rotation->multiply(camera_translation);

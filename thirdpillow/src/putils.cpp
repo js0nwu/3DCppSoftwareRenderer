@@ -87,3 +87,7 @@ char** putils::split_string(char* text, char* delim, int* length) {
 bool putils::string_contains(char* text, char* find) {
 	return strstr(text, find) != NULL;
 }
+
+float putils::to_radians(float degrees) {
+	return (float) ((degrees * (float) 3.14) / (float) 180);
+}

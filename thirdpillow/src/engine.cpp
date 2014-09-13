@@ -36,10 +36,10 @@ void engine::initialize() {
 	cam->set_position(start);
 	transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
 	mesh* m = new mesh();
-	m->from_obj("res/testalduinsmall.obj");
+	m->from_obj("res/testgolem.obj");
 	//m->from_obj("res/teststeve.obj");
 	image* texture = new image();
-	texture->from_ppm_raw("res/alduin_lod.ppm");
+	texture->from_ppm_raw("res/testgolem.ppm");
 	//texture->from_ppm_raw("res/teststeve.ppm");
 	thing* t = new thing();
 	t->set_mesh(m);

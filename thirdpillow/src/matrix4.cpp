@@ -17,41 +17,36 @@ void matrix4::set_at(int x, int y, float value) {
 
 void matrix4::initialize_rotation(float x, float y, float z) {
 	this->initialize_identity();
-	matrix4* rx = new matrix4();
-	matrix4* ry = new matrix4();
-	matrix4* rz = new matrix4();
-	rx->initialize_identity();
-	ry->initialize_identity();
-	rz->initialize_identity();
-	float x_radians = (x * (float) 3.14) / (float)180;
-	float y_radians = (y * (float) 3.14) / (float)180;
-	float z_radians = (z * (float) 3.14) / (float)180;
+	matrix4 rx, ry, rz;
+	rx.initialize_identity();
+	ry.initialize_identity();
+	ry.initialize_identity();
+	float x_radians = putils::to_radians(x);
+	float y_radians = putils::to_radians(y);
+	float z_radians = putils::to_radians(z);
+	rz.set_at(0, 0, cos(z_radians));
+	rz.set_at(0, 1, -sin(z_radians));
+	rz.set_at(1, 0, sin(z_radians));
+	rz.set_at(1, 1, cos(z_radians));
 
-	rz->set_at(0, 0, cos(z_radians));
-	rz->set_at(0, 1, -sin(z_radians));
-	rz->set_at(1, 0, sin(z_radians));
-	rz->set_at(1, 1, cos(z_radians));
+	rx.set_at(1, 1, cos(x_radians));
+	rx.set_at(2, 1, sin(x_radians));
+	rx.set_at(1, 2, -sin(x_radians));
+	rx.set_at(2, 2, cos(x_radians));
 
-	rx->set_at(1, 1, cos(x_radians));
-	rx->set_at(2, 1, sin(x_radians));
-	rx->set_at(1, 2, -sin(x_radians));
-	rx->set_at(2, 2, cos(x_radians));
+	ry.set_at(0, 0, cos(y_radians));
+	ry.set_at(2, 0, sin(y_radians));
+	ry.set_at(0, 2, -sin(y_radians));
+	ry.set_at(2, 2, cos(y_radians));
 
-	ry->set_at(0, 0, cos(y_radians));
-	ry->set_at(2, 0, sin(y_radians));
-	ry->set_at(0, 2, -sin(y_radians));
-	ry->set_at(2, 2, cos(y_radians));
-
-	ry->multiply(rx);
-	rz->multiply(ry);
+	ry.multiply(&rx);
+	rz.multiply(&ry);
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			this->matrix[i][j] = rz->get_at(i, j);
+			this->matrix[i][j] = rz.get_at(i, j);
 		}
 	}
-	delete rx;
-	delete ry;
-	delete rz;
+
 }
 
 void matrix4::initialize_translation(float x, float y, float z) {
