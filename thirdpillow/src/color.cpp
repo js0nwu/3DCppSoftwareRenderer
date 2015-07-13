@@ -53,18 +53,18 @@ void color::set_a(float a) {
 	this->a = a;
 }
 
-void color::add(color* c) {
-	this->r += c->get_r();
-	this->g += c->get_g();
-	this->b += c->get_b();
-	this->a += c->get_a();
+void color::add(color c) {
+	this->r += c.get_r();
+	this->g += c.get_g();
+	this->b += c.get_b();
+	this->a += c.get_a();
 }
 
-void color::subtract(color* c) {
-	this->r -= c->get_r();
-	this->g -= c->get_g();
-	this->b -= c->get_b();
-	this->a -= c->get_a();
+void color::subtract(color c) {
+	this->r -= c.get_r();
+	this->g -= c.get_g();
+	this->b -= c.get_b();
+	this->a -= c.get_a();
 }
 
 void color::multiply(float f) {

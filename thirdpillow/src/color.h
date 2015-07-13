@@ -20,8 +20,8 @@ public:
 	void set_g(float g);
 	void set_b(float b);
 	void set_a(float a);
-	void add(color* c);
-	void subtract(color* c);
+	void add(color c);
+	void subtract(color c);
 	void multiply(float f);
 
 	color* clone();

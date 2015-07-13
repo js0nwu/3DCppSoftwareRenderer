@@ -43,12 +43,12 @@ void span::set_z_2(float z) {
 	this->z_2 = z;
 }
 
-vector2* span::get_uv_a() {
-	return &this->uv_a;
+vector2 span::get_uv_a() {
+	return this->uv_a;
 }
 
-vector2* span::get_uv_b() {
-	return &this->uv_b;
+vector2 span::get_uv_b() {
+	return this->uv_b;
 }
 
 void span::set_x_1(int i) {
@@ -59,12 +59,12 @@ void span::set_x_2(int i) {
 	this->x_2 = i;
 }
 
-void span::set_uv_a(vector2* v) {
-	this->uv_a = *v;
+void span::set_uv_a(vector2 v) {
+	this->uv_a = v;
 }
 
-void span::set_uv_b(vector2* v) {
-	this->uv_b = *v;
+void span::set_uv_b(vector2 v) {
+	this->uv_b = v;
 }
 
 span::~span() {

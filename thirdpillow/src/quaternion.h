@@ -27,7 +27,7 @@ public:
 	void normalize();
 	virtual ~quaternion();
 	void conjugate();
-	void multiply(quaternion* q);
+	void multiply(quaternion q);
 	void multiply(float v_x, float v_y, float v_z);
 
 	void print();

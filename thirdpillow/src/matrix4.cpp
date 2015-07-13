@@ -39,8 +39,8 @@ void matrix4::initialize_rotation(float x, float y, float z) {
 	ry.set_at(0, 2, -sin(y_radians));
 	ry.set_at(2, 2, cos(y_radians));
 
-	ry.multiply(&rx);
-	rz.multiply(&ry);
+	ry.multiply(rx);
+	rz.multiply(ry);
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			this->matrix[i][j] = rz.get_at(i, j);
@@ -129,28 +129,25 @@ void matrix4::initialize_projection(float fov, float width, float height,
 	matrix[3][3] = 0;
 }
 
-void matrix4::initialize_camera(vector3* forward, vector3* up) {
-	forward->normalize();
-	vector3* f = forward->clone();
-	up->normalize();
-	vector3* r = up->clone();
-	r->normalize();
-	r->cross_product(f);
-	vector3* u = f->clone();
-	u->cross_product(r);
+void matrix4::initialize_camera(vector3 forward, vector3 up) {
+	forward.normalize();
+	vector3 f = forward;
+	up.normalize();
+	vector3 r = up;
+	r.normalize();
+	r.cross_product(f);
+	vector3 u = f;
+	u.cross_product(r);
 	this->initialize_identity();
-	this->set_at(0, 0, r->get_x());
-	this->set_at(0, 1, r->get_y());
-	this->set_at(0, 2, r->get_z());
-	this->set_at(1, 0, u->get_x());
-	this->set_at(1, 1, u->get_y());
-	this->set_at(1, 2, u->get_z());
-	this->set_at(2, 0, f->get_x());
-	this->set_at(2, 1, f->get_y());
-	this->set_at(2, 2, f->get_z());
-	delete u;
-	delete r;
-	delete f;
+	this->set_at(0, 0, r.get_x());
+	this->set_at(0, 1, r.get_y());
+	this->set_at(0, 2, r.get_z());
+	this->set_at(1, 0, u.get_x());
+	this->set_at(1, 1, u.get_y());
+	this->set_at(1, 2, u.get_z());
+	this->set_at(2, 0, f.get_x());
+	this->set_at(2, 1, f.get_y());
+	this->set_at(2, 2, f.get_z());
 }
 
 float* matrix4::get_data() {
@@ -170,18 +167,18 @@ matrix4* matrix4::clone() {
 	return clone;
 }
 
-void matrix4::multiply(matrix4* m) {
-	matrix4* product = new matrix4();
+void matrix4::multiply(matrix4 m) {
+	matrix4 product;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
-			product->set_at(i, j,
-				this->matrix[i][0] * m->get_at(0, j)
-				+ this->matrix[i][1] * m->get_at(1, j)
-				+ this->matrix[i][2] * m->get_at(2, j)
-				+ this->matrix[i][3] * m->get_at(3, j));
+			product.set_at(i, j,
+				this->matrix[i][0] * m.get_at(0, j)
+				+ this->matrix[i][1] * m.get_at(1, j)
+				+ this->matrix[i][2] * m.get_at(2, j)
+				+ this->matrix[i][3] * m.get_at(3, j));
 		}
 	}
-	float* data = product->get_data();
+	float* data = product.get_data();
 
 	for (int i_2 = 0; i_2 < 4; i_2++) {
 		for (int j_2 = 0; j_2 < 4; j_2++) {
@@ -191,7 +188,6 @@ void matrix4::multiply(matrix4* m) {
 	}
 
 	delete data;
-	delete product;
 }
 
 matrix4::matrix4() {

@@ -19,14 +19,14 @@ int image::get_height() {
 	return this->height;
 }
 
-color* image::get_color(int x, int y) {
+color image::get_color(int x, int y) {
 	int index = putils::get_index_2d(x, y, this->width);
-	return &this->data[index];
+	return this->data[index];
 }
 
-void image::set_color(int x, int y, color* value) {
+void image::set_color(int x, int y, color value) {
 	int index = putils::get_index_2d(x, y, this->width);
-	this->data[index] = *value;
+	this->data[index] = value;
 }
 
 //http://stackoverflow.com/questions/2693631/read-ppm-file-and-store-it-in-an-array-coded-with-c

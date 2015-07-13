@@ -69,43 +69,43 @@ camera::camera(int render_width, int render_height, vector3 pos,
 
 vector3* camera::get_left() {
 	vector3* left = this->up.clone();
-	left->cross_product(&this->forward);
+	left->cross_product(this->forward);
 	left->normalize();
 	return left;
 }
 
 vector3* camera::get_right() {
 	vector3 right = this->forward;
-	right.cross_product(&this->up);
+	right.cross_product(this->up);
 	right.normalize();
 	return right.clone();
 }
 
 void camera::rotate_x(float degree) {
 	vector3 h_axis = y_axis;
-	h_axis.cross_product(&this->forward);
+	h_axis.cross_product(this->forward);
 	h_axis.normalize();
-	forward.rotate(degree, &h_axis);
+	forward.rotate(degree, h_axis);
 	forward.normalize();
 	up = forward;
-	up.cross_product(&h_axis);
+	up.cross_product(h_axis);
 	up.normalize();
 }
 void camera::rotate_y(float degree) {
 	vector3 h_axis = y_axis;
-	h_axis.cross_product(&this->forward);
+	h_axis.cross_product(this->forward);
 	h_axis.normalize();
-	forward.rotate(degree, &y_axis);
+	forward.rotate(degree, y_axis);
 	forward.normalize();
 	up = forward;
-	up.cross_product(&h_axis);
+	up.cross_product(h_axis);
 	up.normalize();
 }
 
 void camera::move(vector3* direction, float amount) {
 	vector3 delta = *direction;
 	delta.multiply(amount);
-	this->position.add(&delta);
+	this->position.add(delta);
 }
 
 void camera::input(int keycode) {

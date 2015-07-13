@@ -91,16 +91,16 @@ void mesh::from_obj(char* filename) {
 					c = atoi((const char*)line_split[3]);
 				}
 				if (a != 0 && b != 0 && c != 0) {
-					triangle3* face_t = new triangle3(vertices[a - 1], vertices[b - 1], vertices[c - 1]);
-					face* f = new face(face_t);
+					triangle3 face_t(*vertices[a - 1], *vertices[b - 1], *vertices[c - 1]);
+					face f(face_t);
 					if (at != 0 && bt != 0 && ct != 0) {
 						vector2 f_uvs[3];
 						f_uvs[0] = *uvs[at - 1];
 						f_uvs[1] = *uvs[bt - 1];
 						f_uvs[2] = *uvs[ct - 1];
-						f->set_uvs(f_uvs);
+						f.set_uvs(f_uvs);
 					}
-					this->faces.push_back(*f);
+					this->faces.push_back(f);
 				}
 			}
 		}
@@ -114,7 +114,7 @@ void mesh::sort(matrix4* mt) {
 		for (int i = 0; i < this->faces.size() - 1; i++) {
 			int a = i;
 			int b = a + 1;
-			if (faces[a].get_triangle()->get_center()->get_z() < faces[b].get_triangle()->get_center()->get_z()) {
+			if (faces[a].get_triangle().get_center().get_z() < faces[b].get_triangle().get_center().get_z()) {
 				face temp = faces[a];
 				faces[a] = faces[b];
 				faces[b] = temp;

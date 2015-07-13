@@ -9,10 +9,10 @@ triangle2::triangle2() {
 	this->vertices[2] = *c;
 }
 
-triangle2::triangle2(vector2* a, vector2* b, vector2* c) {
-	this->vertices[0] = *a;
-	this->vertices[1] = *b;
-	this->vertices[2] = *c;
+triangle2::triangle2(vector2 a, vector2 b, vector2 c) {
+	this->vertices[0] = a;
+	this->vertices[1] = b;
+	this->vertices[2] = c;
 }
 
 vector2* triangle2::get_vertices() {

@@ -1,15 +1,15 @@
 #include "face.h"
 
-face::face(triangle3* tri) {
-	this->tri = *tri;
+face::face(triangle3 tri) {
+	this->tri = tri;
 }
 
-triangle3* face::get_triangle() {
-	return &this->tri;
+triangle3 face::get_triangle() {
+	return this->tri;
 }
 
-void face::set_triangle(triangle3* t) {
-	this->tri = *t;
+void face::set_triangle(triangle3 t) {
+	this->tri = t;
 }
 
 vector2* face::get_uvs() {

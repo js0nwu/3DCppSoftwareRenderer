@@ -80,15 +80,15 @@ void quaternion::conjugate() {
 	this->w = w_prime;
 }
 
-void quaternion::multiply(quaternion* q) {
-	float w_prime = w * q->get_w() - x * q->get_x() - y * q->get_y()
-			- z * q->get_z();
-	float x_prime = x * q->get_w() + w * q->get_x() + y * q->get_z()
-			- z * q->get_y();
-	float y_prime = y * q->get_w() + w * q->get_y() + z * q->get_x()
-			- x * q->get_z();
-	float z_prime = z * q->get_w() + w * q->get_z() + x * q->get_y()
-			- y * q->get_x();
+void quaternion::multiply(quaternion q) {
+	float w_prime = w * q.get_w() - x * q.get_x() - y * q.get_y()
+			- z * q.get_z();
+	float x_prime = x * q.get_w() + w * q.get_x() + y * q.get_z()
+			- z * q.get_y();
+	float y_prime = y * q.get_w() + w * q.get_y() + z * q.get_x()
+			- x * q.get_z();
+	float z_prime = z * q.get_w() + w * q.get_z() + x * q.get_y()
+			- y * q.get_x();
 	this->x = x_prime;
 	this->y = y_prime;
 	this->z = z_prime;

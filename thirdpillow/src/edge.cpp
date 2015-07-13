@@ -46,36 +46,36 @@ void edge::set_z_b(float z) {
 	this->z_b = z;
 }
 
-vector2* edge::get_a() {
-	return &this->a;
+vector2 edge::get_a() {
+	return this->a;
 }
 
-vector2* edge::get_b() {
-	return &this->b;
+vector2 edge::get_b() {
+	return this->b;
 }
 
-vector2* edge::get_uv_a() {
-	return &this->uv_a;
+vector2 edge::get_uv_a() {
+	return this->uv_a;
 }
 
-vector2* edge::get_uv_b() {
-	return &this->uv_b;
+vector2 edge::get_uv_b() {
+	return this->uv_b;
 }
 
-void edge::set_a(vector2* v) {
-	this->a = *v;
+void edge::set_a(vector2 v) {
+	this->a = v;
 }
 
-void edge::set_b(vector2* v) {
-	this->b = *v;
+void edge::set_b(vector2 v) {
+	this->b = v;
 }
 
-void edge::set_uv_a(vector2* v) {
-	this->uv_a = *v;
+void edge::set_uv_a(vector2 v) {
+	this->uv_a = v;
 }
 
-void edge::set_uv_b(vector2* v) {
-	this->uv_b = *v;
+void edge::set_uv_b(vector2 v) {
+	this->uv_b = v;
 }
 
 edge* edge::clone() {
