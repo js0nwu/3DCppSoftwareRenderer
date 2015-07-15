@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <thread>
+#include <omp.h>
 
 #include "color.h"
 #include "vector2.h"

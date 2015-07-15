@@ -267,6 +267,7 @@ void rasterizer::draw_mesh_normals(screen* s, mesh m, matrix4 mt) {
 }
 
 void rasterizer::draw_mesh_textured(screen *s, mesh m, image* texture, matrix4 mt) {
+#pragma omp parallel for
 	for (int i = 0; i < m.faces.size(); i++) {
 		draw_face_textured(s, m.faces[i], texture, mt);
 	}
