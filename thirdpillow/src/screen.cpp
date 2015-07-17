@@ -15,17 +15,8 @@ screen::screen(int render_width, int render_height) {
 }
 
 void screen::cls() {
-	float s_r = 0.53f;
-	float s_g = 0.81f;
-	float s_b = 0.92f;
-	for (int i = 0; i < render_width * render_height * 3; i = i + 3) {
-		buffer[i] = s_r;
-		buffer[i + 1] = s_g;
-		buffer[i + 2] = s_b;
-	}
-	for (int i = 0; i < render_width * render_height; i++) {
-		z_buffer[i] = (float)1;
-	}
+	std::fill_n(buffer, render_width * render_height * 3, 0.0f);
+	std::fill_n(z_buffer, render_width * render_height, 1.0f);
 }
 
 int screen::get_width() {
