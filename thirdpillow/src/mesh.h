@@ -15,11 +15,9 @@
 #include "transform.h"
 #include "putils.h"
 
-using namespace std;
-
 class mesh {
 public:
-	vector<face> faces;
+	std::vector<face> faces;
 	transform* get_transform();
 	void from_obj(char* filename);
 	void sort(matrix4* mt);

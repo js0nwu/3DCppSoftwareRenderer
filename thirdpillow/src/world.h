@@ -12,11 +12,9 @@
 
 #include "thing.h"
 
-using namespace std;
-
 class world {
 public:
-	vector<thing*> things;
+	std::vector<thing*> things;
 	world();
 	virtual ~world();
 };

@@ -19,8 +19,8 @@ void mesh::from_obj(char* filename) {
 		printf("file extension is not .obj\n");
 		exit(1);
 	}
-	vector<vector2*> uvs;
-	vector<vector3*> vertices;
+	std::vector<vector2*> uvs;
+	std::vector<vector3*> vertices;
 	int f_len;
 	char* model_c = putils::read_file(filename, &f_len);
 	int l_len;

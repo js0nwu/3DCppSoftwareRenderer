@@ -10,7 +10,10 @@
 
 #include <stdio.h>
 #include <thread>
+
+#ifndef __APPLE__
 #include <omp.h>
+#endif
 
 #include "color.h"
 #include "vector2.h"

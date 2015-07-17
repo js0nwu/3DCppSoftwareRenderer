@@ -24,8 +24,6 @@
 #include "camera.h"
 #include "image.h"
 
-using namespace std;
-
 class engine {
 public:
 	world* get_scene();

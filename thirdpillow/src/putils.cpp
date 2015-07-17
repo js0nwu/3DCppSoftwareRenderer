@@ -59,7 +59,7 @@ void putils::write_file(char* filename, char* contents) {
 char** putils::split_string(char* text, char* delim, int* length) {
 	using namespace std;
 
-	vector<char*> elements;
+	std::vector<char*> elements;
 	size_t pos = 0;
 	string s = string(text);
 	string delimeter = string(delim);
