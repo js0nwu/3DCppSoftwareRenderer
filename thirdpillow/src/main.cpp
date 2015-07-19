@@ -6,6 +6,7 @@
 #include <GL/glut.h>
 #else
 #include <GLUT/glut.h>
+#include <OpenGL/gl.h>
 #endif
 
 #include "engine.h"
