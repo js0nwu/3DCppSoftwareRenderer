@@ -168,3 +168,8 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 .nb-gradle/
+
+*.json
+
+thirdpillow/thirdpillow
+nbproject/
