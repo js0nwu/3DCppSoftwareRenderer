@@ -26,21 +26,21 @@
 
 class engine {
 public:
-	world* get_scene();
-	void start();
-	void stop();
-	void render();
-	float* get_render_buffer();
-	engine(int render_width, int render_height);
-	virtual ~engine();
+    world* get_scene();
+    void start();
+    void stop();
+    void render();
+    float* get_render_buffer();
+    engine(int render_width, int render_height);
+    virtual ~engine();
 private:
-	world scene;
-	transform* player;
-	screen* frame;
-	rasterizer* rast;
-	float RandomFloat(float a, float b);
-	void initialize();
-	void cleanup();
+    world scene;
+    transform* player;
+    screen* frame;
+    rasterizer* rast;
+    float RandomFloat(float a, float b);
+    void initialize();
+    void cleanup();
 };
 
 #endif /* ENGINE_H_ */

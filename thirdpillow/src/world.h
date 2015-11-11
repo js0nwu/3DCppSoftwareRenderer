@@ -14,9 +14,9 @@
 
 class world {
 public:
-	std::vector<thing*> things;
-	world();
-	virtual ~world();
+    std::vector<thing*> things;
+    world();
+    virtual ~world();
 };
 
 #endif /* WORLD_H_ */

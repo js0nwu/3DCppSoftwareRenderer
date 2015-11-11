@@ -17,14 +17,14 @@
 
 class mesh {
 public:
-	std::vector<face> faces;
-	transform* get_transform();
-	void from_obj(char* filename);
-	void sort(matrix4* mt);
-	mesh();
-	virtual ~mesh();
+    std::vector<face> faces;
+    transform* get_transform();
+    void from_obj(char* filename);
+    void sort(matrix4* mt);
+    mesh();
+    virtual ~mesh();
 private:
-	transform m_transform;
+    transform m_transform;
 };
 
 #endif /* MESH_H_ */

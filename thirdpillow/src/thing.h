@@ -14,16 +14,16 @@
 
 class thing {
 public:
-	void set_mesh(mesh* m);
-	mesh* get_mesh();
-	void set_texture(image* i);
-	image* get_texture();
-	transform t;
-	thing();
-	virtual ~thing();
+    void set_mesh(mesh* m);
+    mesh* get_mesh();
+    void set_texture(image* i);
+    image* get_texture();
+    transform t;
+    thing();
+    virtual ~thing();
 private:
-	mesh* geometry;
-	image* texture;
+    mesh* geometry;
+    image* texture;
 };
 
 #endif /* THING_H_ */

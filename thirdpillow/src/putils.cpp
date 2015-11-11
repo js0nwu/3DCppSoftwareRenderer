@@ -8,86 +8,86 @@
 #include "putils.h"
 
 int putils::get_index_2d(int x, int y, int wide) {
-	return y * wide + x;
+    return y * wide + x;
 }
 
 int putils::get_index_3d(int x, int y, int z, int wide, int thick) {
-	return ((y * wide + x) * thick) + z;
+    return ((y * wide + x) * thick) + z;
 }
 
 float putils::linear_interpolate(float a, float b, float mu) {
-	return a + mu * (b - a);
+    return a + mu * (b - a);
 }
 
 char* putils::read_file(char* filename, int* length) {
-	using namespace std; 
+    using namespace std;
 
-	string line;
-	string text = "";
-	ifstream file(filename);
-	cout << "opening " << filename << endl;
-	if (file.is_open()) {
-		while (getline(file, line)) {
-			text += line;
-			text += "\n";
-		}
-		file.close();
-	}
-	else {
-		cout << "unable to open file" << endl;
-		exit(1);
-	}
-	*length = text.length();
-	char* c_s = new char[text.size() + 1];
-	c_s[text.size()] = 0;
-	memcpy(c_s, text.c_str(), text.size());
-	return c_s;
+    string line;
+    string text = "";
+    ifstream file(filename);
+    cout << "opening " << filename << endl;
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            text += line;
+            text += "\n";
+        }
+        file.close();
+    }
+    else {
+        cout << "unable to open file" << endl;
+        exit(1);
+    }
+    *length = text.length();
+    char* c_s = new char[text.size() + 1];
+    c_s[text.size()] = 0;
+    memcpy(c_s, text.c_str(), text.size());
+    return c_s;
 }
 
 void putils::write_file(char* filename, char* contents) {
-	using namespace std;
+    using namespace std;
 
-	ofstream output(filename);
-	cout << "opening " << filename << endl;
-	if (output.is_open()) {
-		output << contents;
-	}
-	else {
-		cout << "unable to open file" << endl;
-	}
+    ofstream output(filename);
+    cout << "opening " << filename << endl;
+    if (output.is_open()) {
+        output << contents;
+    }
+    else {
+        cout << "unable to open file" << endl;
+    }
 }
 char** putils::split_string(char* text, char* delim, int* length) {
-	using namespace std;
+    using namespace std;
 
-	std::vector<char*> elements;
-	size_t pos = 0;
-	string s = string(text);
-	string delimeter = string(delim);
-	string token;
-	while ((pos = s.find(delimeter)) != std::string::npos) {
-		token = s.substr(0, pos);
-		char* c_s = new char[token.size() + 1];
-		c_s[token.size()] = 0;
-		memcpy(c_s, token.c_str(), token.size());
-		elements.push_back(c_s);
-		s.erase(0, pos + delimeter.length());
-	}
-	char* f_c_s = new char[s.size() + 1];
-	f_c_s[s.size()] = 0;
-	memcpy(f_c_s, s.c_str(), s.size());
-	elements.push_back(f_c_s);
-	char** c_elems = new char*[sizeof(char*)* elements.size()];
-	for (int i = 0; i < elements.size(); i++) {
-		c_elems[i] = elements[i];
-	}
-	*length = elements.size();
-	return c_elems;
+    std::vector<char*> elements;
+    size_t pos = 0;
+    string s = string(text);
+    string delimeter = string(delim);
+    string token;
+    while ((pos = s.find(delimeter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        char* c_s = new char[token.size() + 1];
+        c_s[token.size()] = 0;
+        memcpy(c_s, token.c_str(), token.size());
+        elements.push_back(c_s);
+        s.erase(0, pos + delimeter.length());
+    }
+    char* f_c_s = new char[s.size() + 1];
+    f_c_s[s.size()] = 0;
+    memcpy(f_c_s, s.c_str(), s.size());
+    elements.push_back(f_c_s);
+    char** c_elems = new char*[sizeof(char*)* elements.size()];
+    for (int i = 0; i < elements.size(); i++) {
+        c_elems[i] = elements[i];
+    }
+    *length = elements.size();
+    return c_elems;
 }
 
 bool putils::string_contains(char* text, char* find) {
-	return strstr(text, find) != NULL;
+    return strstr(text, find) != NULL;
 }
 
 float putils::to_radians(float degrees) {
-	return (float) ((degrees * (float) 3.14) / (float) 180);
+    return (float) ((degrees * (float) 3.14) / (float) 180);
 }
