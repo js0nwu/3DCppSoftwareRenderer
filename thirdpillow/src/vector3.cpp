@@ -116,7 +116,7 @@ void vector3::cross_product(vector3 v) {
 }
 
 float vector3::angle_between(vector3 v) {
-    float total_magnitude = this->magnitude() + v.magnitude();
+    float total_magnitude = this->magnitude() * v.magnitude();
     float dot_product = this->dot_product(v);
     float angle_radian = acos(dot_product / total_magnitude);
     float angle = ((float)180 * angle_radian) / (float) 3.14;
