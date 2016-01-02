@@ -173,3 +173,6 @@ nb-configuration.xml
 
 thirdpillow/thirdpillow
 nbproject/
+thirdpillow-build
+*build
+thirdpillow/build
