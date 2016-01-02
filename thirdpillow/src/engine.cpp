@@ -27,7 +27,7 @@ float engine::RandomFloat(float a, float b) {
 
 void engine::initialize() {
     printf("engine initializing\n");
-    color* default_color = new color(1, 0, 0, 1);
+    color default_color(1, 0, 0, 1);
     rast = new rasterizer(default_color);
     player = new transform();
     cam = new camera(this->frame->get_width(), this->frame->get_height());
@@ -92,10 +92,10 @@ void engine::render() {
         image* texture = t->get_texture();
         matrix4 mt = t->t.get_projected_transformation();
         if (i == 3) {
-            this->rast->draw_mesh_wire(this->frame, *m, mt);
+            this->rast->draw_mesh_wire(*this->frame, *m, mt);
             continue;
         }
-        this->rast->draw_mesh_textured(this->frame, *m, texture, mt);
+        this->rast->draw_mesh_textured(*this->frame, *m, texture, mt);
     }
 }
 

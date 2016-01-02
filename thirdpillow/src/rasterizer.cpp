@@ -7,19 +7,19 @@
 
 #include "rasterizer.h"
 
-rasterizer::rasterizer(color* c) {
-    this->default_color = *c;
+rasterizer::rasterizer(color c) {
+    this->default_color = c;
 }
 
-color* rasterizer::get_default_color() {
-    return &this->default_color;
+color rasterizer::get_default_color() {
+    return this->default_color;
 }
 
-void rasterizer::set_default_color(color* c) {
-    this->default_color = *c;
+void rasterizer::set_default_color(color c) {
+    this->default_color = c;
 }
 
-void rasterizer::draw_span(screen* s, span a, image* texture, int y) {
+void rasterizer::draw_span(screen s, span a, image* texture, int y) {
     int x_diff = (int)a.get_x_2() - (int)a.get_x_1();
     if (x_diff == 0) {
         return;
@@ -30,7 +30,7 @@ void rasterizer::draw_span(screen* s, span a, image* texture, int y) {
     float factor_step = (float)1 / (float)x_diff;
     for (int x = (int)a.get_x_1(); x < (int)a.get_x_2(); x++) {
         float z_depth = putils::linear_interpolate(a.get_z_1(), a.get_z_2(), ((float)x - a.get_x_1()) / (a.get_x_2() - a.get_x_1()));
-        if (z_depth < s->get_z(x, y)) {
+        if (z_depth < s.get_z(x, y)) {
             vector2 t = a.get_uv_a();
             vector2 t_1 = t_diff;
             t_1.multiply(factor);
@@ -38,14 +38,14 @@ void rasterizer::draw_span(screen* s, span a, image* texture, int y) {
             float uv_x = t.get_x() * (float)texture->get_width();
             float uv_y = ((float)1 - t.get_y()) * (float)texture->get_height();
             color i = texture->get_color((int)uv_x, (int)uv_y);
-            s->set_pixel(x, y, i);
-            s->set_z(x, y, z_depth);
+            s.set_pixel(x, y, i);
+            s.set_z(x, y, z_depth);
             factor += factor_step;
         }
     }
 }
 
-void rasterizer::draw_edge_span(screen* s, edge a, edge b, image* texture) {
+void rasterizer::draw_edge_span(screen s, edge a, edge b, image* texture) {
     float y_diff_1 = (float)(a.get_b().get_y() - a.get_a().get_y());
     if (y_diff_1 == (float)0) {
         return;
@@ -84,29 +84,29 @@ void rasterizer::draw_edge_span(screen* s, edge a, edge b, image* texture) {
     }
 }
 
-void rasterizer::draw_triangle_wire_color(screen* s, vector2 a, color a_color, vector2 b, color b_color, vector2 c, color c_color) {
+void rasterizer::draw_triangle_wire_color(screen s, vector2 a, color a_color, vector2 b, color b_color, vector2 c, color c_color) {
     draw_line_color(s, a, a_color, b, b_color);
     draw_line_color(s, b, b_color, c, c_color);
     draw_line_color(s, c, c_color, a, a_color);
 }
 
-void rasterizer::draw_triangle_wire(screen* s, vector2 a, vector2 b, vector2 c) {
+void rasterizer::draw_triangle_wire(screen s, vector2 a, vector2 b, vector2 c) {
     draw_line_color(s, a, b, this->default_color);
     draw_line_color(s, b, c, this->default_color);
     draw_line_color(s, c, a, this->default_color);
 }
 
-void rasterizer::draw_triangle_wire(screen* s, triangle2 t) {
+void rasterizer::draw_triangle_wire(screen s, triangle2 t) {
     vector2* v_t = t.get_vertices();
     draw_triangle_wire(s, v_t[0], v_t[1], v_t[2]);
     delete[] v_t;
 }
 
-void rasterizer::draw_line_color(screen* s, vector2 a, vector2 b, color c) {
+void rasterizer::draw_line_color(screen s, vector2 a, vector2 b, color c) {
     float x_diff = b.get_x() - a.get_x();
     float y_diff = b.get_y() - a.get_y();
     if (x_diff == 0 && y_diff == 0) {
-        s->set_pixel(a.get_x(), a.get_y(), c);
+        s.set_pixel(a.get_x(), a.get_y(), c);
         return;
     }
     if (fabs(x_diff) > fabs(y_diff)) {
@@ -122,7 +122,7 @@ void rasterizer::draw_line_color(screen* s, vector2 a, vector2 b, color c) {
         float slope = y_diff / x_diff;
         for (float x = x_min; x <= x_max; x += (float)1) {
             float y = a.get_y() + ((x - a.get_x()) * slope);
-            s->set_pixel((int)x, (int)y, c);
+            s.set_pixel((int)x, (int)y, c);
         }
     }
     else {
@@ -138,16 +138,16 @@ void rasterizer::draw_line_color(screen* s, vector2 a, vector2 b, color c) {
         float slope = x_diff / y_diff;
         for (float y = y_min; y <= y_max; y += (float)1) {
             float x = a.get_x() + ((y - a.get_y()) * slope);
-            s->set_pixel((int)x, (int)y, c);
+            s.set_pixel((int)x, (int)y, c);
         }
     }
 }
 
-void rasterizer::draw_line_color(screen* s, vector2 a, color a_color, vector2 b, color b_color) {
+void rasterizer::draw_line_color(screen s, vector2 a, color a_color, vector2 b, color b_color) {
     float x_diff = b.get_x() - a.get_x();
     float y_diff = b.get_y() - a.get_y();
     if (x_diff == 0 && y_diff == 0) {
-        s->set_pixel(a.get_x(), a.get_y(), a_color);
+        s.set_pixel(a.get_x(), a.get_y(), a_color);
         return;
     }
     if (fabs(x_diff) > fabs(y_diff)) {
@@ -169,7 +169,7 @@ void rasterizer::draw_line_color(screen* s, vector2 a, color a_color, vector2 b,
             d.subtract(a_color);
             d.multiply(c_s);
             c.add(d);
-            s->set_pixel((int)x, (int)y, c);
+            s.set_pixel((int)x, (int)y, c);
         }
     }
     else {
@@ -191,17 +191,17 @@ void rasterizer::draw_line_color(screen* s, vector2 a, color a_color, vector2 b,
             d.subtract(a_color);
             d.multiply(c_s);
             c.add(d);
-            s->set_pixel((int)x, (int)y, c);
+            s.set_pixel((int)x, (int)y, c);
         }
     }
 }
 
-void rasterizer::draw_triangle3_wire(screen* s, triangle3 t3, matrix4 mt) {
+void rasterizer::draw_triangle3_wire(screen s, triangle3 t3, matrix4 mt) {
     triangle2 flat = t3.flatten(mt);
     this->draw_triangle_wire(s, flat);
 }
 
-void rasterizer::draw_face_textured(screen* s, face f, image* texture, matrix4 mt) {
+void rasterizer::draw_face_textured(screen s, face f, image* texture, matrix4 mt) {
     float z_depth[3];
     triangle2 flat = f.get_triangle().flatten_z(mt, z_depth); //get local z value
     vector2* vertices = flat.get_vertices();
@@ -229,13 +229,13 @@ void rasterizer::draw_face_textured(screen* s, face f, image* texture, matrix4 m
     delete[] vertices;
 }
 
-void rasterizer::draw_mesh_wire(screen* s, mesh m, matrix4 mt) {
+void rasterizer::draw_mesh_wire(screen s, mesh m, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
         draw_triangle3_wire(s, m.faces[i].get_triangle(), mt);
     }
 }
 
-void rasterizer::draw_mesh_normals(screen* s, mesh m, matrix4 mt) {
+void rasterizer::draw_mesh_normals(screen s, mesh m, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
         vector3 local_normal = m.faces[i].get_triangle().get_normal();
         vector3 barycenter = m.faces[i].get_triangle().get_center();
@@ -266,14 +266,14 @@ void rasterizer::draw_mesh_normals(screen* s, mesh m, matrix4 mt) {
     }
 }
 
-void rasterizer::draw_mesh_textured(screen *s, mesh m, image* texture, matrix4 mt) {
+void rasterizer::draw_mesh_textured(screen s, mesh m, image* texture, matrix4 mt) {
     #pragma omp parallel for
     for (int i = 0; i < m.faces.size(); i++) {
         draw_face_textured(s, m.faces[i], texture, mt);
     }
 }
 
-void rasterizer::draw_mesh_textured_cull(screen *s, mesh m, image* texture, matrix4 mt) {
+void rasterizer::draw_mesh_textured_cull(screen s, mesh m, image* texture, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
         float dot = m.faces[i].get_triangle().get_normal().dot_product(*transform::get_camera()->get_forward());
         if (dot <= 0) {
@@ -282,7 +282,7 @@ void rasterizer::draw_mesh_textured_cull(screen *s, mesh m, image* texture, matr
     }
 }
 
-void rasterizer::draw_mesh_wire_cull(screen* s, mesh m, matrix4 mt) {
+void rasterizer::draw_mesh_wire_cull(screen s, mesh m, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
         float dot = m.faces[i].get_triangle().get_normal().dot_product(*transform::get_camera()->get_forward());
         if (dot <= 0.5) {
@@ -291,16 +291,16 @@ void rasterizer::draw_mesh_wire_cull(screen* s, mesh m, matrix4 mt) {
     }
 }
 
-void rasterizer::draw_image(screen* s, image texture) {
+void rasterizer::draw_image(screen s, image texture) {
     for (int x = 0; x < texture.get_width(); x++) {
         for (int y = 0; y < texture.get_height(); y++) {
-            s->set_pixel(x, s->get_height() - y, texture.get_color(x, y));
+            s.set_pixel(x, s.get_height() - y, texture.get_color(x, y));
         }
     }
 }
 
-void rasterizer::set_pixel(screen* s, vector2 p, color c) {
-    s->set_pixel((int)p.get_x(), (int)p.get_y(), c);
+void rasterizer::set_pixel(screen s, vector2 p, color c) {
+    s.set_pixel((int)p.get_x(), (int)p.get_y(), c);
 }
 
 rasterizer::~rasterizer() {

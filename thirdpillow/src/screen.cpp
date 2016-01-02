@@ -82,7 +82,7 @@ void screen::set_z(int x, int y, float z) {
 }
 
 screen::~screen() {
-    delete this->buffer;
-    delete this->z_buffer;
+    // delete this->buffer;
+    // delete this->z_buffer;
 }
 

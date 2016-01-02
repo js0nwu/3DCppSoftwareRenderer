@@ -1,12 +1,9 @@
 #include "triangle3.h"
 
 triangle3::triangle3() {
-    vector3* a = new vector3();
-    vector3* b = new vector3();
-    vector3* c = new vector3();
-    this->vertices[0] = *a;
-    this->vertices[1] = *b;
-    this->vertices[2] = *c;
+    this->vertices[0] = vector3();
+    this->vertices[1] = vector3();
+    this->vertices[2] = vector3();
 }
 
 triangle3::triangle3(vector3 a, vector3 b, vector3 c) {

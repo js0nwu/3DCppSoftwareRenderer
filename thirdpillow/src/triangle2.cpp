@@ -1,12 +1,9 @@
 #include "triangle2.h"
 
 triangle2::triangle2() {
-    vector2* a = new vector2();
-    vector2* b = new vector2();
-    vector2* c = new vector2();
-    this->vertices[0] = *a;
-    this->vertices[1] = *b;
-    this->vertices[2] = *c;
+    this->vertices[0] = vector2();
+    this->vertices[1] = vector2();
+    this->vertices[2] = vector2();
 }
 
 triangle2::triangle2(vector2 a, vector2 b, vector2 c) {
