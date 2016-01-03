@@ -7,3 +7,4 @@ file(GLOB thirdpillow_SRC
 )
 add_executable(thirdpillow ${thirdpillow_SRC})
 target_link_libraries(thirdpillow ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
+file(COPY res DESTINATION .)
