@@ -19,7 +19,7 @@ void rasterizer::set_default_color(color c) {
     this->default_color = c;
 }
 
-void rasterizer::draw_span(screen s, span a, image* texture, int y) {
+void rasterizer::draw_span(screen s, span a, image texture, int y) {
     int x_diff = (int)a.get_x_2() - (int)a.get_x_1();
     if (x_diff == 0) {
         return;
@@ -35,9 +35,9 @@ void rasterizer::draw_span(screen s, span a, image* texture, int y) {
             vector2 t_1 = t_diff;
             t_1.multiply(factor);
             t.add(t_1);
-            float uv_x = t.get_x() * (float)texture->get_width();
-            float uv_y = ((float)1 - t.get_y()) * (float)texture->get_height();
-            color i = texture->get_color((int)uv_x, (int)uv_y);
+            float uv_x = t.get_x() * (float)texture.get_width();
+            float uv_y = ((float)1 - t.get_y()) * (float)texture.get_height();
+            color i = texture.get_color((int)uv_x, (int)uv_y);
             s.set_pixel(x, y, i);
             s.set_z(x, y, z_depth);
             factor += factor_step;
@@ -45,7 +45,7 @@ void rasterizer::draw_span(screen s, span a, image* texture, int y) {
     }
 }
 
-void rasterizer::draw_edge_span(screen s, edge a, edge b, image* texture) {
+void rasterizer::draw_edge_span(screen s, edge a, edge b, image texture) {
     float y_diff_1 = (float)(a.get_b().get_y() - a.get_a().get_y());
     if (y_diff_1 == (float)0) {
         return;
@@ -201,7 +201,7 @@ void rasterizer::draw_triangle3_wire(screen s, triangle3 t3, matrix4 mt) {
     this->draw_triangle_wire(s, flat);
 }
 
-void rasterizer::draw_face_textured(screen s, face f, image* texture, matrix4 mt) {
+void rasterizer::draw_face_textured(screen s, face f, image texture, matrix4 mt) {
     float z_depth[3];
     triangle2 flat = f.get_triangle().flatten_z(mt, z_depth); //get local z value
     vector2* vertices = flat.get_vertices();
@@ -266,14 +266,14 @@ void rasterizer::draw_mesh_normals(screen s, mesh m, matrix4 mt) {
     }
 }
 
-void rasterizer::draw_mesh_textured(screen s, mesh m, image* texture, matrix4 mt) {
+void rasterizer::draw_mesh_textured(screen s, mesh m, image texture, matrix4 mt) {
     #pragma omp parallel for
     for (int i = 0; i < m.faces.size(); i++) {
         draw_face_textured(s, m.faces[i], texture, mt);
     }
 }
 
-void rasterizer::draw_mesh_textured_cull(screen s, mesh m, image* texture, matrix4 mt) {
+void rasterizer::draw_mesh_textured_cull(screen s, mesh m, image texture, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
         float dot = m.faces[i].get_triangle().get_normal().dot_product(*transform::get_camera()->get_forward());
         if (dot <= 0) {

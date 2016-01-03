@@ -33,7 +33,6 @@ int time_delta = 0;
 int timel = 0;
 int timeu = 0;
 
-//engine
 engine* thirdpillow;
 
 void render() {
@@ -42,8 +41,7 @@ void render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
     glBegin(GL_2D);
-    glDrawPixels(width, height, GL_RGB, GL_FLOAT,
-                 thirdpillow->get_render_buffer());
+    glDrawPixels(width, height, GL_RGB, GL_FLOAT, thirdpillow->get_render_buffer());
     glEnd();
     glutSwapBuffers();
 }

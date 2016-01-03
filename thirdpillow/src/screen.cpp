@@ -1,10 +1,3 @@
-/*
- * screen.cpp
- *
- *  Created on: Apr 29, 2014
- *      Author: jwpilly
- */
-
 #include "screen.h"
 
 screen::screen(int render_width, int render_height) {
@@ -82,7 +75,5 @@ void screen::set_z(int x, int y, float z) {
 }
 
 screen::~screen() {
-    // delete this->buffer;
-    // delete this->z_buffer;
-}
 
+}

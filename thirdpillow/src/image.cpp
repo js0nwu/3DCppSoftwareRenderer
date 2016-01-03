@@ -107,5 +107,4 @@ void image::from_ppm_raw(char* filename) {
 }
 
 image::~image() {
-    delete this->data;
 }

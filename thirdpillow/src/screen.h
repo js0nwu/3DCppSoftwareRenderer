@@ -1,10 +1,3 @@
-/*
- * screen.h
- *
- *  Created on: Apr 29, 2014
- *      Author: jwpilly
- */
-
 #ifndef SCREEN_H_
 #define SCREEN_H_
 

@@ -1,10 +1,3 @@
-/*
- * engine.h
- *
- *  Created on: Apr 7, 2014
- *      Author: jwpilly
- */
-
 #ifndef ENGINE_H_
 #define ENGINE_H_
 
@@ -26,7 +19,7 @@
 
 class engine {
 public:
-    world* get_scene();
+    world get_scene();
     void start();
     void stop();
     void render();
@@ -38,7 +31,6 @@ private:
     transform* player;
     screen* frame;
     rasterizer* rast;
-    float RandomFloat(float a, float b);
     void initialize();
     void cleanup();
 };
