@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
-find_package(OpenGL REQUIRED)
-find_package(GLUT REQUIRED)
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
 file(GLOB thirdpillow_SRC
     "src/*.cpp"
 )
-add_executable(thirdpillow ${thirdpillow_SRC})
-target_link_libraries(thirdpillow ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
+add_executable(thirdpillow ${thirdpillow_SRC} src/displayer.cpp src/displayer.h src/inputter.cpp src/inputter.h)
+target_link_libraries(thirdpillow ${SDL2_LIBRARY})
 file(COPY res DESTINATION .)

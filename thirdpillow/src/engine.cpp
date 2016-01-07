@@ -2,10 +2,6 @@
 
 camera* cam;
 
-world engine::get_scene() {
-    return this->scene;
-}
-
 void engine::cleanup() {
     printf("cleaning up\n");
     delete this->frame;
@@ -54,10 +50,23 @@ void engine::initialize() {
 void engine::start() {
     printf("engine started\n");
     this->initialize();
+    this->game_loop = true;
+    this->screen_display = new displayer("thirdpillow", this->frame);
+    this->loop();
 }
 
 void engine::stop() {
+    this->game_loop = false;
+    // delete this->frame;
     this->cleanup();
+}
+
+void engine::input() {
+
+}
+
+void engine::display() {
+    this->screen_display->refresh();
 }
 
 void engine::render() {
@@ -71,13 +80,18 @@ void engine::render() {
     }
 }
 
-float* engine::get_render_buffer() {
-    return this->frame->get_buffer();
+void engine::loop() {
+    while (this->game_loop) {
+        //input();
+        render();
+        display();
+    }
 }
 
-engine::engine(int render_width, int render_height) {
-    printf("engine created (%d, %d)\n", render_width, render_height);
+engine::engine(int render_width, int render_height, int fps) {
+    printf("engine created (%d, %d, %d)\n", render_width, render_height, fps);
     this->frame = new screen(render_width, render_height);
+    this->fps = fps;
 }
 
 engine::~engine() {

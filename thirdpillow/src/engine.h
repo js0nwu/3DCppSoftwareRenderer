@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>
 
+#include "displayer.h"
 #include "vector3.h"
 #include "vector4.h"
 #include "transform.h"
@@ -19,18 +19,22 @@
 
 class engine {
 public:
-    world get_scene();
     void start();
     void stop();
-    void render();
-    float* get_render_buffer();
-    engine(int render_width, int render_height);
+    engine(int render_width, int render_height, int fps);
     virtual ~engine();
 private:
+    displayer* screen_display;
+    bool game_loop = false;
+    int fps;
     world scene;
     transform* player;
     screen* frame;
     rasterizer* rast;
+    void render();
+    void input();
+    void display();
+    void loop();
     void initialize();
     void cleanup();
 };

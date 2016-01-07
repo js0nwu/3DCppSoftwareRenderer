@@ -1,3 +1,5 @@
+# taken from https://github.com/brendan-w/collector/blob/master/cmake/FindSDL2.cmake
+
 # Locate SDL2 library
 # This module defines
 # SDL2_LIBRARY, the name of the library to link against
