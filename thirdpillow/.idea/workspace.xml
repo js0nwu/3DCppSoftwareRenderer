@@ -12,26 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="189578e3-d16d-4356-82dd-83376c76a507" name="Default" comment="get rid of some ide generated vomit">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/transform.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/transform.h" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/thirdpillow.iml" afterPath="$PROJECT_DIR$/.idea/thirdpillow.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/color.cpp" afterPath="$PROJECT_DIR$/src/color.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/color.h" afterPath="$PROJECT_DIR$/src/color.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/displayer.cpp" afterPath="$PROJECT_DIR$/src/displayer.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/displayer.h" afterPath="$PROJECT_DIR$/src/displayer.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine.cpp" afterPath="$PROJECT_DIR$/src/engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine.h" afterPath="$PROJECT_DIR$/src/engine.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/inputter.cpp" afterPath="$PROJECT_DIR$/src/inputter.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/inputter.h" afterPath="$PROJECT_DIR$/src/inputter.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mesh.cpp" afterPath="$PROJECT_DIR$/src/mesh.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mesh.h" afterPath="$PROJECT_DIR$/src/mesh.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rasterizer.cpp" afterPath="$PROJECT_DIR$/src/rasterizer.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screen.cpp" afterPath="$PROJECT_DIR$/src/screen.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screen.h" afterPath="$PROJECT_DIR$/src/screen.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thing.h" afterPath="$PROJECT_DIR$/src/thing.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/triangle3.cpp" afterPath="$PROJECT_DIR$/src/triangle3.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/triangle3.h" afterPath="$PROJECT_DIR$/src/triangle3.h" />
     </list>
     <ignored path="thirdpillow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,11 +55,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37313432">
+            <state vertical-scroll-proportion="0.0">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayer.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="displayer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/displayer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.14179105">
+              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -150,18 +141,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="displayer.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/displayer.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
-              <folding>
-                <element signature="e#57#73#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -185,12 +164,12 @@
         <option value="$PROJECT_DIR$/src/color.cpp" />
         <option value="$PROJECT_DIR$/src/screen.cpp" />
         <option value="$PROJECT_DIR$/src/displayer.h" />
-        <option value="$PROJECT_DIR$/src/displayer.cpp" />
         <option value="$PROJECT_DIR$/src/inputter.h" />
         <option value="$PROJECT_DIR$/src/inputter.cpp" />
         <option value="$PROJECT_DIR$/src/engine.h" />
         <option value="$PROJECT_DIR$/src/engine.cpp" />
         <option value="$PROJECT_DIR$/src/t_transform.h" />
+        <option value="$PROJECT_DIR$/src/displayer.cpp" />
       </list>
     </option>
   </component>
@@ -490,6 +469,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -515,6 +495,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -530,6 +511,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -537,6 +519,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="41" selection-start-line="60" selection-start-column="41" selection-end-line="60" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -652,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/include/SDL2/SDL_pixels.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3084577">
@@ -705,6 +681,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2238806">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -722,14 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/displayer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -764,14 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mesh.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -792,8 +753,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37313432">
+        <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/displayer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14179105">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
           <folding />
         </state>
       </provider>
