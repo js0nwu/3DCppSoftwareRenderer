@@ -11,7 +11,7 @@ color::color() {
     this->r = 0;
     this->g = 0;
     this->b = 0;
-    this->a = 1;
+    this->a = 255;
 }
 
 color::color(unsigned char r, unsigned char g, unsigned char b, unsigned char a) {

@@ -37,7 +37,7 @@ void displayer::cleanup() {
 
 void displayer::refresh() {
     unsigned char* frame_buffer = this->frame->get_buffer();
-    SDL_UpdateTexture(this->sdl_texture, NULL, frame_buffer, this->frame->get_width() * sizeof(unsigned char));
+    SDL_UpdateTexture(this->sdl_texture, NULL, frame_buffer, this->frame->get_width() * 3 * sizeof(unsigned char));
     SDL_RenderClear(this->sdl_renderer);
     SDL_RenderCopyEx(this->sdl_renderer, this->sdl_texture, NULL, NULL, 0, 0, SDL_FLIP_VERTICAL);
     SDL_RenderPresent(this->sdl_renderer);
