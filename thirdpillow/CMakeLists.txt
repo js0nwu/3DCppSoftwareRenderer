@@ -5,6 +5,6 @@ include_directories(${SDL2_INCLUDE_DIR})
 file(GLOB thirdpillow_SRC
     "src/*.cpp"
 )
-add_executable(thirdpillow ${thirdpillow_SRC} src/displayer.cpp src/displayer.h src/inputter.cpp src/inputter.h)
+add_executable(thirdpillow ${thirdpillow_SRC} src/displayer.cpp src/displayer.h src/inputter.cpp src/inputter.h src/inputtable.h)
 target_link_libraries(thirdpillow ${SDL2_LIBRARY})
 file(COPY res DESTINATION .)

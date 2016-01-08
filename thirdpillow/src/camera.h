@@ -15,8 +15,9 @@
 #include "vector3.h"
 #include "vector4.h"
 #include "matrix4.h"
+#include "inputtable.h"
 
-class camera {
+class camera : public inputtable {
 public:
     vector3 y_axis;
     void set_position(vector3* p);
@@ -28,7 +29,7 @@ public:
     void rotate_x(float degree);
     void rotate_y(float degree);
     void move(vector3* direction, float amount);
-    void input(int keycode);
+    virtual void input(SDL_Event e);
     float get_fov();
     void set_fov(float f);
     int get_min_x();

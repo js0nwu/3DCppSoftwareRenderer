@@ -8,14 +8,14 @@
 #include <vector>
 #include <SDL.h>
 
-#include "thing.h"
+#include "inputtable.h"
 
 using namespace std;
 
 class inputter {
 public:
     inputter();
-    vector<thing> inputs;
+    vector<inputtable*> inputs;
     void refresh(SDL_Event e);
     virtual ~inputter();
 };

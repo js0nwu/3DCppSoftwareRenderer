@@ -108,40 +108,45 @@ void camera::move(vector3* direction, float amount) {
     this->position.add(delta);
 }
 
-void camera::input(int keycode) {
-    switch (keycode) {
-    case 106: //j
-        rotate_y((float)-1);
-        break;
-    case 108: //l
-        rotate_y((float)1);
-        break;
-    case 107: //k
-        rotate_x((float)1);
-        break;
-    case 105: //i
-        rotate_x((float)-1);
-        break;
-    case 97: //a
-        move(get_left(), (float)-1);
-        break;
-    case 100: //d
-        move(get_right(), (float)-1);
-        break;
-    case 115: //s
-        move(get_forward(), (float)-1);
-        break;
-    case 119: //w
-        move(get_forward(), (float)1);
-        break;
-    case 113: //q
-        move(get_up(), (float)1);
-        break;
-    case 101: //e
-        move(get_up(), (float)-1);
-        break;
-    default:
-        break;
+void camera::input(SDL_Event e) {
+    switch (e.type) {
+        case SDL_KEYDOWN:
+            switch (e.key.keysym.sym) {
+                case SDLK_w:
+                    move(get_forward(), (float)1);
+                    break;
+                case SDLK_a:
+                    move(get_left(), (float)-1);
+                    break;
+                case SDLK_s:
+                    move(get_forward(), (float)-1);
+                    break;
+                case SDLK_d:
+                    move(get_right(), (float)-1);
+                    break;
+                case SDLK_q:
+                    move(get_up(), (float)1);
+                    break;
+                case SDLK_e:
+                    move(get_up(), (float)-1);
+                    break;
+                case SDLK_UP:
+                    rotate_x((float)-1);
+                    break;
+                case SDLK_DOWN:
+                    rotate_x((float)1);
+                    break;
+                case SDLK_LEFT:
+                    rotate_y((float)-1);
+                    break;
+                case SDLK_RIGHT:
+                    rotate_y((float)1);
+                    break;
+                default:
+                    break;
+            }
+        default:
+            break;
     }
 }
 

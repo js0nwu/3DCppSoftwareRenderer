@@ -17,6 +17,7 @@ void engine::initialize() {
     vector3* start = new vector3(-20, 0, 0);
     cam->set_position(start);
     t_transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
+    this->game_input->inputs.push_back(cam);
     mesh m;
     m.from_obj("res/testgolem.obj");
     mesh m2;

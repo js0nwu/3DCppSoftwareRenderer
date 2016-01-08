@@ -12,6 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/mesh.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/engine.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/face.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/t_transform.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/vertex.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/edge.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/vertex.cpp" isTestSource="false" />
@@ -44,7 +45,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/thing.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/world.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/span.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/t_transform.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/inputtable.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/color.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/putils.cpp" isTestSource="false" />
