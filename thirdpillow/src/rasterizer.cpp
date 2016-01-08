@@ -255,10 +255,10 @@ void rasterizer::draw_mesh_normals(screen s, mesh m, matrix4 mt) {
         b4.set_z(b4.get_z() / b4.get_w());
         b4.set_x(b4.get_x() / b4.get_z());
         b4.set_y(b4.get_y() / b4.get_z());
-        float p_x_a = ((a4.get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-        float p_y_a = ((a4.get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
-        float p_x_b = ((b4.get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-        float p_y_b = ((b4.get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+        float p_x_a = ((a4.get_x() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_width();
+        float p_y_a = ((a4.get_y() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_height();
+        float p_x_b = ((b4.get_x() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_width();
+        float p_y_b = ((b4.get_y() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_height();
         vector2 a(p_x_a, p_y_a);
         vector2 b(p_x_b, p_y_b);
         color white(1, 1, 1, 1);
@@ -275,7 +275,7 @@ void rasterizer::draw_mesh_textured(screen s, mesh m, image texture, matrix4 mt)
 
 void rasterizer::draw_mesh_textured_cull(screen s, mesh m, image texture, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
-        float dot = m.faces[i].get_triangle().get_normal().dot_product(*transform::get_camera()->get_forward());
+        float dot = m.faces[i].get_triangle().get_normal().dot_product(*t_transform::get_camera()->get_forward());
         if (dot <= 0) {
             draw_face_textured(s, m.faces[i], texture, mt);
         }
@@ -284,7 +284,7 @@ void rasterizer::draw_mesh_textured_cull(screen s, mesh m, image texture, matrix
 
 void rasterizer::draw_mesh_wire_cull(screen s, mesh m, matrix4 mt) {
     for (int i = 0; i < m.faces.size(); i++) {
-        float dot = m.faces[i].get_triangle().get_normal().dot_product(*transform::get_camera()->get_forward());
+        float dot = m.faces[i].get_triangle().get_normal().dot_product(*t_transform::get_camera()->get_forward());
         if (dot <= 0.5) {
             draw_triangle3_wire(s, m.faces[i].get_triangle(), mt);
         }

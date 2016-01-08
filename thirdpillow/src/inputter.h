@@ -16,7 +16,7 @@ class inputter {
 public:
     inputter();
     vector<thing> inputs;
-    void refresh();
+    void refresh(SDL_Event e);
     virtual ~inputter();
 };
 

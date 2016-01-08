@@ -12,19 +12,19 @@
 
 #include "vertex.h"
 #include "face.h"
-#include "transform.h"
+#include "t_transform.h"
 #include "putils.h"
 
 class mesh {
 public:
     std::vector<face> faces;
-    transform* get_transform();
+    t_transform* get_t_transform();
     void from_obj(char* filename);
     void sort(matrix4* mt);
     mesh();
     virtual ~mesh();
 private:
-    transform m_transform;
+    t_transform m_t_transform;
 };
 
 #endif /* MESH_H_ */

@@ -19,6 +19,8 @@ private:
     SDL_Window* sdl_window;
     SDL_Renderer* sdl_renderer;
     SDL_Texture* sdl_texture;
+    SDL_Surface* sdl_surface;
+    SDL_Surface* frame_surface;
 };
 
 

@@ -9,7 +9,7 @@
 #define THING_H_
 
 #include "mesh.h"
-#include "transform.h"
+#include "t_transform.h"
 #include "image.h"
 
 class thing {
@@ -18,7 +18,7 @@ public:
     mesh get_mesh();
     void set_texture(image i);
     image get_texture();
-    transform t;
+    t_transform t;
     thing();
     virtual ~thing();
 private:

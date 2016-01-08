@@ -7,7 +7,7 @@
 #include "displayer.h"
 #include "vector3.h"
 #include "vector4.h"
-#include "transform.h"
+#include "t_transform.h"
 #include "world.h"
 #include "vertex.h"
 #include "rasterizer.h"
@@ -16,6 +16,7 @@
 #include "rasterizer.h"
 #include "camera.h"
 #include "image.h"
+#include "inputter.h"
 
 class engine {
 public:
@@ -25,14 +26,15 @@ public:
     virtual ~engine();
 private:
     displayer* screen_display;
+    inputter* game_input;
     bool game_loop = false;
     int fps;
     world scene;
-    transform* player;
+    t_transform* player;
     screen* frame;
     rasterizer* rast;
     void render();
-    void input();
+    void input(SDL_Event e);
     void display();
     void loop();
     void initialize();

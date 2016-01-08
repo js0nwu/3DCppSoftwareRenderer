@@ -4,7 +4,7 @@ inputter::inputter() {
 
 }
 
-void inputter::refresh() {
+void inputter::refresh(SDL_Event e) {
 
 }
 

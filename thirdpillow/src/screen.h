@@ -7,13 +7,13 @@
 class screen {
 public:
     screen(int render_width, int render_height);
-    void set_buffer(float* buffer);
-    float* get_buffer();
+    void set_buffer(unsigned char* buffer);
+    unsigned char* get_buffer();
     int get_width();
     int get_height();
     void cls();
-    float get_at(int i);
-    void set_at(int i, float f);
+    unsigned char get_at(int i);
+    void set_at(int i, unsigned char v);
     color get_pixel(int x, int y);
     void set_pixel(int x, int y, color c);
     float* get_z_buffer();
@@ -24,7 +24,7 @@ public:
 private:
     int render_width;
     int render_height;
-    float* buffer;
+    unsigned char* buffer;
     float* z_buffer;
 };
 

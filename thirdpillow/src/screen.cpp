@@ -3,13 +3,13 @@
 screen::screen(int render_width, int render_height) {
     this->render_width = render_width;
     this->render_height = render_height;
-    this->buffer = new float[render_width * render_height * 3];
+    this->buffer = new unsigned char[render_width * render_height * 3];
     this->z_buffer = new float[render_width* render_height];
 }
 
 void screen::cls() {
-    std::fill_n(buffer, render_width * render_height * 3, 0.0f);
-    std::fill_n(z_buffer, render_width * render_height, 1.0f);
+    std::fill_n(buffer, render_width * render_height * 3, 0);
+    std::fill_n(z_buffer, render_width * render_height, 1);
 }
 
 int screen::get_width() {
@@ -20,11 +20,11 @@ int screen::get_height() {
     return this->render_height;
 }
 
-void screen::set_buffer(float* buffer) {
+void screen::set_buffer(unsigned char* buffer) {
     this->buffer = buffer;
 }
 
-float* screen::get_buffer() {
+unsigned char* screen::get_buffer() {
     return this->buffer;
 }
 
@@ -36,12 +36,12 @@ float* screen::get_z_buffer() {
     return this->z_buffer;
 }
 
-float screen::get_at(int i) {
+unsigned char screen::get_at(int i) {
     return this->buffer[i];
 }
 
-void screen::set_at(int i, float f) {
-    this->buffer[i] = f;
+void screen::set_at(int i, unsigned char v) {
+    this->buffer[i] = v;
 }
 
 color screen::get_pixel(int x, int y) {

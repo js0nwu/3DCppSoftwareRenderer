@@ -7,8 +7,8 @@
 
 #include "mesh.h"
 
-transform* mesh::get_transform() {
-    return &this->m_transform;
+t_transform* mesh::get_t_transform() {
+    return &this->m_t_transform;
 }
 
 void mesh::from_obj(char* filename) {
@@ -125,8 +125,8 @@ void mesh::sort(matrix4* mt) {
 
 mesh::mesh() {
     // TODO Auto-generated constructor stub
-    transform* t = new transform();
-    this->m_transform = *t;
+    t_transform* t = new t_transform();
+    this->m_t_transform = *t;
 }
 
 mesh::~mesh() {

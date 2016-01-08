@@ -56,8 +56,8 @@ triangle2 triangle3::flatten(matrix4 m) {
         point.set_z(point.get_z() / point.get_w());
         point.set_x(point.get_x() / point.get_z());
         point.set_y(point.get_y() / point.get_z());
-        float p_x = ((point.get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-        float p_y = ((point.get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+        float p_x = ((point.get_x() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_width();
+        float p_y = ((point.get_y() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_height();
         vector2 v2(p_x, p_y);
         tri2[i] = v2;
     }
@@ -77,8 +77,8 @@ triangle2 triangle3::flatten_z(matrix4 m, float* z_depth) {
         z_values[i] = point.get_z();
         point.set_x(point.get_x() / point.get_z());
         point.set_y(point.get_y() / point.get_z());
-        float p_x = ((point.get_x() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_width();
-        float p_y = ((point.get_y() / (float)2) + (float)0.5) * (float)transform::get_camera()->get_render_height();
+        float p_x = ((point.get_x() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_width();
+        float p_y = ((point.get_y() / (float)2) + (float)0.5) * (float)t_transform::get_camera()->get_render_height();
         vector2 v2(p_x, p_y);
         tri2[i] = v2;
     }

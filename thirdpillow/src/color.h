@@ -11,26 +11,26 @@
 class color {
 public:
     color();
-    color(float r, float g, float b, float a);
-    float get_r();
-    float get_g();
-    float get_b();
-    float get_a();
-    void set_r(float r);
-    void set_g(float g);
-    void set_b(float b);
-    void set_a(float a);
+    color(unsigned char r, unsigned char g, unsigned char b, unsigned char a);
+    unsigned char get_r();
+    unsigned char get_g();
+    unsigned char get_b();
+    unsigned char get_a();
+    void set_r(unsigned char r);
+    void set_g(unsigned char g);
+    void set_b(unsigned char b);
+    void set_a(unsigned char a);
     void add(color c);
     void subtract(color c);
-    void multiply(float f);
+    void multiply(unsigned char f);
 
     color* clone();
     virtual ~color();
 private:
-    float r;
-    float g;
-    float b;
-    float a;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    unsigned char a;
 };
 
 #endif /* COLOR_H_ */

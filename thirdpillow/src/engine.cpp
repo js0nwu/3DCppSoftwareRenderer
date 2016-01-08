@@ -9,14 +9,14 @@ void engine::cleanup() {
 
 void engine::initialize() {
     printf("engine initializing\n");
-    color default_color(1, 0, 0, 1);
+    color default_color(255, 0, 0, 255);
     rast = new rasterizer(default_color);
-    player = new transform();
+    player = new t_transform();
     cam = new camera(this->frame->get_width(), this->frame->get_height());
-    transform::set_camera(cam);
+    t_transform::set_camera(cam);
     vector3* start = new vector3(-20, 0, 0);
     cam->set_position(start);
-    transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
+    t_transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
     mesh m;
     m.from_obj("res/testgolem.obj");
     mesh m2;
@@ -52,6 +52,7 @@ void engine::start() {
     this->initialize();
     this->game_loop = true;
     this->screen_display = new displayer("thirdpillow", this->frame);
+    this->game_input = new inputter();
     this->loop();
 }
 
@@ -61,8 +62,8 @@ void engine::stop() {
     this->cleanup();
 }
 
-void engine::input() {
-
+void engine::input(SDL_Event e) {
+    this->game_input->refresh(e);
 }
 
 void engine::display() {
@@ -75,14 +76,20 @@ void engine::render() {
         thing* t = this->scene.things[i];
         mesh m = t->get_mesh();
         image texture = t->get_texture();
-        matrix4 mt = t->t.get_projected_transformation();
+        matrix4 mt = t->t.get_projected_t_transformation();
         this->rast->draw_mesh_textured(*this->frame, m, texture, mt);
     }
 }
 
 void engine::loop() {
+    SDL_Event e;
     while (this->game_loop) {
-        //input();
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                this->game_loop = false;
+            }
+            input(e);
+        }
         render();
         display();
     }
