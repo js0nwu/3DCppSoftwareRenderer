@@ -7,8 +7,7 @@ void engine::cleanup() {
     delete this->frame;
 }
 
-void engine::initialize() {
-    printf("engine initializing\n");
+void engine::load() {
     color default_color(255, 0, 0, 255);
     rast = new rasterizer(default_color);
     player = new t_transform();
@@ -48,12 +47,18 @@ void engine::initialize() {
     this->scene.things.push_back(t3);
 }
 
+void engine::initialize() {
+    this->game_input = new inputter();
+    this->screen_display = new displayer("thirdpillow", this->frame);
+    printf("engine initializing\n");
+
+}
+
 void engine::start() {
     printf("engine started\n");
     this->initialize();
+    this->load();
     this->game_loop = true;
-    this->screen_display = new displayer("thirdpillow", this->frame);
-    this->game_input = new inputter();
     this->loop();
 }
 
@@ -86,10 +91,10 @@ void engine::loop() {
     SDL_Event e;
     while (this->game_loop) {
         while (SDL_PollEvent(&e) != 0) {
+            input(e);
             if (e.type == SDL_QUIT) {
                 this->game_loop = false;
             }
-            input(e);
         }
         render();
         display();

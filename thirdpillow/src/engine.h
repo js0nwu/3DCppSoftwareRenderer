@@ -38,6 +38,7 @@ private:
     void display();
     void loop();
     void initialize();
+    void load();
     void cleanup();
 };
 
