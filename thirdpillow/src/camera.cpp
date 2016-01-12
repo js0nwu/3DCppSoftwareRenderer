@@ -44,8 +44,8 @@ camera::camera(int render_width, int render_height) {
     this->initialize();
     //test projection settings
     this->fov = 70;
-    this->z_near = (float) 0.1;
-    this->z_far = (float)1000;
+    this->z_near = .1f;
+    this->z_far = 1000.f;
     vector3 forward = vector3(1, 0, 0);
     this->forward = forward;
     vector3 up = vector3(0, 1, 0);
@@ -60,8 +60,8 @@ camera::camera(int render_width, int render_height, vector3 pos,
     this->render_height = render_height;
     this->initialize();
     this->fov = 70;
-    this->z_near = (float) 0.1;
-    this->z_far = (float)1000;
+    this->z_near = .1f;
+    this->z_far = 1000.f;
     this->position = pos;
     this->forward = forward;
     this->up = up;
@@ -113,34 +113,34 @@ void camera::input(SDL_Event e) {
         case SDL_KEYDOWN:
             switch (e.key.keysym.sym) {
                 case SDLK_w:
-                    move(get_forward(), (float)1);
+                    move(get_forward(), 1.f);
                     break;
                 case SDLK_a:
-                    move(get_left(), (float)-1);
+                    move(get_left(), -1.f);
                     break;
                 case SDLK_s:
-                    move(get_forward(), (float)-1);
+                    move(get_forward(), -1.f);
                     break;
                 case SDLK_d:
-                    move(get_right(), (float)-1);
+                    move(get_right(), -1.f);
                     break;
                 case SDLK_q:
-                    move(get_up(), (float)1);
+                    move(get_up(), 1.f);
                     break;
                 case SDLK_e:
-                    move(get_up(), (float)-1);
+                    move(get_up(), -1.f);
                     break;
                 case SDLK_UP:
-                    rotate_x((float)-0.1);
+                    rotate_x(-.1f);
                     break;
                 case SDLK_DOWN:
-                    rotate_x((float)0.1);
+                    rotate_x(.1f);
                     break;
                 case SDLK_LEFT:
-                    rotate_y((float)-0.1);
+                    rotate_y(-.1f);
                     break;
                 case SDLK_RIGHT:
-                    rotate_y((float)0.1);
+                    rotate_y(.1f);
                     break;
                 default:
                     break;
