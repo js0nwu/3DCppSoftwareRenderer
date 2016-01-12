@@ -28,9 +28,10 @@ public:
 private:
     displayer* screen_display;
     inputter* game_input;
-    timekeeper game_clock;
+    timekeeper *game_clock;
     bool game_loop = false;
     int frames;
+    long timel;
     world scene;
     t_transform* player;
     screen* frame;

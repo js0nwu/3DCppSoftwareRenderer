@@ -48,11 +48,12 @@ void engine::load() {
 }
 
 void engine::initialize() {
-    game_clock.start();
+    game_clock = new timekeeper();
+    game_clock->start();
+    timel = 0;
     game_input = new inputter();
     screen_display = new displayer("thirdpillow", frame);
     printf("engine initializing\n");
-
 }
 
 void engine::start() {
@@ -77,6 +78,14 @@ void engine::display() {
 }
 
 void engine::render() {
+    long ge = game_clock->get_ticks();
+    if (ge - timel >= 1000) {
+        long timediff = ge - timel;
+        float fps = frames * 1000.f / timediff;
+        printf("fps: %4.2f\n", fps);
+        timel = ge;
+        frames = 0;
+    }
     frame->cls();
     for (int i = 0; i < scene.things.size(); i++) {
         thing* t = scene.things[i];
@@ -85,6 +94,7 @@ void engine::render() {
         matrix4 mt = t->t.get_projected_t_transformation();
         rast->draw_mesh_textured(*frame, m, texture, mt);
     }
+    frames++;
 }
 
 void engine::loop() {

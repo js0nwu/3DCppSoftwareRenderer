@@ -43,15 +43,14 @@ void timekeeper::unpause() {
 }
 
 long timekeeper::get_ticks() {
-    long time = 0;
     if (started) {
         if (paused) {
-            time = pause_ticks;
+            return pause_ticks;
         } else {
-            time - SDL_GetTicks() - start_ticks;
+            return SDL_GetTicks() - start_ticks;
         }
     }
-    return time;
+    return 0;
 }
 
 bool timekeeper::is_started() {
