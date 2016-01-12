@@ -1,13 +1,13 @@
 #include "vertex.h"
 
 void vertex::set_position(vector3 p) {
-    this->position.set_x(p.get_x());
-    this->position.set_y(p.get_y());
-    this->position.set_z(p.get_z());
+    position.set_x(p.get_x());
+    position.set_y(p.get_y());
+    position.set_z(p.get_z());
 }
 
 vector3 vertex::get_position() {
-    return this->position;
+    return position;
 }
 
 vertex::vertex() {

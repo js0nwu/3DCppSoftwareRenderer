@@ -4,19 +4,19 @@ camera* cam;
 
 void engine::cleanup() {
     printf("cleaning up\n");
-    delete this->frame;
+    delete frame;
 }
 
 void engine::load() {
     color default_color(255, 0, 0, 255);
     rast = new rasterizer(default_color);
     player = new t_transform();
-    cam = new camera(this->frame->get_width(), this->frame->get_height());
+    cam = new camera(frame->get_width(), frame->get_height());
     t_transform::set_camera(cam);
     vector3* start = new vector3(-20, 0, 0);
     cam->set_position(start);
-    t_transform::set_projection((float)70, (float) this->frame->get_width(), this->frame->get_height(), (float) 1, (float)1000);
-    this->game_input->inputs.push_back(cam);
+    t_transform::set_projection((float)70, (float) frame->get_width(), frame->get_height(), (float) 1, (float)1000);
+    game_input->inputs.push_back(cam);
     mesh m;
     m.from_obj("res/testgolem.obj");
     mesh m2;
@@ -42,58 +42,58 @@ void engine::load() {
     t3->set_mesh(m3);
     t3->set_texture(texture3);
     t3->t.set_translation(0, -5, 0);
-    this->scene.things.push_back(t);
-    this->scene.things.push_back(t2);
-    this->scene.things.push_back(t3);
+    //scene.things.push_back(t);
+    scene.things.push_back(t2);
+    //scene.things.push_back(t3);
 }
 
 void engine::initialize() {
-    this->game_input = new inputter();
-    this->screen_display = new displayer("thirdpillow", this->frame);
+    game_clock.start();
+    game_input = new inputter();
+    screen_display = new displayer("thirdpillow", frame);
     printf("engine initializing\n");
 
 }
 
 void engine::start() {
     printf("engine started\n");
-    this->initialize();
-    this->load();
-    this->game_loop = true;
-    this->loop();
+    initialize();
+    load();
+    game_loop = true;
+    loop();
 }
 
 void engine::stop() {
-    this->game_loop = false;
-    // delete this->frame;
-    this->cleanup();
+    game_loop = false;
+    cleanup();
 }
 
 void engine::input(SDL_Event e) {
-    this->game_input->refresh(e);
+    game_input->refresh(e);
 }
 
 void engine::display() {
-    this->screen_display->refresh();
+    screen_display->refresh();
 }
 
 void engine::render() {
-    this->frame->cls();
-    for (int i = 0; i < this->scene.things.size(); i++) {
-        thing* t = this->scene.things[i];
+    frame->cls();
+    for (int i = 0; i < scene.things.size(); i++) {
+        thing* t = scene.things[i];
         mesh m = t->get_mesh();
         image texture = t->get_texture();
         matrix4 mt = t->t.get_projected_t_transformation();
-        this->rast->draw_mesh_textured(*this->frame, m, texture, mt);
+        rast->draw_mesh_textured(*frame, m, texture, mt);
     }
 }
 
 void engine::loop() {
     SDL_Event e;
-    while (this->game_loop) {
+    while (game_loop) {
         while (SDL_PollEvent(&e) != 0) {
             input(e);
             if (e.type == SDL_QUIT) {
-                this->game_loop = false;
+                game_loop = false;
             }
         }
         render();
@@ -103,12 +103,12 @@ void engine::loop() {
 
 engine::engine(int render_width, int render_height, int fps) {
     printf("engine created (%d, %d, %d)\n", render_width, render_height, fps);
-    this->frame = new screen(render_width, render_height);
-    this->fps = fps;
+    frame = new screen(render_width, render_height);
+    fps = fps;
 }
 
 engine::~engine() {
     printf("stopping engine\n");
-    this->stop();
+    stop();
 }
 

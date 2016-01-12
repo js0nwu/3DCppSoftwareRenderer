@@ -8,7 +8,7 @@
 #include "mesh.h"
 
 t_transform* mesh::get_t_transform() {
-    return &this->m_t_transform;
+    return &m_t_transform;
 }
 
 void mesh::from_obj(char* filename) {
@@ -100,7 +100,7 @@ void mesh::from_obj(char* filename) {
                         f_uvs[2] = *uvs[ct - 1];
                         f.set_uvs(f_uvs);
                     }
-                    this->faces.push_back(f);
+                    faces.push_back(f);
                 }
             }
         }
@@ -110,8 +110,8 @@ void mesh::from_obj(char* filename) {
 void mesh::sort(matrix4* mt) {
     //bubble sort from greatest to least
     //fix this later
-    for (int it = 0; it < this->faces.size(); it++) {
-        for (int i = 0; i < this->faces.size() - 1; i++) {
+    for (int it = 0; it < faces.size(); it++) {
+        for (int i = 0; i < faces.size() - 1; i++) {
             int a = i;
             int b = a + 1;
             if (faces[a].get_triangle().get_center().get_z() < faces[b].get_triangle().get_center().get_z()) {
@@ -126,7 +126,7 @@ void mesh::sort(matrix4* mt) {
 mesh::mesh() {
     // TODO Auto-generated constructor stub
     t_transform* t = new t_transform();
-    this->m_t_transform = *t;
+    m_t_transform = *t;
 }
 
 mesh::~mesh() {

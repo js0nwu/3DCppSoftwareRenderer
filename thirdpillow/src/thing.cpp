@@ -8,19 +8,19 @@
 #include "thing.h"
 
 void thing::set_mesh(mesh m) {
-    this->geometry = m;
+    geometry = m;
 }
 
 mesh thing::get_mesh() {
-    return this->geometry;
+    return geometry;
 }
 
 void thing::set_texture(image i) {
-    this->texture = i;
+    texture = i;
 }
 
 image thing::get_texture() {
-    return this->texture;
+    return texture;
 }
 
 thing::thing() {

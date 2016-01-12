@@ -1,41 +1,41 @@
 #include "triangle3.h"
 
 triangle3::triangle3() {
-    this->vertices[0] = vector3();
-    this->vertices[1] = vector3();
-    this->vertices[2] = vector3();
+    vertices[0] = vector3();
+    vertices[1] = vector3();
+    vertices[2] = vector3();
 }
 
 triangle3::triangle3(vector3 a, vector3 b, vector3 c) {
-    this->vertices[0] = a;
-    this->vertices[1] = b;
-    this->vertices[2] = c;
+    vertices[0] = a;
+    vertices[1] = b;
+    vertices[2] = c;
     calculate_normal();
 }
 
 triangle3::triangle3(vector3* vertices) {
-    this->vertices[0] = vertices[0];
-    this->vertices[1] = vertices[1];
-    this->vertices[2] = vertices[2];
+    vertices[0] = vertices[0];
+    vertices[1] = vertices[1];
+    vertices[2] = vertices[2];
     calculate_normal();
 }
 
 vector3 triangle3::get_normal() {
-    return this->normal;
+    return normal;
 }
 
 void triangle3::calculate_normal() {
-    vector3 u = this->vertices[1];
-    u.subtract(this->vertices[0]);
-    vector3 v = this->vertices[2];
-    v.subtract(this->vertices[0]);
+    vector3 u = vertices[1];
+    u.subtract(vertices[0]);
+    vector3 v = vertices[2];
+    v.subtract(vertices[0]);
     u.cross_product(v);
     u.normalize();
-    this->normal = u;
+    normal = u;
 }
 
 vector3* triangle3::get_vertices() {
-    return &this->vertices[0];
+    return &vertices[0];
 }
 
 vector3 triangle3::get_center() {
@@ -49,7 +49,7 @@ vector3 triangle3::get_center() {
 triangle2 triangle3::flatten(matrix4 m) {
     vector2 tri2[3];
     for (int i = 0; i < 3; i++) {
-        vector4 point(this->vertices[i]);
+        vector4 point(vertices[i]);
         point.multiply_first(m);
         point.set_x(point.get_x() / point.get_w());
         point.set_y(point.get_y() / point.get_w());
@@ -69,7 +69,7 @@ triangle2 triangle3::flatten_z(matrix4 m, float* z_depth) {
     vector2 tri2[3];
     float z_values[3];
     for (int i = 0; i < 3; i++) {
-        vector4 point(this->vertices[i]);
+        vector4 point(vertices[i]);
         point.multiply_first(m);
         point.set_x(point.get_x() / point.get_w());
         point.set_y(point.get_y() / point.get_w());

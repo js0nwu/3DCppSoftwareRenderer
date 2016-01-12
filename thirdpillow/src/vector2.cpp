@@ -12,127 +12,124 @@ int vector2::get_index_2d(int x, int y, int wide) {
 }
 
 void vector2::set_x(float x) {
-    this->x = x;
+    x = x;
 }
 
 void vector2::set_y(float y) {
-    this->y = y;
+    y = y;
 }
 
 float vector2::get_x() {
-    return this->x;
+    return x;
 }
 
 float vector2::get_y() {
-    return this->y;
+    return y;
 }
 
 float vector2::magnitude() {
-    return (float) (sqrt((this->x * this->x) + (this->y * this->y)));
+    return (float) (sqrt((x * x) + (y * y)));
 }
 
 float vector2::distance_from(vector2 v) {
     float x_2 = v.get_x();
     float y_2 = v.get_y();
     float distance = (float) (sqrt(
-                                  ((x_2 - this->x) * (x_2 - this->x))
-                                  + ((y_2 - this->y) * (y_2 - this->y))));
+            ((x_2 - x) * (x_2 - x))
+            + ((y_2 - y) * (y_2 - y))));
     return distance;
 }
 
 void vector2::normalize() {
-    float magnitude = this->magnitude();
-    this->x /= magnitude;
-    this->y /= magnitude;
+    float mag = magnitude();
+    x /= mag;
+    y /= mag;
 }
 
 void vector2::negative() {
-    this->x = -this->x;
-    this->y = -this->y;
+    x = -x;
+    y = -y;
 }
 
 float vector2::dot_product(vector2 v) {
-    return (this->x * v.get_x()) + (this->y * v.get_y());
+    return (x * v.get_x()) + (y * v.get_y());
 }
 
 void vector2::cross_product(vector2 v) {
-    float x = this->x;
-    float y = this->y;
-    this->x = x * v.get_y();
-    this->y = y * v.get_x();
+    float x2 = x;
+    float y2 = y;
+    x = x2 * v.get_y();
+    y = y2 * v.get_x();
 }
 
 float vector2::angle_between(vector2 v) {
-    float dot_product = this->dot_product(v);
-    float total_magnitude = this->magnitude() + v.magnitude();
-    float angle_radian = acos(dot_product / total_magnitude);
-    float angle = (angle_radian * (float) 180) / (float) 3.14;
-    return angle;
+    float dp = dot_product(v);
+    float total_magnitude = magnitude() + v.magnitude();
+    return acos(dp / total_magnitude);
 }
 
-void vector2::rotate_degree(float degrees) {
-    float radians = (degrees * (float) 3.14) / (float) 180;
-    float x_prime = this->x * cos(radians) - this->y * sin(radians);
-    float y_prime = this->x * sin(radians) + this->y * cos(radians);
-    this->x = x_prime;
-    this->y = y_prime;
+void vector2::rotate(float radians) {
+    float x_prime = x * cos(radians) - y * sin(radians);
+    float y_prime = x * sin(radians) + y * cos(radians);
+    x = x_prime;
+    y = y_prime;
 }
 
 void vector2::add(float s) {
-    this->x = this->x + s;
-    this->y = this->y + s;
+    x = x + s;
+    y = y + s;
 }
 
 void vector2::add(vector2 v) {
-    this->x = this->x + v.get_x();
-    this->y = this->y + v.get_y();
+    x = x + v.get_x();
+    y = y + v.get_y();
 }
 
 void vector2::subtract(float s) {
-    this->x = this->x - s;
-    this->y = this->y - s;
+    x = x - s;
+    y = y - s;
 }
 
 void vector2::subtract(vector2 v) {
-    this->x = this->x - v.get_x();
-    this->y = this->y - v.get_y();
+    x = x - v.get_x();
+    y = y - v.get_y();
 }
 
 void vector2::multiply(float s) {
-    this->x = this->x * s;
-    this->y = this->y * s;
+    x = x * s;
+    y = y * s;
 }
 
 void vector2::multiply(vector2 v) {
-    this->x = this->x * v.get_x();
-    this->y = this->y * v.get_y();
+    x = x * v.get_x();
+    y = y * v.get_y();
 }
 
 void vector2::divide(float s) {
-    this->x = this->x / s;
-    this->y = this->y / s;
+    x = x / s;
+    y = y / s;
 }
 
 void vector2::divide(vector2 v) {
-    this->x = this->x / v.get_x();
-    this->y = this->y / v.get_y();
+    x = x / v.get_x();
+    y = y / v.get_y();
 }
 
 void vector2::scale(vector2 f) {
-    float x_prime = this->x * f.get_x();
-    float y_prime = this->y * f.get_y();
-    this->x = x_prime;
-    this->y = y_prime;
+    float x_prime = x * f.get_x();
+    float y_prime = y * f.get_y();
+    x = x_prime;
+    y = y_prime;
 }
 
 vector2* vector2::clone() {
-    vector2* clone = new vector2(this->get_x(), this->get_y());
+    vector2* clone = new vector2(get_x(), get_y());
     return clone;
 }
 
 vector2::vector2() {
-    this->x = 0;
-    this->y = 0;
+    x = 0;
+    y = 0;
 }
 
 vector2::vector2(float x, float y) {

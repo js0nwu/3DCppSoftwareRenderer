@@ -42,7 +42,7 @@ public:
     void divide(vector3 v);
     void scale(vector3 f);
     void lookat(vector3 v);
-    void rotate(float degree, vector3 axis);
+    void rotate(float radians, vector3 axis);
     void print();
     bool is_zero();
 

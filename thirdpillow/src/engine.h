@@ -17,6 +17,7 @@
 #include "camera.h"
 #include "image.h"
 #include "inputter.h"
+#include "timekeeper.h"
 
 class engine {
 public:
@@ -27,8 +28,9 @@ public:
 private:
     displayer* screen_display;
     inputter* game_input;
+    timekeeper game_clock;
     bool game_loop = false;
-    int fps;
+    int frames;
     world scene;
     t_transform* player;
     screen* frame;

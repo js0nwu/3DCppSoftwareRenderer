@@ -8,15 +8,15 @@
 #include "matrix4.h"
 
 float matrix4::get_at(int x, int y) {
-    return this->matrix[x][y];
+    return matrix[x][y];
 }
 
 void matrix4::set_at(int x, int y, float value) {
-    this->matrix[x][y] = value;
+    matrix[x][y] = value;
 }
 
 void matrix4::initialize_rotation(float x, float y, float z) {
-    this->initialize_identity();
+    initialize_identity();
     matrix4 rx, ry, rz;
     rx.initialize_identity();
     ry.initialize_identity();
@@ -43,7 +43,7 @@ void matrix4::initialize_rotation(float x, float y, float z) {
     rz.multiply(ry);
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            this->matrix[i][j] = rz.get_at(i, j);
+            matrix[i][j] = rz.get_at(i, j);
         }
     }
 
@@ -138,16 +138,16 @@ void matrix4::initialize_camera(vector3 forward, vector3 up) {
     r.cross_product(f);
     vector3 u = f;
     u.cross_product(r);
-    this->initialize_identity();
-    this->set_at(0, 0, r.get_x());
-    this->set_at(0, 1, r.get_y());
-    this->set_at(0, 2, r.get_z());
-    this->set_at(1, 0, u.get_x());
-    this->set_at(1, 1, u.get_y());
-    this->set_at(1, 2, u.get_z());
-    this->set_at(2, 0, f.get_x());
-    this->set_at(2, 1, f.get_y());
-    this->set_at(2, 2, f.get_z());
+    initialize_identity();
+    set_at(0, 0, r.get_x());
+    set_at(0, 1, r.get_y());
+    set_at(0, 2, r.get_z());
+    set_at(1, 0, u.get_x());
+    set_at(1, 1, u.get_y());
+    set_at(1, 2, u.get_z());
+    set_at(2, 0, f.get_x());
+    set_at(2, 1, f.get_y());
+    set_at(2, 2, f.get_z());
 }
 
 float* matrix4::get_data() {
@@ -156,14 +156,14 @@ float* matrix4::get_data() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             int index = putils::get_index_2d(i, j, 4);
-            data[index] = this->matrix[i][j];
+            data[index] = matrix[i][j];
         }
     }
     return data;
 }
 
 matrix4* matrix4::clone() {
-    matrix4* clone = new matrix4(this->get_data());
+    matrix4* clone = new matrix4(get_data());
     return clone;
 }
 
@@ -172,10 +172,10 @@ void matrix4::multiply(matrix4 m) {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             product.set_at(i, j,
-                           this->matrix[i][0] * m.get_at(0, j)
-                           + this->matrix[i][1] * m.get_at(1, j)
-                           + this->matrix[i][2] * m.get_at(2, j)
-                           + this->matrix[i][3] * m.get_at(3, j));
+                           matrix[i][0] * m.get_at(0, j)
+                           + matrix[i][1] * m.get_at(1, j)
+                           + matrix[i][2] * m.get_at(2, j)
+                           + matrix[i][3] * m.get_at(3, j));
         }
     }
     float* data = product.get_data();
@@ -183,7 +183,7 @@ void matrix4::multiply(matrix4 m) {
     for (int i_2 = 0; i_2 < 4; i_2++) {
         for (int j_2 = 0; j_2 < 4; j_2++) {
             int index = putils::get_index_2d(i_2, j_2, 4);
-            this->matrix[i_2][j_2] = data[index];
+            matrix[i_2][j_2] = data[index];
         }
     }
 
@@ -191,14 +191,14 @@ void matrix4::multiply(matrix4 m) {
 }
 
 matrix4::matrix4() {
-    this->initialize_identity();
+    initialize_identity();
 }
 
 matrix4::matrix4(float* data) {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             int index = putils::get_index_2d(i, j, 4);
-            this->matrix[i][j] = data[index];
+            matrix[i][j] = data[index];
         }
     }
 }
@@ -209,7 +209,7 @@ void matrix4::print() {
     printf("matrix4:\n");
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            printf("(%d, %d) = %f\n", i, j, this->get_at(i, j));
+            printf("(%d, %d) = %f\n", i, j, get_at(i, j));
         }
     }
 }

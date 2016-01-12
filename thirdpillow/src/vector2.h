@@ -26,7 +26,7 @@ public:
     float dot_product(vector2 v);
     void cross_product(vector2 v);
     float angle_between(vector2 v);
-    void rotate_degree(float degrees);
+    void rotate(float radians);
     void add(float s);
     void add(vector2 v);
     void subtract(float s);

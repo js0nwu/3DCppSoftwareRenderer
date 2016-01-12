@@ -3,8 +3,8 @@
 screen::screen(int render_width, int render_height) {
     this->render_width = render_width;
     this->render_height = render_height;
-    this->buffer = new unsigned char[render_width * render_height * 3];
-    this->z_buffer = new float[render_width* render_height];
+    buffer = new unsigned char[render_width * render_height * 3];
+    z_buffer = new float[render_width* render_height];
 }
 
 void screen::cls() {
@@ -13,11 +13,11 @@ void screen::cls() {
 }
 
 int screen::get_width() {
-    return this->render_width;
+    return render_width;
 }
 
 int screen::get_height() {
-    return this->render_height;
+    return render_height;
 }
 
 void screen::set_buffer(unsigned char* buffer) {
@@ -25,52 +25,52 @@ void screen::set_buffer(unsigned char* buffer) {
 }
 
 unsigned char* screen::get_buffer() {
-    return this->buffer;
+    return buffer;
 }
 
 void screen::set_z_buffer(float* buffer) {
-    this->z_buffer = buffer;
+    z_buffer = buffer;
 }
 
 float* screen::get_z_buffer() {
-    return this->z_buffer;
+    return z_buffer;
 }
 
 unsigned char screen::get_at(int i) {
-    return this->buffer[i];
+    return buffer[i];
 }
 
 void screen::set_at(int i, unsigned char v) {
-    this->buffer[i] = v;
+    buffer[i] = v;
 }
 
 color screen::get_pixel(int x, int y) {
-    int index = putils::get_index_3d(x, y, 0, this->render_width, 3);
-    color c(this->buffer[index], this->buffer[index + 1],
-            this->buffer[index + 2], 1);
+    int index = putils::get_index_3d(x, y, 0, render_width, 3);
+    color c(buffer[index], buffer[index + 1],
+            buffer[index + 2], 1);
     return c;
 }
 
 void screen::set_pixel(int x, int y, color c) {
-    if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
-        int index = putils::get_index_3d(x, y, 0, this->render_width, 3);
-        this->buffer[index] = c.get_r();
-        this->buffer[index + 1] = c.get_g();
-        this->buffer[index + 2] = c.get_b();
+    if (x >= 0 && x < render_width && y >= 0 && y < render_height) {
+        int index = putils::get_index_3d(x, y, 0, render_width, 3);
+        buffer[index] = c.get_r();
+        buffer[index + 1] = c.get_g();
+        buffer[index + 2] = c.get_b();
     }
 }
 
 float screen::get_z(int x, int y) {
-    if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
-        int index = putils::get_index_2d(x, y, this->render_width);
-        return this->z_buffer[index];
+    if (x >= 0 && x < render_width && y >= 0 && y < render_height) {
+        int index = putils::get_index_2d(x, y, render_width);
+        return z_buffer[index];
     }
 }
 
 void screen::set_z(int x, int y, float z) {
-    if (x >= 0 && x < this->render_width && y >= 0 && y < this->render_height) {
-        int index = putils::get_index_2d(x, y, this->render_width);
-        this->z_buffer[index] = z;
+    if (x >= 0 && x < render_width && y >= 0 && y < render_height) {
+        int index = putils::get_index_2d(x, y, render_width);
+        z_buffer[index] = z;
     }
 }
 

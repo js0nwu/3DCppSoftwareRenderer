@@ -40,44 +40,44 @@ void quaternion::set_w(float w) {
 }
 
 float quaternion::get_x() {
-    return this->x;
+    return x;
 }
 
 float quaternion::get_y() {
-    return this->y;
+    return y;
 }
 
 float quaternion::get_z() {
-    return this->z;
+    return z;
 }
 
 float quaternion::get_w() {
-    return this->w;
+    return w;
 }
 
 float quaternion::magnitude() {
     return (float) sqrt(
-               this->x * this->x + this->y * this->y + this->z * this->z
-               + this->w * this->w);
+               x * x + y * y + z * z
+               + w * w);
 }
 
 void quaternion::normalize() {
-    float magnitude = this->magnitude();
-    this->x /= magnitude;
-    this->y /= magnitude;
-    this->z /= magnitude;
-    this->w /= magnitude;
+    float mag = magnitude();
+    x /= mag;
+    y /= mag;
+    z /= mag;
+    w /= mag;
 }
 
 void quaternion::conjugate() {
-    float x_prime = -this->x;
-    float y_prime = -this->y;
-    float z_prime = -this->z;
-    float w_prime = this->w;
-    this->x = x_prime;
-    this->y = y_prime;
-    this->z = z_prime;
-    this->w = w_prime;
+    float x_prime = -x;
+    float y_prime = -y;
+    float z_prime = -z;
+    float w_prime = w;
+    x = x_prime;
+    y = y_prime;
+    z = z_prime;
+    w = w_prime;
 }
 
 void quaternion::multiply(quaternion q) {
@@ -89,10 +89,10 @@ void quaternion::multiply(quaternion q) {
                     - x * q.get_z();
     float z_prime = z * q.get_w() + w * q.get_z() + x * q.get_y()
                     - y * q.get_x();
-    this->x = x_prime;
-    this->y = y_prime;
-    this->z = z_prime;
-    this->w = w_prime;
+    x = x_prime;
+    y = y_prime;
+    z = z_prime;
+    w = w_prime;
 }
 
 void quaternion::multiply(float v_x, float v_y, float v_z) {
@@ -101,17 +101,17 @@ void quaternion::multiply(float v_x, float v_y, float v_z) {
     float z_prime = w * v_z + x * v_y - y * v_x;
     float w_prime = -x * v_x - y * v_y - z * v_z;
 
-    this->x = x_prime;
-    this->y = y_prime;
-    this->z = z_prime;
-    this->w = w_prime;
+    x = x_prime;
+    y = y_prime;
+    z = z_prime;
+    w = w_prime;
 }
 
 void quaternion::print() {
-    printf("quaternion: %f %f %f %f\n", this->x, this->y, this->z, this->w);
+    printf("quaternion: %f %f %f %f\n", x, y, z, w);
 }
 
 quaternion* quaternion::clone() {
-    quaternion* clone = new quaternion(this->x, this->y, this->z, this->w);
+    quaternion* clone = new quaternion(x, y, z, w);
     return clone; //wow fail
 }

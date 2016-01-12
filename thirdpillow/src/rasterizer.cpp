@@ -8,15 +8,15 @@
 #include "rasterizer.h"
 
 rasterizer::rasterizer(color c) {
-    this->default_color = c;
+    default_color = c;
 }
 
 color rasterizer::get_default_color() {
-    return this->default_color;
+    return default_color;
 }
 
 void rasterizer::set_default_color(color c) {
-    this->default_color = c;
+    default_color = c;
 }
 
 void rasterizer::draw_span(screen s, span a, image texture, int y) {
@@ -91,9 +91,9 @@ void rasterizer::draw_triangle_wire_color(screen s, vector2 a, color a_color, ve
 }
 
 void rasterizer::draw_triangle_wire(screen s, vector2 a, vector2 b, vector2 c) {
-    draw_line_color(s, a, b, this->default_color);
-    draw_line_color(s, b, c, this->default_color);
-    draw_line_color(s, c, a, this->default_color);
+    draw_line_color(s, a, b, default_color);
+    draw_line_color(s, b, c, default_color);
+    draw_line_color(s, c, a, default_color);
 }
 
 void rasterizer::draw_triangle_wire(screen s, triangle2 t) {
@@ -198,7 +198,7 @@ void rasterizer::draw_line_color(screen s, vector2 a, color a_color, vector2 b, 
 
 void rasterizer::draw_triangle3_wire(screen s, triangle3 t3, matrix4 mt) {
     triangle2 flat = t3.flatten(mt);
-    this->draw_triangle_wire(s, flat);
+    draw_triangle_wire(s, flat);
 }
 
 void rasterizer::draw_face_textured(screen s, face f, image texture, matrix4 mt) {

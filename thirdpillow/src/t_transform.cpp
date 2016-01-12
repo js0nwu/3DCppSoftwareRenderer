@@ -26,7 +26,7 @@ camera* t_transform::get_camera() {
 }
 
 matrix4 t_transform::get_projected_t_transformation() {
-    matrix4 m_t_transformation = this->get_t_transformation();
+    matrix4 m_t_transformation = get_t_transformation();
     matrix4 m_projection;
     matrix4 camera_rotation;
     camera_rotation.initialize_camera(*t_transform::get_camera()->get_forward(), *t_transform::get_camera()->get_up());
@@ -56,7 +56,7 @@ matrix4 t_transform::get_t_transformation() {
 }
 
 void t_transform::set_scale(vector3* s) {
-    this->scale = *s;
+    scale = *s;
 }
 
 void t_transform::set_scale(float x, float y, float z) {
@@ -65,11 +65,11 @@ void t_transform::set_scale(float x, float y, float z) {
 }
 
 vector3 t_transform::get_scale() {
-    return this->scale;
+    return scale;
 }
 
 void t_transform::set_translation(vector3* t) {
-    this->translation = *t; //do you need clone?
+    translation = *t; //do you need clone?
 }
 
 void t_transform::set_translation(float x, float y, float z) {
@@ -78,11 +78,11 @@ void t_transform::set_translation(float x, float y, float z) {
 }
 
 vector3 t_transform::get_translation() {
-    return this->translation;
+    return translation;
 }
 
 void t_transform::set_rotation(vector3* r) {
-    this->rotation = *r; //do you need clone?
+    rotation = *r; //do you need clone?
 }
 
 void t_transform::set_rotation(float x, float y, float z) {
@@ -91,20 +91,20 @@ void t_transform::set_rotation(float x, float y, float z) {
 }
 
 vector3 t_transform::get_rotation() {
-    return this->rotation;
+    return rotation;
 }
 
 void t_transform::translate(vector3* delta) {
-    this->translation.set_x(this->translation.get_x() + delta->get_x());
-    this->translation.set_y(this->translation.get_y() + delta->get_y());
-    this->translation.set_z(this->translation.get_z() + delta->get_z());
-    //this->translation.print
+    translation.set_x(translation.get_x() + delta->get_x());
+    translation.set_y(translation.get_y() + delta->get_y());
+    translation.set_z(translation.get_z() + delta->get_z());
+    //translation.print
 }
 
 t_transform::t_transform(vector3 translation, vector3 rotation, vector3 scale) {
-    this->translation = translation;
-    this->rotation = rotation;
-    this->scale = scale;
+    translation = translation;
+    rotation = rotation;
+    scale = scale;
 
 }
 
