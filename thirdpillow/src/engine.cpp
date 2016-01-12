@@ -79,8 +79,8 @@ void engine::display() {
 
 void engine::render() {
     long ge = game_clock->get_ticks();
-    if (ge - timel >= 1000) {
-        long timediff = ge - timel;
+    long timediff = ge - timel;
+    if (timediff >= 1000) {
         float fps = frames * 1000.f / timediff;
         printf("fps: %4.2f\n", fps);
         timel = ge;
@@ -114,7 +114,6 @@ void engine::loop() {
 engine::engine(int render_width, int render_height, int fps) {
     printf("engine created (%d, %d, %d)\n", render_width, render_height, fps);
     frame = new screen(render_width, render_height);
-    fps = fps;
 }
 
 engine::~engine() {
