@@ -26,8 +26,8 @@ public:
     vector3* get_right();
     vector3* get_forward();
     vector3* get_up();
-    void rotate_x(float degree);
-    void rotate_y(float degree);
+    void rotate_x(float radians);
+    void rotate_y(float radians);
     void move(vector3* direction, float amount);
     virtual void input(SDL_Event e);
     float get_fov();

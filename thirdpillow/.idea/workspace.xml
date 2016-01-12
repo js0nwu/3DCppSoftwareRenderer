@@ -12,29 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="189578e3-d16d-4356-82dd-83376c76a507" name="Default" comment="get rid of some ide generated vomit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/timekeeper.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/timekeeper.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/thirdpillow.iml" afterPath="$PROJECT_DIR$/.idea/thirdpillow.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine.cpp" afterPath="$PROJECT_DIR$/src/engine.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine.h" afterPath="$PROJECT_DIR$/src/engine.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/matrix4.cpp" afterPath="$PROJECT_DIR$/src/matrix4.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mesh.cpp" afterPath="$PROJECT_DIR$/src/mesh.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/quaternion.cpp" afterPath="$PROJECT_DIR$/src/quaternion.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/rasterizer.cpp" afterPath="$PROJECT_DIR$/src/rasterizer.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/screen.cpp" afterPath="$PROJECT_DIR$/src/screen.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/span.cpp" afterPath="$PROJECT_DIR$/src/span.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/t_transform.cpp" afterPath="$PROJECT_DIR$/src/t_transform.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/thing.cpp" afterPath="$PROJECT_DIR$/src/thing.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/triangle2.cpp" afterPath="$PROJECT_DIR$/src/triangle2.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/triangle3.cpp" afterPath="$PROJECT_DIR$/src/triangle3.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vector2.cpp" afterPath="$PROJECT_DIR$/src/vector2.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vector2.h" afterPath="$PROJECT_DIR$/src/vector2.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vector3.cpp" afterPath="$PROJECT_DIR$/src/vector3.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vector3.h" afterPath="$PROJECT_DIR$/src/vector3.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vector4.cpp" afterPath="$PROJECT_DIR$/src/vector4.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vertex.cpp" afterPath="$PROJECT_DIR$/src/vertex.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera.cpp" afterPath="$PROJECT_DIR$/src/camera.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera.h" afterPath="$PROJECT_DIR$/src/camera.h" />
     </list>
     <ignored path="thirdpillow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,26 +34,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="triangle3.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/triangle3.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vector3.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vector3.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.8596492">
-              <caret line="13" column="51" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="vector3.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/vector3.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,11 +74,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="world.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="world.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/world.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timekeeper.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/timekeeper.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="camera.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/camera.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5894161">
+              <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="camera.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/camera.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.491228">
+              <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -130,26 +129,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vector2.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vector2.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="vector2.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vector2.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -177,8 +156,6 @@
         <option value="$PROJECT_DIR$/src/displayer.cpp" />
         <option value="$PROJECT_DIR$/src/inputtable.h" />
         <option value="$PROJECT_DIR$/src/inputter.h" />
-        <option value="$PROJECT_DIR$/src/camera.cpp" />
-        <option value="$PROJECT_DIR$/src/camera.h" />
         <option value="$PROJECT_DIR$/src/inputter.cpp" />
         <option value="$PROJECT_DIR$/src/timekeeper.h" />
         <option value="$PROJECT_DIR$/src/timekeeper.cpp" />
@@ -201,6 +178,8 @@
         <option value="$PROJECT_DIR$/src/vector2.cpp" />
         <option value="$PROJECT_DIR$/src/vector4.cpp" />
         <option value="$PROJECT_DIR$/src/vertex.cpp" />
+        <option value="$PROJECT_DIR$/src/camera.h" />
+        <option value="$PROJECT_DIR$/src/camera.cpp" />
       </list>
     </option>
   </component>
@@ -491,13 +470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/image.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -509,20 +481,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/camera.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/camera.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="20" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -689,14 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/timekeeper.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/triangle2.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.368421">
@@ -797,6 +747,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/timekeeper.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/camera.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.491228">
+          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/camera.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5894161">
+          <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
           <folding />
         </state>
       </provider>

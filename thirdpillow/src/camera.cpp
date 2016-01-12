@@ -81,21 +81,21 @@ vector3* camera::get_right() {
     return right.clone();
 }
 
-void camera::rotate_x(float degree) {
+void camera::rotate_x(float radians) {
     vector3 h_axis = y_axis;
     h_axis.cross_product(this->forward);
     h_axis.normalize();
-    forward.rotate(degree, h_axis);
+    forward.rotate(radians, h_axis);
     forward.normalize();
     up = forward;
     up.cross_product(h_axis);
     up.normalize();
 }
-void camera::rotate_y(float degree) {
+void camera::rotate_y(float radians) {
     vector3 h_axis = y_axis;
     h_axis.cross_product(this->forward);
     h_axis.normalize();
-    forward.rotate(degree, y_axis);
+    forward.rotate(radians, y_axis);
     forward.normalize();
     up = forward;
     up.cross_product(h_axis);
@@ -131,16 +131,16 @@ void camera::input(SDL_Event e) {
                     move(get_up(), (float)-1);
                     break;
                 case SDLK_UP:
-                    rotate_x((float)-1);
+                    rotate_x((float)-0.1);
                     break;
                 case SDLK_DOWN:
-                    rotate_x((float)1);
+                    rotate_x((float)0.1);
                     break;
                 case SDLK_LEFT:
-                    rotate_y((float)-1);
+                    rotate_y((float)-0.1);
                     break;
                 case SDLK_RIGHT:
-                    rotate_y((float)1);
+                    rotate_y((float)0.1);
                     break;
                 default:
                     break;
